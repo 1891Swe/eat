@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     let config = {};
 
     try {
-        // Get restaurant ID from URL parameter or default to 'greatest-restaurant'
+        // Get restaurant ID from URL parameter or default to 'rest1'
         const urlParams = new URLSearchParams(window.location.search);
-        const restaurantId = urlParams.get('id') || 'greatest-restaurant';
+        const restaurantId = urlParams.get('id') || 'rest1';
         
         // Load restaurant configuration
         const response = await fetch(`restaurants/${restaurantId}.json`);
@@ -37,14 +37,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const categoryLinks = document.querySelectorAll('.category-nav a');
     const menuItemsContainer = document.getElementById('menu-items');
 
-    // Update the navigation links to include food subcategories
     categoryLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            
             categoryLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
-            
             const category = link.dataset.category;
             displayMenuItems(category);
         });
@@ -52,8 +49,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function displayMenuItems(category) {
         const items = config.categories?.[category] || [];
-        
-        // Clear container with fade-out effect
         menuItemsContainer.style.opacity = 0;
         
         setTimeout(() => {
@@ -71,14 +66,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const menuItem = document.createElement('div');
                     menuItem.className = 'menu-item';
                     
-                    // Update image path to use restaurant-specific folder
-                    const imagePath = item.image ?
-                        item.image.replace('images/', `images/${urlParams.get('id') || 'greatest-restaurant'}/`) :
-                        null;
-                    
-                    const imageContent = imagePath
-                        ? `<img src="${imagePath}" alt="${item.name}" onerror="this.style.display='none'">`
-                        : `<div class="placeholder-image"></div>`;
+                    let imageContent;
+                    if (item.image) {
+                        imageContent = `
+                            <div class="image-container">
+                                <img src="${item.image}" alt="${item.name}" 
+                                     onerror="this.parentElement.innerHTML='<div class=\'placeholder-image\'><i class=\'fas fa-utensils\'></i></div>'">
+                            </div>`;
+                    } else {
+                        imageContent = `
+                            <div class="image-container">
+                                <div class="placeholder-image">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                            </div>`;
+                    }
 
                     menuItem.innerHTML = `
                         ${imageContent}
@@ -89,13 +91,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                         </div>
                     `;
 
-                    // Add stagger effect to items
                     menuItem.style.opacity = 0;
                     menuItem.style.transform = 'translateY(20px)';
-                    
                     menuItemsContainer.appendChild(menuItem);
                     
-                    // Trigger animation
                     requestAnimationFrame(() => {
                         menuItem.style.transition = 'all 0.3s ease';
                         menuItem.style.transitionDelay = `${index * 0.1}s`;
@@ -105,7 +104,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
             }
             
-            // Fade in container
             requestAnimationFrame(() => {
                 menuItemsContainer.style.transition = 'opacity 0.3s ease';
                 menuItemsContainer.style.opacity = 1;
