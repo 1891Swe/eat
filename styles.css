@@ -15,7 +15,7 @@ body {
 /* Header Styles */
 header {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('images/Pattaya.jpg');
+                url('images/pattaya.jpg');
     background-size: cover;
     background-position: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
