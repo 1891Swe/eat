@@ -1,0 +1,28 @@
+{
+    "id": "restaurant-id",
+    "restaurantName": "RESTAURANT NAME",
+    "currency": "฿",
+    "openingHours": "11:00 - 23:00",
+    "location": {
+        "city": "City Name",
+        "address": "Restaurant Address",
+        "phone": "Phone Number"
+    },
+    "categories": {
+        "special": [
+            {
+                "name": "Special Item",
+                "description": "Description of special item",
+                "price": 100,
+                "image": "images/restaurant-id/special-item.jpg"
+            }
+        ],
+        "meat": [],
+        "fish": [],
+        "chicken": [],
+        "beer": [],
+        "wine": [],
+        "drinks": [],
+        "desserts": []
+    }
+}
