@@ -1,0 +1,243 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('images/Pattaya.jpg');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.restaurant-info {
+    padding: 4rem 1rem;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.restaurant-info h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.restaurant-details {
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Navigation Styles - Mobile Optimized */
+.category-nav {
+    background-color: rgba(0,0,0,0.8);
+    padding: 0.5rem;
+}
+
+.category-nav ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0 0.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.category-nav a {
+    text-decoration: none;
+    color: white;
+    padding: 0.6rem 0.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    background-color: rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.category-nav i {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.category-nav a:hover {
+    background-color: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+
+.category-nav a.active {
+    background-color: #fff;
+    color: #1a1a1a;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Menu Grid Styles */
+.menu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.menu-item {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.menu-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+}
+
+.menu-item img, .placeholder-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background-color: #f8f9fa;
+}
+
+.placeholder-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #adb5bd;
+    font-size: 0.9rem;
+    background: linear-gradient(45deg, #f8f9fa 25%, #e9ecef 25%, #e9ecef 50%, #f8f9fa 50%, #f8f9fa 75%, #e9ecef 75%, #e9ecef);
+    background-size: 20px 20px;
+}
+
+.menu-item-content {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.menu-item-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: #1a1a1a;
+}
+
+.menu-item-description {
+    color: #6c757d;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.menu-item-price {
+    font-weight: 700;
+    color: #2ecc71;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.menu-item-price::before {
+    content: '฿';
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .restaurant-info h1 {
+        font-size: 2.5rem;
+    }
+    
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .menu-item-title {
+        font-size: 1.2rem;
+    }
+
+    .restaurant-info {
+        padding: 3rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .category-nav a {
+        padding: 0.5rem 0.3rem;
+        font-size: 0.8rem;
+    }
+    
+    .category-nav i {
+        font-size: 1rem;
+    }
+    
+    .category-nav ul {
+        gap: 0.3rem;
+        padding: 0 0.3rem;
+    }
+    
+    .menu-item img, .placeholder-image {
+        height: 120px;
+    }
+    
+    .menu-item-content {
+        padding: 0.75rem;
+    }
+
+    .menu-item-title {
+        font-size: 1rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .menu-item-description {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+
+    .menu-item-price {
+        font-size: 1.1rem;
+    }
+
+    .restaurant-info h1 {
+        font-size: 2rem;
+    }
+
+    .restaurant-info {
+        padding: 2rem 1rem;
+    }
+}
