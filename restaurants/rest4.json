@@ -1,0 +1,124 @@
+{
+    "restaurantName": "THAI FOOD EXPERIENCE",
+    "currency": "฿",
+    "categories": {
+        "special": [
+            {
+                "name": "Happy Hour Beer Special",
+                "description": "Get 2 beer or drinks - pay for one! Available 17:00-19:00",
+                "price": 100,
+                "image": "images/rest1/happyhour.jpg"
+            },
+            {
+                "name": "Lunch offer - Thai chicken curry",
+                "description": "Try our fantastic chicken curry! Available 11:00-15:00!",
+                "price": 199,
+                "image": "images/rest1/chickencurry.jpg"
+            }
+        ],
+        "meat": [
+            {
+                "name": "Grilled Ribeye Steak",
+                "description": "Premium ribeye steak grilled to perfection with herb butter",
+                "price": 450,
+                "image": "images/rest1/ribeyesteak.jpg"
+            },
+            {
+                "name": "Cheese Burger with fries",
+                "description": "Juicy burger with melted cheese and fresh vegetables",
+                "price": 250,
+                "image": "images/rest1/cheeseburger.jpg"
+            }
+        ],
+        "fish": [
+            {
+                "name": "Pad Thai",
+                "description": "Classic thai dish with nudles and schrimp",
+                "price": 320,
+                "image": "images/rest1/padthai.jpg"
+            },
+            {
+                "name": "Sea Bass",
+                "description": "Pan-seared sea bass with herbs and white wine sauce",
+                "price": 380,
+                "image": "images/rest1/seabass.jpg"
+            }
+        ],
+        "chicken": [
+            {
+                "name": "Grilled Chicken",
+                "description": "Herb-marinated grilled chicken breast",
+                "price": 220,
+                "image": "images/rest1/chicken.jpg"
+            },
+            {
+                "name": "Chicken Satay",
+                "description": "Grilled chicken skewers with peanut sauce",
+                "price": 180,
+                "image": "images/rest1/satay.jpg"
+            }
+        ],
+        "beer": [
+            {
+                "name": "Singha",
+                "description": "Premium Thai lager beer, 5% ABV",
+                "price": 120,
+                "image": "images/rest1/singha.jpg"
+            },
+            {
+                "name": "Chang",
+                "description": "Classic Thai beer, 5.2% ABV",
+                "price": 110,
+                "image": "images/rest1/chang.jpg"
+            },
+            {
+                "name": "Draft Beer",
+                "description": "This weeks tasty beer on draft",
+                "price": 110,
+                "image": "images/rest1/draftbeer.jpg"
+            }
+        ],
+        "wine": [
+            {
+                "name": "House Red Wine",
+                "description": "Smooth medium-bodied red wine",
+                "price": 220,
+                "image": null
+            },
+            {
+                "name": "House White Wine",
+                "description": "Crisp and refreshing white wine",
+                "price": 220,
+                "image": null
+            }
+        ],
+        "drinks": [
+            {
+                "name": "Thai Iced Tea",
+                "description": "Traditional Thai tea with milk",
+                "price": 80,
+                "image": null
+            },
+            {
+                "name": "Coconut Water",
+                "description": "Fresh coconut water",
+                "price": 70,
+                "image": null
+            }
+        ],
+        "desserts": [
+            {
+                "name": "Mango Sticky Rice",
+                "description": "Sweet sticky rice with fresh mango",
+                "price": 120,
+                "image": null
+            },
+            {
+                "name": "Coconut Ice Cream",
+                "description": "Homemade coconut ice cream",
+                "price": 90,
+                "image": null
+            }
+        ]
+    }
+}
