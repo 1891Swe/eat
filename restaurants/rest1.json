@@ -7,13 +7,13 @@
                 "name": "Happy Hour Beer Special",
                 "description": "Get 2 beer or drinks - pay for one! Available 17:00-19:00",
                 "price": 100,
-                "image": "images/greatest-restaurant/happyhour.jpg"
+                "image": "images/rest1/happyhour.jpg"
             },
             {
                 "name": "Lunch offer - Thai chicken curry",
                 "description": "Try our fantastic chicken curry! Available 11:00-15:00!",
                 "price": 199,
-                "image": "images/greatest-restaurant/chickencurry.jpg"
+                "image": "images/rest1/chickencurry.jpg"
             }
         ],
         "meat": [
@@ -21,13 +21,13 @@
                 "name": "Grilled Ribeye Steak",
                 "description": "Premium ribeye steak grilled to perfection with herb butter",
                 "price": 450,
-                "image": "images/greatest-restaurant/ribeyesteak.jpg"
+                "image": "images/rest1/ribeyesteak.jpg"
             },
             {
                 "name": "Cheese Burger with fries",
                 "description": "Juicy burger with melted cheese and fresh vegetables",
                 "price": 250,
-                "image": "images/greatest-restaurant/cheeseburger.jpg"
+                "image": "images/rest1/cheeseburger.jpg"
             }
         ],
         "fish": [
@@ -35,13 +35,13 @@
                 "name": "Pad Thai",
                 "description": "Classic thai dish with nudles and schrimp",
                 "price": 320,
-                "image": "images/greatest-restaurant/padthai.jpg"
+                "image": "images/rest1/padthai.jpg"
             },
             {
                 "name": "Sea Bass",
                 "description": "Pan-seared sea bass with herbs and white wine sauce",
                 "price": 380,
-                "image": "images/greatest-restaurant/seabass.jpg"
+                "image": "images/rest1/seabass.jpg"
             }
         ],
         "chicken": [
@@ -49,13 +49,13 @@
                 "name": "Grilled Chicken",
                 "description": "Herb-marinated grilled chicken breast",
                 "price": 220,
-                "image": "images/greatest-restaurant/chicken.jpg"
+                "image": "images/rest1/chicken.jpg"
             },
             {
                 "name": "Chicken Satay",
                 "description": "Grilled chicken skewers with peanut sauce",
                 "price": 180,
-                "image": "images/greatest-restaurant/satay.jpg"
+                "image": "images/rest1/satay.jpg"
             }
         ],
         "beer": [
@@ -63,19 +63,19 @@
                 "name": "Singha",
                 "description": "Premium Thai lager beer, 5% ABV",
                 "price": 120,
-                "image": "images/greatest-restaurant/singha.jpg"
+                "image": "images/rest1/singha.jpg"
             },
             {
                 "name": "Chang",
                 "description": "Classic Thai beer, 5.2% ABV",
                 "price": 110,
-                "image": "images/greatest-restaurant/chang.jpg"
+                "image": "images/rest1/chang.jpg"
             },
             {
                 "name": "Draft Beer",
                 "description": "This weeks tasty beer on draft",
                 "price": 110,
-                "image": "images/greatest-restaurant/draftbeer.jpg"
+                "image": "images/rest1/draftbeer.jpg"
             }
         ],
         "wine": [
