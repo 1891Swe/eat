@@ -97,19 +97,16 @@ header {
     margin: 0 auto;
     padding: 2rem 1rem;
     position: relative;
-    background: linear-gradient(
-        45deg,
-        rgba(239, 239, 239, 0.97) 0%,
-        rgba(255, 255, 255, 0.97) 15%,
-        rgba(211, 0, 0, 0.97) 15%,
-        rgba(211, 0, 0, 0.97) 35%,
-        rgba(255, 255, 255, 0.97) 35%,
-        rgba(255, 255, 255, 0.97) 65%,
-        rgba(0, 36, 154, 0.97) 65%,
-        rgba(0, 36, 154, 0.97) 85%,
-        rgba(255, 255, 255, 0.97) 85%,
-        rgba(239, 239, 239, 0.97) 100%
-    );
+    background: #fff;
+    border: 1px solid #eee;
+    background-image: 
+        linear-gradient(45deg, #f8d7da 25%, transparent 25%),
+        linear-gradient(-45deg, #f8d7da 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f8d7da 75%),
+        linear-gradient(-45deg, transparent 75%, #f8d7da 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    border-radius: 8px;
 }
 
 .menu-grid {
@@ -119,19 +116,29 @@ header {
 }
 
 .menu-item {
-    background: rgba(255, 255, 255, 0.95);
+    background: white;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     position: relative;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid #eee;
+}
+
+.menu-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #b71c1c, #1a237e);
+    opacity: 0.7;
 }
 
 .menu-item:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
 }
 
 .menu-item img, .placeholder-image {
@@ -161,6 +168,20 @@ header {
     font-weight: 600;
     margin-bottom: 0.8rem;
     color: #1a1a1a;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.menu-item-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #b71c1c, #1a237e);
+    opacity: 0.7;
 }
 
 .menu-item-description {
@@ -172,7 +193,7 @@ header {
 
 .menu-item-price {
     font-weight: 700;
-    color: #2ecc71;
+    color: #b71c1c;
     font-size: 1.3rem;
     display: flex;
     align-items: center;
@@ -203,6 +224,10 @@ header {
 
     .restaurant-info {
         padding: 3rem 1rem;
+    }
+
+    .menu-container {
+        background-size: 15px 15px;
     }
 }
 
@@ -255,5 +280,9 @@ header {
 
     .restaurant-info {
         padding: 2rem 1rem;
+    }
+
+    .menu-container {
+        background-size: 10px 10px;
     }
 }
