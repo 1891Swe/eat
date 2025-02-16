@@ -1,1 +1,76 @@
-
+{
+    "restaurantName": "BELLA ITALIA",
+    "currency": "฿",
+    "categories": {
+        "starters": [
+            {
+                "name": "Bruschetta",
+                "description": "Toasted bread with fresh tomatoes, garlic and basil",
+                "price": 120,
+                "image": "images/rest2/bruschetta.jpg"
+            },
+            {
+                "name": "Caprese Salad",
+                "description": "Fresh mozzarella, tomatoes, and basil with balsamic glaze",
+                "price": 180,
+                "image": "images/rest2/caprese.jpg"
+            }
+        ],
+        "pasta": [
+            {
+                "name": "Spaghetti Carbonara",
+                "description": "Classic Roman pasta with eggs, pecorino and guanciale",
+                "price": 280,
+                "image": "images/rest2/carbonara.jpg"
+            },
+            {
+                "name": "Penne Arrabbiata",
+                "description": "Spicy tomato sauce with garlic and red chili",
+                "price": 240,
+                "image": "images/rest2/arrabbiata.jpg"
+            }
+        ],
+        "pizza": [
+            {
+                "name": "Margherita",
+                "description": "Tomato sauce, fresh mozzarella, and basil",
+                "price": 280,
+                "image": "images/rest2/margherita.jpg"
+            },
+            {
+                "name": "Quattro Formaggi",
+                "description": "Four cheese pizza with mozzarella, gorgonzola, parmesan, and fontina",
+                "price": 320,
+                "image": "images/rest2/quattro-formaggi.jpg"
+            }
+        ],
+        "wine": [
+            {
+                "name": "Chianti Classico",
+                "description": "Red wine from Tuscany",
+                "price": 320,
+                "image": null
+            },
+            {
+                "name": "Pinot Grigio",
+                "description": "White wine from Veneto",
+                "price": 280,
+                "image": null
+            }
+        ],
+        "desserts": [
+            {
+                "name": "Tiramisu",
+                "description": "Classic Italian coffee-flavored dessert",
+                "price": 160,
+                "image": "images/rest2/tiramisu.jpg"
+            },
+            {
+                "name": "Panna Cotta",
+                "description": "Italian cream dessert with berry sauce",
+                "price": 140,
+                "image": "images/rest2/panna-cotta.jpg"
+            }
+        ]
+    }
+}
