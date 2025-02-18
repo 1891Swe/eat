@@ -5,7 +5,7 @@
         "special": [
             {
                 "name": "Happy Hour Beer Special",
-                "description": "Get 2 beer or drinks - pay for one! Available 17:00-19:00",
+                "description": "2 beers for the price of one! Available 17:00-19:00",
                 "price": 100,
                 "image": "images/rest1/happyhour.jpg"
             },
