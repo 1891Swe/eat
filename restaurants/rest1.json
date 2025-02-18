@@ -24,6 +24,12 @@
                 "image": "images/rest1/ribeyesteak.jpg"
             },
             {
+                "name": "Red curry Thai chicken",
+                "description": "Premium ribeye steak grilled to perfection with herb butter",
+                "price": 450,
+                "image": "images/rest1/redcurrychicken.jpg"
+            },
+            {
                 "name": "Cheese Burger with fries",
                 "description": "Juicy burger with melted cheese and fresh vegetables",
                 "price": 250,
