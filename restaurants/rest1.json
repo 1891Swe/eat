@@ -83,7 +83,7 @@
                 "name": "House Red Wine",
                 "description": "Smooth medium-bodied red wine",
                 "price": 220,
-                "image": null
+                "image": "images/rest1/redwine.jpg"
             },
             {
                 "name": "House White Wine",
