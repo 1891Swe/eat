@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // Sample restaurant data - in a real application, this would be loaded from a server
+    // Sample restaurant data - just one example restaurant
     const restaurants = [
         {
             id: 'rest1',
@@ -7,27 +7,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             address: '123 Beachfront Road, Pattaya',
             image: 'images/restaurant1.jpg',
             cuisine: 'Thai'
-        },
-        {
-            id: 'rest2',
-            name: 'Ocean Breeze',
-            address: '456 Seaside Avenue, Pattaya',
-            image: 'images/restaurant2.jpg',
-            cuisine: 'Seafood'
-        },
-        {
-            id: 'rest3',
-            name: 'Spice Paradise',
-            address: '789 Palm Street, Pattaya',
-            image: 'images/restaurant3.jpg',
-            cuisine: 'Indian'
-        },
-        {
-            id: 'rest4',
-            name: 'Mediterranean Delight',
-            address: '321 Coconut Lane, Pattaya',
-            image: 'images/restaurant4.jpg',
-            cuisine: 'Mediterranean'
         }
     ];
 
