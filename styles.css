@@ -1,0 +1,299 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('images/pattaya.jpg');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.restaurant-info {
+    padding: 4rem 1rem;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.restaurant-info h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.restaurant-details {
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Navigation Styles - Mobile Optimized */
+.category-nav {
+    background-color: rgba(0,0,0,0.8);
+    padding: 0.5rem;
+}
+
+.category-nav ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0 0.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.category-nav a {
+    text-decoration: none;
+    color: white;
+    padding: 0.6rem 0.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    background-color: rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.category-nav i {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.category-nav a:hover {
+    background-color: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+
+.category-nav a.active {
+    background-color: #fff;
+    color: #1a1a1a;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Menu Grid Styles */
+.menu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    position: relative;
+    background: #fff;
+    border: 1px solid #eee;
+    background-image: 
+        linear-gradient(45deg, #f8d7da 25%, transparent 25%),
+        linear-gradient(-45deg, #f8d7da 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f8d7da 75%),
+        linear-gradient(-45deg, transparent 75%, #f8d7da 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    border-radius: 8px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.menu-item {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid #eee;
+}
+
+.menu-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #b71c1c, #1a237e);
+    opacity: 0.7;
+}
+
+.menu-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.menu-item img, .placeholder-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background-color: #f8f9fa;
+}
+
+.placeholder-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #adb5bd;
+    font-size: 0.9rem;
+    background: linear-gradient(45deg, #f8f9fa 25%, #e9ecef 25%, #e9ecef 50%, #f8f9fa 50%, #f8f9fa 75%, #e9ecef 75%, #e9ecef);
+    background-size: 20px 20px;
+}
+
+.menu-item-content {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.menu-item-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: #1a1a1a;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.menu-item-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #b71c1c, #1a237e);
+    opacity: 0.7;
+}
+
+.menu-item-description {
+    color: #6c757d;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.menu-item-price {
+    font-weight: 700;
+    color: #b71c1c;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.menu-item-price::before {
+    content: ''; /* Removing the baht symbol */
+    display: inline-block;
+    width: 1rem;
+    height: 0.7rem;
+    margin-right: 0.3rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='600' fill='%23A51931'/%3E%3Crect width='900' height='400' y='100' fill='%23F4F5F8'/%3E%3Crect width='900' height='200' y='200' fill='%232D2A4A'/%3E%3C/svg%3E");
+    background-size: cover;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .restaurant-info h1 {
+        font-size: 2.5rem;
+    }
+    
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .menu-item-title {
+        font-size: 1.2rem;
+    }
+
+    .restaurant-info {
+        padding: 3rem 1rem;
+    }
+
+    .menu-container {
+        background-size: 15px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .category-nav a {
+        padding: 0.5rem 0.3rem;
+        font-size: 0.8rem;
+    }
+    
+    .category-nav i {
+        font-size: 1rem;
+    }
+    
+    .category-nav ul {
+        gap: 0.3rem;
+        padding: 0 0.3rem;
+    }
+    
+    .menu-item img, .placeholder-image {
+        height: 120px;
+    }
+    
+    .menu-item-content {
+        padding: 0.75rem;
+    }
+
+    .menu-item-title {
+        font-size: 1rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .menu-item-description {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+
+    .menu-item-price {
+        font-size: 1.1rem;
+    }
+    
+    .menu-item-price::before {
+        width: 0.8rem;
+        height: 0.56rem;
+    }
+
+    .restaurant-info h1 {
+        font-size: 2rem;
+    }
+
+    .restaurant-info {
+        padding: 2rem 1rem;
+    }
+
+    .menu-container {
+        background-size: 10px 10px;
+    }
+}
