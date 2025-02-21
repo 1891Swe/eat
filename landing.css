@@ -29,8 +29,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('images/restaurant-bg.jpg');
+    background: url('images/pattaya.jpg');
     background-size: cover;
     background-position: center;
     z-index: -1;
@@ -39,10 +38,12 @@ body {
 .header-content {
     color: white;
     text-align: center;
-    padding: 0 1rem;
+    padding: 2rem;
     max-width: 800px;
     position: relative;
     z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
 }
 
 #welcome-title {
@@ -61,6 +62,31 @@ body {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 1s 0.3s forwards;
+    margin-bottom: 2rem;
+}
+
+/* Header CTA Button - Using the same style as view-menu-btn */
+.header-content .view-menu-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #b71c1c, #1a237e);
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s 0.6s forwards;
+    margin-top: 1rem;
+}
+
+.header-content .view-menu-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    opacity: 0.9;
 }
 
 @keyframes fadeInUp {
@@ -77,7 +103,15 @@ body {
     padding: 3rem 1rem;
 }
 
-.restaurant-selection h2 {
+.section-description {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+.restaurant-selection h2,
+.pricing-section h2 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     position: relative;
@@ -85,7 +119,8 @@ body {
     display: inline-block;
 }
 
-.restaurant-selection h2::after {
+.restaurant-selection h2::after,
+.pricing-section h2::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -172,10 +207,18 @@ body {
     opacity: 0.9;
 }
 
+/* Pricing Section */
+.pricing-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
 /* Features Section */
 .features {
     background-color: #fff;
-    padding: 4rem 1rem;
+    padding: 2rem 1rem 4rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
@@ -189,6 +232,7 @@ body {
     background-color: #f8f9fa;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: relative;
 }
 
 .feature-card:hover {
@@ -213,6 +257,76 @@ body {
     color: #6c757d;
 }
 
+/* Pricing Card Specifics */
+.feature-card.highlight {
+    border: 2px solid #b71c1c;
+    transform: scale(1.05);
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(183, 28, 28, 0.15);
+}
+
+.feature-card.highlight:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.best-value {
+    position: absolute;
+    top: -15px;
+    right: 50%;
+    transform: translateX(50%);
+    background: linear-gradient(90deg, #b71c1c, #1a237e);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.price-tag {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 1.5rem 0 0.5rem;
+}
+
+.price-note {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+/* Contact Section */
+.contact-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 1rem;
+    text-align: center;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    margin-bottom: 3rem;
+}
+
+.contact-button {
+    display: inline-block;
+    background: linear-gradient(90deg, #b71c1c, #1a237e);
+    color: white;
+    padding: 0.8rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    margin-top: 1.5rem;
+}
+
+.contact-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
 /* Footer Styles */
 footer {
     background-color: #1a1a1a;
@@ -223,22 +337,8 @@ footer {
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.social-links a {
-    color: white;
-    margin-left: 1rem;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-}
-
-.social-links a:hover {
-    color: #b71c1c;
+    text-align: center;
+    padding: 1rem 0;
 }
 
 /* Responsive Design */
