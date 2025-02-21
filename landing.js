@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // Sample restaurant data - just one example restaurant
+    // Just one demo restaurant
     const restaurants = [
         {
             id: 'rest1',
