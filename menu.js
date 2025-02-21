@@ -1,116 +1,212 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    let config = {};
+// Wait for the DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the menu
+    initializeMenu();
+    
+    // Add smooth scrolling
+    setupSmoothScrolling();
+    
+    // Add image lazy loading
+    setupLazyLoading();
+});
 
-    try {
-        // Get restaurant ID from URL parameter or default to 'rest1'
-        const urlParams = new URLSearchParams(window.location.search);
-        const restaurantId = urlParams.get('id') || 'rest1';
-        
-        // Load restaurant configuration
-        const response = await fetch(`restaurants/${restaurantId}.json`);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        config = await response.json();
-        
-        // Update restaurant name with fade-in effect
-        const restaurantName = document.getElementById('restaurant-name');
-        restaurantName.textContent = config.restaurantName;
-        restaurantName.style.opacity = 0;
-        requestAnimationFrame(() => {
-            restaurantName.style.transition = 'opacity 0.5s ease';
-            restaurantName.style.opacity = 1;
-        });
-    } catch (error) {
-        console.error('Error loading configuration:', error);
-        document.querySelector('.menu-container').innerHTML = `
-            <div style="text-align: center; padding: 2rem; color: #dc3545;">
-                <i class="fas fa-exclamation-circle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-                <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">Unable to load menu data</p>
-                <p style="color: #6c757d;">Please try again later</p>
-            </div>
-        `;
-        return;
-    }
-
-    const categoryLinks = document.querySelectorAll('.category-nav a');
-    const menuItemsContainer = document.getElementById('menu-items');
-
-    categoryLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+/**
+ * Initialize the menu functionality
+ */
+function initializeMenu() {
+    // Get all navigation buttons
+    const navButtons = document.querySelectorAll('.category-nav a');
+    
+    // Add click event listeners to each button
+    navButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
             e.preventDefault();
-            categoryLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-            const category = link.dataset.category;
-            displayMenuItems(category);
+            
+            // Get the category from the button's href attribute
+            const category = this.getAttribute('href').substring(1);
+            
+            // Show the selected category
+            showCategory(category);
+            
+            // Update active state on buttons
+            updateActiveButton(this);
         });
     });
-
-    function displayMenuItems(category) {
-        const items = config.categories?.[category] || [];
-        menuItemsContainer.style.opacity = 0;
+    
+    // If there's a hash in URL, show that category
+    if (window.location.hash) {
+        const category = window.location.hash.substring(1);
+        const categoryElement = document.getElementById(category);
         
-        setTimeout(() => {
-            menuItemsContainer.innerHTML = '';
+        if (categoryElement) {
+            showCategory(category);
+            
+            // Find and update the active button
+            const button = document.querySelector(`.category-nav a[href="#${category}"]`);
+            if (button) {
+                updateActiveButton(button);
+            }
+        }
+    }
+}
 
-            if (items.length === 0) {
-                menuItemsContainer.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #6c757d;">
-                        <i class="fas fa-utensils" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                        <p>No items available in this category</p>
-                    </div>
-                `;
-            } else {
-                items.forEach((item, index) => {
-                    const menuItem = document.createElement('div');
-                    menuItem.className = 'menu-item';
-                    
-                    let imageContent;
-                    if (item.image) {
-                        imageContent = `
-                            <div class="image-container">
-                                <img src="${item.image}" alt="${item.name}" 
-                                     onerror="this.parentElement.innerHTML='<div class=\'placeholder-image\'><i class=\'fas fa-utensils\'></i></div>'">
-                            </div>`;
-                    } else {
-                        imageContent = `
-                            <div class="image-container">
-                                <div class="placeholder-image">
-                                    <i class="fas fa-utensils"></i>
-                                </div>
-                            </div>`;
-                    }
+/**
+ * Show the selected category and hide others
+ * @param {string} categoryId - The ID of the category to show
+ */
+function showCategory(categoryId) {
+    // Hide all categories
+    const allCategories = document.querySelectorAll('.menu-container > div');
+    allCategories.forEach(category => {
+        category.style.display = 'none';
+    });
+    
+    // Show the selected category
+    const selectedCategory = document.getElementById(categoryId);
+    if (selectedCategory) {
+        selectedCategory.style.display = 'grid';
+        
+        // Add a small animation
+        selectedCategory.style.opacity = '0';
+        selectedCategory.style.transform = 'translateY(20px)';
+        
+        // Force reflow
+        void selectedCategory.offsetWidth;
+        
+        // Animate in
+        selectedCategory.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        selectedCategory.style.opacity = '1';
+        selectedCategory.style.transform = 'translateY(0)';
+    }
+    
+    // Update URL hash without scrolling
+    updateUrlHash(categoryId);
+}
 
-                    menuItem.innerHTML = `
-                        ${imageContent}
-                        <div class="menu-item-content">
-                            <h3 class="menu-item-title">${item.name}</h3>
-                            <p class="menu-item-description">${item.description}</p>
-                            <p class="menu-item-price">${config.currency}${item.price}</p>
-                        </div>
-                    `;
+/**
+ * Update the active state of navigation buttons
+ * @param {Element} activeButton - The button to set as active
+ */
+function updateActiveButton(activeButton) {
+    // Remove active class from all buttons
+    const allButtons = document.querySelectorAll('.category-nav a');
+    allButtons.forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    // Add active class to the clicked button
+    activeButton.classList.add('active');
+}
 
-                    menuItem.style.opacity = 0;
-                    menuItem.style.transform = 'translateY(20px)';
-                    menuItemsContainer.appendChild(menuItem);
-                    
-                    requestAnimationFrame(() => {
-                        menuItem.style.transition = 'all 0.3s ease';
-                        menuItem.style.transitionDelay = `${index * 0.1}s`;
-                        menuItem.style.opacity = 1;
-                        menuItem.style.transform = 'translateY(0)';
+/**
+ * Update URL hash without scrolling
+ * @param {string} hash - The hash to set in the URL
+ */
+function updateUrlHash(hash) {
+    // Save current scroll position
+    const scrollPosition = window.scrollY;
+    
+    // Update URL
+    window.location.hash = hash;
+    
+    // Restore scroll position
+    window.scrollTo(0, scrollPosition);
+}
+
+/**
+ * Setup smooth scrolling for anchor links
+ */
+function setupSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            // Only handle category navigation in the nav section
+            if (!this.closest('.category-nav')) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100, // Adjust for header
+                        behavior: 'smooth'
                     });
-                });
+                }
+            }
+        });
+    });
+}
+
+/**
+ * Setup lazy loading for images
+ */
+function setupLazyLoading() {
+    // Check if Intersection Observer API is available
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const src = img.getAttribute('data-src');
+                    
+                    if (src) {
+                        img.src = src;
+                        img.removeAttribute('data-src');
+                    }
+                    
+                    observer.unobserve(img);
+                }
+            });
+        });
+        
+        // Get all images with data-src attribute
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        lazyImages.forEach(img => {
+            imageObserver.observe(img);
+        });
+    } else {
+        // Fallback for browsers that don't support Intersection Observer
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        lazyImages.forEach(img => {
+            img.src = img.getAttribute('data-src');
+            img.removeAttribute('data-src');
+        });
+    }
+}
+
+/**
+ * Toggle mobile menu visibility
+ */
+function toggleMobileMenu() {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (mobileMenu) {
+        mobileMenu.classList.toggle('active');
+    }
+}
+
+/**
+ * Initialize special offers display
+ */
+function initializeSpecialOffers() {
+    const specialOffers = document.querySelector('.special-offers');
+    if (specialOffers) {
+        // Set up automatic carousel if multiple offers
+        const offers = specialOffers.querySelectorAll('.offer');
+        if (offers.length > 1) {
+            let currentOffer = 0;
+            
+            // Function to show next offer
+            function showNextOffer() {
+                offers.forEach(offer => offer.classList.remove('active'));
+                currentOffer = (currentOffer + 1) % offers.length;
+                offers[currentOffer].classList.add('active');
             }
             
-            requestAnimationFrame(() => {
-                menuItemsContainer.style.transition = 'opacity 0.3s ease';
-                menuItemsContainer.style.opacity = 1;
-            });
-        }, 300);
+            // Initialize the first offer as active
+            offers[0].classList.add('active');
+            
+            // Set interval for rotation
+            setInterval(showNextOffer, 5000);
+        }
     }
-
-    // Display initial category
-    displayMenuItems('special');
-});
+}
