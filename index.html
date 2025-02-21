@@ -3,44 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Digital restaurant menu with delicious food and drinks">
-    <meta name="theme-color" content="#000000">
-    <title>Restaurant Menu</title>
+    <title>Restaurang Pattaya</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="restaurant-info">
-            <h1 id="restaurant-name"></h1>
+            <h1>Restaurang Pattaya</h1>
             <div class="restaurant-details">
-                <span><i class="fas fa-clock"></i> Open Daily: 11:00 - 23:00</span>
+                <p>Authentic Thai Cuisine • Since 2005</p>
+                <p>Open Daily: 11:00 - 22:00</p>
             </div>
         </div>
-        
+
         <nav class="category-nav">
             <ul>
-                <!-- First Row -->
-                <li><a href="#" data-category="special" class="active"><i class="fas fa-star"></i> Special</a></li>
-                <li><a href="#" data-category="meat"><i class="fas fa-burger"></i> Meat</a></li>
-                <li><a href="#" data-category="fish"><i class="fas fa-fish"></i> Fish</a></li>
-                <li><a href="#" data-category="chicken"><i class="fas fa-kiwi-bird"></i> Chicken</a></li>
-                <!-- Second Row -->
-                <li><a href="#" data-category="beer"><i class="fas fa-beer"></i> Beer</a></li>
-                <li><a href="#" data-category="wine"><i class="fas fa-wine-glass-alt"></i> Wine</a></li>
-                <li><a href="#" data-category="drinks"><i class="fas fa-cocktail"></i> Drinks</a></li>
-                <li><a href="#" data-category="desserts"><i class="fas fa-ice-cream"></i> Desserts</a></li>
+                <li><a href="#starters" class="active"><i class="fas fa-seedling"></i> Starters</a></li>
+                <li><a href="#mains"><i class="fas fa-utensils"></i> Main Course</a></li>
+                <li><a href="#curries"><i class="fas fa-fire"></i> Curries</a></li>
+                <li><a href="#rice"><i class="fas fa-bowl-rice"></i> Rice & Noodles</a></li>
+                <li><a href="#vegetarian"><i class="fas fa-leaf"></i> Vegetarian</a></li>
+                <li><a href="#seafood"><i class="fas fa-fish"></i> Seafood</a></li>
+                <li><a href="#desserts"><i class="fas fa-ice-cream"></i> Desserts</a></li>
+                <li><a href="#drinks"><i class="fas fa-glass-martini-alt"></i> Drinks</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="menu-container">
-        <div id="menu-items" class="menu-grid">
-            <!-- Menu items will be dynamically inserted here -->
+    <!-- Special Offers Section -->
+    <div class="special-offers">
+        <div class="offer">
+            <h2>Happy Hour Beer Special</h2>
+            <div class="offer-content">
+                <p>2 beers for the price of one! Available 17:00-19:00</p>
+                <p class="offer-price">100</p>
+            </div>
         </div>
-    </main>
+    </div>
 
-    <script src="menu.js"></script>
+    <div class="menu-container">
+        <!-- Starters Section -->
+        <div id="starters" class="menu-grid">
+            <div class="menu-item">
+                <div class="placeholder-image">Image Placeholder</div>
+                <div class="menu-item-content">
+                    <h2 class="menu-item-title">Spring Rolls</h2>
+                    <p class="menu-item-description">Crispy spring rolls filled with vegetables and glass noodles</p>
+                    <p class="menu-item-price">90</p>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="placeholder-image">Image Placeholder</div>
+                <div class="menu-item-content">
+                    <h2 class="menu-item-title">Satay Chicken</h2>
+                    <p class="menu-item-description">Grilled chicken skewers with peanut sauce</p>
+                    <p class="menu-item-price">120</p>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="placeholder-image">Image Placeholder</div>
+                <div class="menu-item-content">
+                    <h2 class="menu-item-title">Tom Yum Soup</h2>
+                    <p class="menu-item-description">Spicy and sour soup with lemongrass and mushrooms</p>
+                    <p class="menu-item-price">110</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Course Section -->
+        <div id="mains" class="menu-grid" style="display: none;">
+            <div class="menu-item">
+                <div class="placeholder-image">Image Placeholder</div>
+                <div class="menu-item-content">
+                    <h2 class="menu-item-title">Pad Thai</h2>
+                    <p class="menu-item-description">Stir-fried rice noodles with egg, tofu, bean sprouts and peanuts</p>
+                    <p class="menu-item-price">160</p>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="placeholder-image">Image Placeholder</div>
+                <div class="menu-item-content">
+                    <h2 class="menu-item-title">Basil Chicken</h2>
+                    <p class="menu-item-description">Stir-fried chicken with basil, chili and garlic</p>
+                    <p class="menu-item-price">150</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remaining menu sections would follow the same pattern -->
+        <div id="curries" class="menu-grid" style="display: none;">
+            <!-- Curry items go here -->
+        </div>
+
+        <div id="rice" class="menu-grid" style="display: none;">
+            <!-- Rice and noodle items go here -->
+        </div>
+
+        <div id="vegetarian" class="menu-grid" style="display: none;">
+            <!-- Vegetarian items go here -->
+        </div>
+
+        <div id="seafood" class="menu-grid" style="display: none;">
+            <!-- Seafood items go here -->
+        </div>
+
+        <div id="desserts" class="menu-grid" style="display: none;">
+            <!-- Dessert items go here -->
+        </div>
+
+        <div id="drinks" class="menu-grid" style="display: none;">
+            <!-- Drink items go here -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Restaurang Pattaya. All rights reserved.</p>
+        <p>Allergies? Please speak to our staff about ingredients</p>
+    </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
