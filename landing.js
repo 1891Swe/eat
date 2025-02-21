@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, 50);
 
     // Add scroll reveal animation to feature cards and step cards
-    const animatedElements = document.querySelectorAll('.feature-card, .step-card');
+    const animatedElements = document.querySelectorAll('.feature-card, .step-card, .mobile-friendly');
     
     const options = {
         threshold: 0.2
