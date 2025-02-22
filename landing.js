@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             id: 'rest1',
             name: 'Thai Garden',
             address: '123 Beachfront Road, Pattaya',
-            image: 'images/restaurant1.jpg',
+            image: 'images/thairest.jpg',
             cuisine: 'Thai'
         }
     ];
