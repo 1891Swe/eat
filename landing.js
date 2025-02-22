@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const restaurants = [
         {
             id: 'rest1',
-            name: 'Thai Garden',
-            address: '123 Beachfront Road, Pattaya',
+            name: 'T',
+            address: 'Second Road, Pattaya City',
             image: 'images/thairest.jpg',
             cuisine: 'Thai'
         }
