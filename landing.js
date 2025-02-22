@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const restaurants = [
         {
             id: 'rest1',
-            name: 'T',
+            name: 'Thai food',
             address: 'Second Road, Pattaya City',
             image: 'images/thairestdemo.jpg',
-            cuisine: 'Thai'
+            cuisine: 'Traditional Thai Food'
         }
     ];
 
