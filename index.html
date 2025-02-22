@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Digital restaurant menu with delicious food and drinks">
-    <meta name="theme-color" content="#000000">
-    <title>Restaurant Menu</title>
+    <meta name="description" content="Modern digital restaurant menu">
+    <meta name="theme-color" content="#ffffff">
+    <title>Digital Menu</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,24 +21,44 @@
         
         <nav class="category-nav">
             <ul>
-                <!-- First Row -->
-                <li><a href="#" data-category="special" class="active"><i class="fas fa-star"></i> Special</a></li>
-                <li><a href="#" data-category="meat"><i class="fas fa-burger"></i> Meat</a></li>
-                <li><a href="#" data-category="fish"><i class="fas fa-fish"></i> Fish</a></li>
-                <li><a href="#" data-category="chicken"><i class="fas fa-kiwi-bird"></i> Chicken</a></li>
-                <!-- Second Row -->
-                <li><a href="#" data-category="beer"><i class="fas fa-beer"></i> Beer</a></li>
-                <li><a href="#" data-category="wine"><i class="fas fa-wine-glass-alt"></i> Wine</a></li>
-                <li><a href="#" data-category="drinks"><i class="fas fa-cocktail"></i> Drinks</a></li>
-                <li><a href="#" data-category="desserts"><i class="fas fa-ice-cream"></i> Desserts</a></li>
+                <li><a href="#" data-category="special" class="active">
+                    <i class="fas fa-star"></i>
+                    <span>Special</span>
+                </a></li>
+                <li><a href="#" data-category="meat">
+                    <i class="fas fa-burger"></i>
+                    <span>Meat</span>
+                </a></li>
+                <li><a href="#" data-category="fish">
+                    <i class="fas fa-fish"></i>
+                    <span>Fish</span>
+                </a></li>
+                <li><a href="#" data-category="chicken">
+                    <i class="fas fa-drumstick-bite"></i>
+                    <span>Chicken</span>
+                </a></li>
+                <li><a href="#" data-category="beer">
+                    <i class="fas fa-beer"></i>
+                    <span>Beer</span>
+                </a></li>
+                <li><a href="#" data-category="wine">
+                    <i class="fas fa-wine-glass-alt"></i>
+                    <span>Wine</span>
+                </a></li>
+                <li><a href="#" data-category="drinks">
+                    <i class="fas fa-cocktail"></i>
+                    <span>Drinks</span>
+                </a></li>
+                <li><a href="#" data-category="desserts">
+                    <i class="fas fa-ice-cream"></i>
+                    <span>Desserts</span>
+                </a></li>
             </ul>
         </nav>
     </header>
 
     <main class="menu-container">
-        <div id="menu-items" class="menu-grid">
-            <!-- Menu items will be dynamically inserted here -->
-        </div>
+        <div id="menu-items" class="menu-grid"></div>
     </main>
 
     <script src="menu.js"></script>
