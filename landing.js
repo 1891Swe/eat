@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             id: 'rest1',
             name: 'T',
             address: 'Second Road, Pattaya City',
-            image: 'images/thairest.jpg',
+            image: 'images/thairestdemo.jpg',
             cuisine: 'Thai'
         }
     ];
