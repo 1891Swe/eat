@@ -24,7 +24,7 @@ header {
     text-align: center;
     position: relative;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                      url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200');
+                      url('/images/');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
