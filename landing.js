@@ -112,4 +112,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
     });
+    
+    // NEW CODE: Toggle pricing boxes display
+    const priceBtn = document.getElementById('price-btn');
+    const pricingBoxes = document.getElementById('pricing-boxes');
+    
+    priceBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        pricingBoxes.classList.toggle('show');
+    });
+    
+    // Close pricing boxes when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!priceBtn.contains(e.target) && !pricingBoxes.contains(e.target)) {
+            pricingBoxes.classList.remove('show');
+        }
+    });
 });
