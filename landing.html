@@ -5,126 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Welcome to our restaurant - explore our digital menu">
     <meta name="theme-color" content="#000000">
-    <title>Restaurant Welcome</title>
-    <link rel="stylesheet" href="landing.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Digital Menu</title>
+    <link rel="stylesheet" href="minimal.css">
 </head>
 <body>
-    <header class="landing-header">
+    <header>
         <div class="header-content">
-            <h1 id="welcome-title">Digital Menu</h1>
-            <p class="tagline">Modernize your restaurant with our affordable digital menu system</p>
-            <!-- Changed "View Pricing" to "Price" button -->
-            <a href="#" id="price-btn" class="price-btn">Price</a>
+            <h1>Digital Menu</h1>
+            <p>Modernize your restaurant with our affordable digital menu system</p>
+            <!-- Price button added to header -->
+            <div class="price-container">
+                <button id="price-btn">Price</button>
+            </div>
+        </div>
+        
+        <!-- Pricing boxes that appear when clicking the Price button -->
+        <div id="pricing-boxes" class="pricing-boxes">
+            <div class="pricing-box">
+                <h3>Flexible Payments</h3>
+                <p>Pay as you go, month by month</p>
+                <div class="price">฿1,900 / month</div>
+                <p class="note">Everything included</p>
+            </div>
             
-            <!-- Pricing boxes that will appear when "Price" is clicked -->
-            <div id="pricing-boxes" class="pricing-boxes">
-                <div class="pricing-box">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Flexible Payments</h3>
-                    <p>Pay as you go, month by month</p>
-                    <div class="price-tag">฿1,900 / month</div>
-                    <p class="price-note">Everything included</p>
-                </div>
-                <div class="pricing-box highlight">
-                    <div class="best-value">Best Value</div>
-                    <i class="fas fa-calendar-check"></i>
-                    <h3>Annual Subscription</h3>
-                    <p>Save with our yearly plan</p>
-                    <div class="price-tag">฿19,000 / year</div>
-                    <p class="price-note">Get 2 months free!</p>
-                </div>
+            <div class="pricing-box best-value">
+                <span class="value-tag">Best Value</span>
+                <h3>Annual Subscription</h3>
+                <p>Save with our yearly plan</p>
+                <div class="price">฿19,000 / year</div>
+                <p class="note">Get 2 months free!</p>
             </div>
         </div>
     </header>
 
-    <section class="how-it-works">
+    <section>
         <h2>How It Works</h2>
-        <p class="section-description"> Simple access to your digital menu</p>
-        <div class="steps-container">
-            <div class="step-card">
-                <div class="step-number">1</div>
-                <i class="fas fa-qrcode step-icon"></i>
-                <h3>Scan QR Code</h3>
-                <p>Scan the QR code with the mobile device camera</p>
-            </div>
-            
-            <div class="step-connector"></div>
-            
-            <div class="step-card">
-                <div class="step-number">2</div>
-                <i class="fas fa-mobile-alt step-icon"></i>
-                <h3>Digital Menu</h3>
-                <p>Digital menu is instantly presented on your device</p>
-            </div>
+        <p>Simple access to your digital menu</p>
+        
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-icon">🔍</div>
+            <h3>Scan QR Code</h3>
+            <p>Scan the QR code with the mobile device camera</p>
         </div>
-        <div class="mobile-friendly">
-            <i class="fas fa-check-circle"></i>
+        
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-icon">📱</div>
+            <h3>Digital Menu</h3>
+            <p>Digital menu is instantly presented on your device</p>
+        </div>
+        
+        <div class="info-box">
+            <span class="check-icon">✓</span>
             <p>No app download required - works directly in browser</p>
         </div>
     </section>
 
-    <!-- Removed this section since we moved it to the top banner -->
-    <!-- <section id="pricing" class="pricing-section">
-        <h2>Digital Menu Solution Pricing</h2>
-        <div class="features">
-            <div class="feature-card">
-                <i class="fas fa-calendar-alt"></i>
-                <h3>Flexible Payments</h3>
-                <p>Pay as you go, month by month</p>
-                <div class="price-tag">฿1,900 / month</div>
-                <p class="price-note">Everything included</p>
-            </div>
-            <div class="feature-card highlight">
-                <div class="best-value">Best Value</div>
-                <i class="fas fa-calendar-check"></i>
-                <h3>Annual Subscription</h3>
-                <p>Save with our yearly plan</p>
-                <div class="price-tag">฿19,000 / year</div>
-                <p class="price-note">Get 2 months free!</p>
-            </div>
-        </div>
-    </section> -->
-
-    <section class="features">
-        <div class="feature-card">
-            <i class="fas fa-sync-alt"></i>
-            <h3>Free Updates</h3>
-            <p>Updates of your digital menu included at no extra cost</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-qrcode"></i>
-            <h3>QR Code Included</h3>
-            <p>Easy to scan QR code is included with your subscription</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-hand-holding-usd"></i>
-            <h3>No Hidden Costs</h3>
-            <p>What you see is what you get - transparent pricing</p>
-        </div>
+    <section>
+        <h2>Free Updates</h2>
+        <p>Updates of your digital menu included at no extra cost</p>
     </section>
-    
-    <section class="restaurant-selection">
+
+    <section>
+        <h2>QR Code Included</h2>
+        <p>Easy to scan QR code is included with your subscription</p>
+    </section>
+
+    <section>
+        <h2>No Hidden Costs</h2>
+        <p>What you see is what you get - transparent pricing</p>
+    </section>
+
+    <section>
         <h2>Restaurant Demo Example</h2>
-        <p class="section-description">Explore our sample restaurant menu to see how our digital menu solution works in action</p>
-        <div class="restaurant-grid centered-demo" id="restaurant-list">
-            <!-- Restaurant card will be dynamically inserted here -->
+        <p>Explore our sample restaurant menu to see how our digital menu solution works in action</p>
+        <div id="restaurant-list">
+            <!-- Restaurant demo will be inserted here -->
         </div>
     </section>
 
-    <section class="contact-section">
-        <h2>Ready to Upgrade Your Restaurant?</h2>
-        <p class="section-description">Contact us today to get started with your digital menu solution</p>
-        <a href="mailto:simplifymenu@gmail.com" class="contact-button">Contact Us</a>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 Digital Menu Solutions. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="landing.js"></script>
+    <script src="minimal.js"></script>
 </body>
 </html>
