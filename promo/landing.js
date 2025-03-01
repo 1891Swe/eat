@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to our restaurant - explore our digital menu">
+    <meta name="description" content="Welcome to order your digital menu">
     <meta name="theme-color" content="#000000">
     <title>Restaurant Welcome</title>
     <link rel="stylesheet" href="landing.css">
@@ -14,7 +14,7 @@
     <header class="landing-header">
         <div class="header-content">
             <h1 id="welcome-title">Digital Menu</h1>
-            <p class="tagline">Modernize your restaurant with our affordable digital menu system</p>
+            <p class="tagline">We offer affordable digital menus</p>
             <a href="#pricing" class="view-menu-btn">View Pricing</a>
         </div>
     </header>
