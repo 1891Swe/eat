@@ -47,6 +47,8 @@ header {
 .category-nav {
     background-color: rgba(0,0,0,0.8);
     padding: 0.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .category-nav ul {
@@ -80,7 +82,7 @@ header {
     margin-bottom: 0.2rem;
 }
 
-.category-nav a:hover {
+.category-nav a:hover, .category-nav a:active {
     background-color: rgba(255,255,255,0.2);
     transform: translateY(-2px);
 }
@@ -134,6 +136,7 @@ header {
     height: 4px;
     background: linear-gradient(90deg, #b71c1c, #1a237e);
     opacity: 0.7;
+    z-index: 1;
 }
 
 .menu-item:hover {
@@ -146,6 +149,11 @@ header {
     height: 220px;
     object-fit: cover;
     background-color: #f8f9fa;
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
 }
 
 .placeholder-image {
@@ -199,12 +207,53 @@ header {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    position: relative;
 }
 
 .menu-item-price::before {
-    content: 'à¸¿';
+    content: attr(data-currency);
     font-size: 1rem;
     color: #666;
+}
+
+/* Loading and refresh indicators */
+.refresh-indicator {
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+}
+
+#loading-indicator div {
+    color: white;
+    text-align: center;
+}
+
+#loading-indicator i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
 }
 
 /* Responsive Design */
@@ -233,8 +282,29 @@ header {
 
 @media (max-width: 480px) {
     .menu-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .menu-item {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        height: auto;
+    }
+    
+    .menu-item img, .placeholder-image {
+        height: 100%;
+        border-radius: 15px 0 0 15px;
+    }
+    
+    .menu-item-content {
+        padding: 0.75rem;
+        text-align: left;
+    }
+    
+    .menu-item-title::after {
+        left: 0;
+        transform: none;
     }
     
     .category-nav a {
@@ -244,6 +314,7 @@ header {
     
     .category-nav i {
         font-size: 1rem;
+        margin-bottom: 0.1rem;
     }
     
     .category-nav ul {
@@ -251,14 +322,6 @@ header {
         padding: 0 0.3rem;
     }
     
-    .menu-item img, .placeholder-image {
-        height: 120px;
-    }
-    
-    .menu-item-content {
-        padding: 0.75rem;
-    }
-
     .menu-item-title {
         font-size: 1rem;
         margin-bottom: 0.4rem;
@@ -275,14 +338,52 @@ header {
     }
 
     .restaurant-info h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .restaurant-info {
-        padding: 2rem 1rem;
+        padding: 1.5rem 1rem;
+    }
+    
+    .restaurant-details {
+        font-size: 0.9rem;
     }
 
     .menu-container {
         background-size: 10px 10px;
+        padding: 1rem 0.5rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .menu-item {
+        grid-template-columns: 1fr;
+    }
+    
+    .menu-item img, .placeholder-image {
+        height: 140px;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .menu-item-content {
+        text-align: center;
+    }
+    
+    .menu-item-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .category-nav ul {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .category-nav a {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.2rem;
+    }
+    
+    .category-nav i {
+        font-size: 0.9rem;
     }
 }
