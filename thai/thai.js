@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     try {
         // Load restaurant configuration
-        const response = await fetch(`restaurants/${restaurantId}.json`);
+        const response = await fetch(`${restaurantId}.json`);
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
