@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Digital restaurant menu with delicious food and drinks">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
+    <title>Restaurant Menu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+</head>
+<body>
+    <div id="loading-indicator">
+        <div>
+            <i class="fas fa-utensils fa-spin"></i>
+            <p>Loading Menu...</p>
+        </div>
+    </div>
+
+    <header>
+        <div class="restaurant-info">
+            <h1 id="restaurant-name"></h1>
+            <div class="restaurant-details">
+                <span><i class="fas fa-clock"></i> Open Daily: <span id="opening-hours">11:00 - 23:00</span></span>
+            </div>
+        </div>
+        
+        <nav class="category-nav">
+            <ul>
+                <!-- First Row -->
+                <li><a href="#" data-category="special" class="active"><i class="fas fa-star"></i> Special</a></li>
+                <li><a href="#" data-category="meat"><i class="fas fa-burger"></i> Meat</a></li>
+                <li><a href="#" data-category="fish"><i class="fas fa-fish"></i> Fish</a></li>
+                <li><a href="#" data-category="chicken"><i class="fas fa-drumstick-bite"></i> Chicken</a></li>
+                <!-- Second Row -->
+                <li><a href="#" data-category="beer"><i class="fas fa-beer"></i> Beer</a></li>
+                <li><a href="#" data-category="wine"><i class="fas fa-wine-glass-alt"></i> Wine</a></li>
+                <li><a href="#" data-category="drinks"><i class="fas fa-cocktail"></i> Drinks</a></li>
+                <li><a href="#" data-category="desserts"><i class="fas fa-ice-cream"></i> Desserts</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="menu-container">
+        <div id="menu-items" class="menu-grid">
+            <!-- Menu items will be dynamically inserted here -->
+        </div>
+    </main>
+
+    <script src="menu.js"></script>
+</body>
+</html>
 
