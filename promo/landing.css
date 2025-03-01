@@ -10,6 +10,32 @@ body {
     line-height: 1.6;
     background-color: #f8f9fa;
     color: #333;
+    overflow-x: hidden;
+}
+
+/* Loading Indicator */
+#loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+}
+
+#loading-indicator div {
+    color: white;
+    text-align: center;
+}
+
+#loading-indicator i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
 }
 
 /* Header Styles */
@@ -44,6 +70,7 @@ body {
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 15px;
+    margin: 1rem;
 }
 
 #welcome-title {
@@ -83,6 +110,7 @@ body {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 1s 0.7s forwards;
+    flex-wrap: wrap;
 }
 
 .header-pricing-box {
@@ -95,7 +123,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.header-pricing-box:hover {
+.header-pricing-box:hover, .header-pricing-box:active {
     transform: translateY(-5px);
     background-color: rgba(255, 255, 255, 0.25);
 }
@@ -125,7 +153,7 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.header-pricing-box.highlight:hover {
+.header-pricing-box.highlight:hover, .header-pricing-box.highlight:active {
     transform: scale(1.05) translateY(-5px);
 }
 
@@ -167,7 +195,8 @@ body {
 
 .restaurant-selection h2,
 .pricing-section h2,
-.features-section h2 {
+.features-section h2,
+.how-it-works h2 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     position: relative;
@@ -177,7 +206,8 @@ body {
 
 .restaurant-selection h2::after,
 .pricing-section h2::after,
-.features-section h2::after {
+.features-section h2::after,
+.how-it-works h2::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -225,7 +255,7 @@ body {
     opacity: 0.7;
 }
 
-.restaurant-card:hover {
+.restaurant-card:hover, .restaurant-card:active {
     transform: translateY(-10px);
     box-shadow: 0 8px 15px rgba(0,0,0,0.15);
 }
@@ -253,6 +283,22 @@ body {
     font-size: 0.9rem;
 }
 
+.view-menu-btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: #1a237e;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.view-menu-btn:hover, .view-menu-btn:active {
+    background-color: #b71c1c;
+    transform: translateY(-2px);
+}
+
 /* Pricing Section */
 .pricing-section {
     max-width: 1200px;
@@ -261,14 +307,7 @@ body {
     text-align: center;
 }
 
-/* Features Section */
-.features-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 3rem 1rem;
-    text-align: center;
-}
-
+/* Features */
 .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -286,7 +325,7 @@ body {
     position: relative;
 }
 
-.feature-card:hover {
+.feature-card:hover, .feature-card:active {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.1);
 }
@@ -306,45 +345,6 @@ body {
 .feature-card p {
     color: #6c757d;
     margin-bottom: 1rem;
-}
-
-/* Pricing Card Specifics */
-.feature-card.highlight {
-    border: 2px solid #b71c1c;
-    transform: scale(1.05);
-    background-color: #fff;
-    box-shadow: 0 8px 20px rgba(183, 28, 28, 0.15);
-}
-
-.feature-card.highlight:hover {
-    transform: scale(1.05) translateY(-5px);
-}
-
-.best-value {
-    position: absolute;
-    top: -15px;
-    right: 50%;
-    transform: translateX(50%);
-    background: linear-gradient(90deg, #b71c1c, #1a237e);
-    color: white;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.price-tag {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin: 0.5rem 0;
-}
-
-.price-note {
-    font-size: 0.9rem;
-    font-style: italic;
-    color: #6c757d;
 }
 
 /* Contact Section */
@@ -372,7 +372,7 @@ body {
     margin-top: 1.5rem;
 }
 
-.contact-button:hover {
+.contact-button:hover, .contact-button:active {
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
@@ -383,26 +383,6 @@ body {
     margin: 2rem auto 0;
     padding: 3rem 1rem;
     text-align: center;
-}
-
-.how-it-works h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    position: relative;
-    padding-bottom: 0.5rem;
-    display: inline-block;
-}
-
-.how-it-works h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(90deg, #b71c1c, #1a237e);
-    opacity: 0.7;
 }
 
 .steps-container {
@@ -425,7 +405,7 @@ body {
     z-index: 1;
 }
 
-.step-card:hover {
+.step-card:hover, .step-card:active {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
@@ -531,7 +511,8 @@ footer {
     
     .restaurant-selection h2,
     .pricing-section h2,
-    .features-section h2 {
+    .features-section h2,
+    .how-it-works h2 {
         font-size: 2rem;
     }
     
@@ -560,11 +541,29 @@ footer {
         border-top: 10px solid #1a237e;
         border-bottom: none;
     }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+    
+    .feature-card i {
+        font-size: 2rem;
+    }
+    
+    .feature-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .header-content {
+        padding: 1.5rem;
+        max-width: 90%;
+    }
 }
 
 @media (max-width: 480px) {
     .landing-header {
-        height: 70vh;
+        height: auto;
+        min-height: 70vh;
     }
     
     #welcome-title {
@@ -577,26 +576,33 @@ footer {
     
     .restaurant-selection h2,
     .pricing-section h2,
-    .features-section h2 {
+    .features-section h2,
+    .how-it-works h2 {
         font-size: 1.5rem;
     }
     
     .feature-card i {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     
     .feature-card h3 {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
     
     .step-card {
         width: 100%;
         max-width: 250px;
+        padding: 1.5rem;
+    }
+
+    .step-icon {
+        font-size: 2.5rem;
     }
     
     .mobile-friendly {
         flex-direction: column;
         text-align: center;
+        padding: 0.6rem 1.5rem;
     }
     
     .mobile-friendly i {
@@ -618,7 +624,75 @@ footer {
         transform: scale(1);
     }
     
-    .header-pricing-box.highlight:hover {
+    .header-pricing-box.highlight:hover,
+    .header-pricing-box.highlight:active {
         transform: translateY(-5px);
+    }
+    
+    .section-description {
+        font-size: 0.95rem;
+    }
+    
+    .contact-button {
+        padding: 0.7rem 2rem;
+        font-size: 1.1rem;
+    }
+    
+    .contact-section {
+        padding: 3rem 1rem;
+    }
+    
+    .pricing-header {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 360px) {
+    #welcome-title {
+        font-size: 1.8rem;
+    }
+    
+    .header-content {
+        padding: 1rem;
+    }
+    
+    .step-card {
+        padding: 1.2rem;
+    }
+    
+    .feature-card {
+        padding: 1.2rem;
+    }
+    
+    .restaurant-card {
+        max-width: 280px;
+    }
+    
+    .restaurant-image {
+        height: 160px;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) {
+    .header-pricing-box:hover,
+    .restaurant-card:hover,
+    .step-card:hover,
+    .feature-card:hover,
+    .contact-button:hover,
+    .view-menu-btn:hover {
+        transform: none;
+    }
+    
+    .header-pricing-box:active,
+    .restaurant-card:active,
+    .step-card:active,
+    .feature-card:active {
+        transform: scale(0.98);
+    }
+    
+    .contact-button:active,
+    .view-menu-btn:active {
+        transform: translateY(2px);
     }
 }
