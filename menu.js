@@ -1,26 +1,29 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    let config = {};
-
+document.addEventListener('DOMContentLoaded', async function() {
+    // Get restaurant from URL parameter or default to "rest1"
+    const urlParams = new URLSearchParams(window.location.search);
+    const restaurantId = urlParams.get('restaurant') || 'rest1';
+    
+    // Set restaurant name element
+    const restaurantNameEl = document.getElementById('restaurant-name');
+    
+    let config;
+    
     try {
-        // Get restaurant ID from URL parameter or default to 'rest1'
-        const urlParams = new URLSearchParams(window.location.search);
-        const restaurantId = urlParams.get('id') || 'rest1';
-        
         // Load restaurant configuration
         const response = await fetch(`restaurants/${restaurantId}.json`);
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
         config = await response.json();
         
         // Update restaurant name with fade-in effect
-        const restaurantName = document.getElementById('restaurant-name');
-        restaurantName.textContent = config.restaurantName;
-        restaurantName.style.opacity = 0;
+        restaurantNameEl.textContent = config.restaurantName;
+        restaurantNameEl.style.opacity = 0;
         requestAnimationFrame(() => {
-            restaurantName.style.transition = 'opacity 0.5s ease';
-            restaurantName.style.opacity = 1;
+            restaurantNameEl.style.transition = 'opacity 0.5s ease';
+            restaurantNameEl.style.opacity = 1;
         });
     } catch (error) {
         console.error('Error loading configuration:', error);
@@ -71,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         imageContent = `
                             <div class="image-container">
                                 <img src="${item.image}" alt="${item.name}" 
-                                     onerror="this.parentElement.innerHTML='<div class=\'placeholder-image\'><i class=\'fas fa-utensils\'></i></div>'">
+                                     onerror="this.parentElement.innerHTML='<div class=\\'placeholder-image\\'><i class=\\'fas fa-utensils\\'></i></div>'">
                             </div>`;
                     } else {
                         imageContent = `
