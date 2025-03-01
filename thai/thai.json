@@ -7,7 +7,7 @@
                 "name": "Happy Hour Beer Special",
                 "description": "2 beers for the price of one! Available 17:00-19:00",
                 "price": 100,
-                "image": "images/rest1/happyhour.jpg"
+                "image": "./images/happyhour.jpg"
             },
             {
                 "name": "Lunch offer - Thai chicken curry",
