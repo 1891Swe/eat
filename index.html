@@ -1,73 +1,46 @@
-<!-- Modifications to index.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Golf Brands Directory</title>
+    <meta name="description" content="Digital restaurant menu with delicious food and drinks">
+    <meta name="theme-color" content="#000000">
+    <title>Restaurant Menu</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="header-top">
-            <h1>Golf Brands Directory</h1>
-            <!-- New pricing section in the top banner -->
-            <div class="pricing-container">
-                <button id="pricingButton" class="pricing-btn">Price</button>
-                <!-- Small pricing boxes that appear when the button is clicked -->
-                <div id="pricingBoxes" class="pricing-boxes">
-                    <div class="pricing-box">
-                        <h3>Flexible Payments</h3>
-                        <p>Pay as you go, month by month</p>
-                    </div>
-                    <div class="pricing-box best-value">
-                        <span class="value-tag">Best Value</span>
-                        <h3>Annual Subscription</h3>
-                        <p>Save with yearly commitment</p>
-                    </div>
-                </div>
+        <div class="restaurant-info">
+            <h1 id="restaurant-name"></h1>
+            <div class="restaurant-details">
+                <span><i class="fas fa-clock"></i> Open Daily: 11:00 - 23:00</span>
             </div>
         </div>
-        <div class="filters">
-            <div class="filter-section">
-                <h3>Brands</h3>
-                <div class="checkbox-group" id="brandFilters">
-                    <label><input type="checkbox" value="cobra" checked> Cobra</label>
-                    <label><input type="checkbox" value="taylormade" checked> TaylorMade</label>
-                    <label><input type="checkbox" value="callaway" checked> Callaway</label>
-                    <label><input type="checkbox" value="titleist" checked> Titleist</label>
-                </div>
-            </div>
-            <div class="filter-section">
-                <h3>Club Types</h3>
-                <div class="checkbox-group" id="clubTypeFilters">
-                    <!-- Club types will be dynamically added here -->
-                </div>
-            </div>
-        </div>
-        <div class="clear-filters-container">
-            <button id="resetFilters" class="reset-filters-btn">Reset Filters</button>
-            <button id="clearFilters" class="clear-filters-btn">Clear Filters</button>
-        </div>
+        
+        <nav class="category-nav">
+            <ul>
+                <!-- First Row -->
+                <li><a href="#" data-category="special" class="active"><i class="fas fa-star"></i> Special</a></li>
+                <li><a href="#" data-category="meat"><i class="fas fa-burger"></i> Meat</a></li>
+                <li><a href="#" data-category="fish"><i class="fas fa-fish"></i> Fish</a></li>
+                <li><a href="#" data-category="chicken"><i class="fas fa-kiwi-bird"></i> Chicken</a></li>
+                <!-- Second Row -->
+                <li><a href="#" data-category="beer"><i class="fas fa-beer"></i> Beer</a></li>
+                <li><a href="#" data-category="wine"><i class="fas fa-wine-glass-alt"></i> Wine</a></li>
+                <li><a href="#" data-category="drinks"><i class="fas fa-cocktail"></i> Drinks</a></li>
+                <li><a href="#" data-category="desserts"><i class="fas fa-ice-cream"></i> Desserts</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main id="brandsContainer">
-        <!-- Brands will be dynamically loaded here -->
+    <main class="menu-container">
+        <div id="menu-items" class="menu-grid">
+            <!-- Menu items will be dynamically inserted here -->
+        </div>
     </main>
 
-    <!-- Initialize golfData object -->
-    <script>window.golfData = {};</script>
-
-    <!-- Load brand data files -->
-    <script src="brands/cobra-golf-data.js"></script>
-    <script src="brands/taylormade-golf-data.js"></script>
-    <script src="brands/titleist-golf-data.js"></script>
-    <script src="brands/callaway-golf-data.js"></script>
-    <script src="data/clubs.js"></script>
-    
-    <!-- Load the main script that will process and display the data -->
-    <script src="script.js"></script>
-    <!-- Add the new pricing script -->
-    <script src="pricing.js"></script>
+    <script src="menu.js"></script>
 </body>
 </html>
