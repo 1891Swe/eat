@@ -1,115 +1,109 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    // Just one demo restaurant
-    const restaurants = [
-        {
-            id: 'rest1',
-            name: 'Thai food',
-            address: 'Second Road, Pattaya City',
-            image: 'images/thairestdemo.jpg',
-            cuisine: 'Traditional Thai Food'
-        }
-    ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to our restaurant - explore our digital menu">
+    <meta name="theme-color" content="#000000">
+    <title>Restaurant Welcome</title>
+    <link rel="stylesheet" href="landing.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="landing-header">
+        <div class="header-content">
+            <h1 id="welcome-title">Digital Menu</h1>
+            <p class="tagline">Modernize your restaurant with our affordable digital menu system</p>
+            <a href="#pricing" class="view-menu-btn">View Pricing</a>
+        </div>
+    </header>
 
-    const restaurantListElement = document.getElementById('restaurant-list');
-
-    // Populate restaurant cards with animation
-    restaurants.forEach((restaurant, index) => {
-        const card = document.createElement('div');
-        card.className = 'restaurant-card';
-        
-        // Use placeholder image if restaurant image doesn't load
-        let imageContent = `
-            <img 
-                src="${restaurant.image}" 
-                alt="${restaurant.name}" 
-                class="restaurant-image"
-                onerror="this.src='images/placeholder-restaurant.jpg'">
-        `;
-        
-        card.innerHTML = `
-            ${imageContent}
-            <div class="restaurant-content">
-                <h3 class="restaurant-name">${restaurant.name}</h3>
-                <p class="restaurant-address">${restaurant.address}</p>
-                <p>Cuisine: ${restaurant.cuisine}</p>
-                <button class="view-menu-btn" data-restaurant-id="${restaurant.id}">View Menu</button>
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <p class="section-description"> Simple access to your digital menu</p>
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <i class="fas fa-qrcode step-icon"></i>
+                <h3>Scan QR Code</h3>
+                <p>Scan the QR code with the mobile device camera</p>
             </div>
-        `;
-        
-        // Add fade-in and slide-up animation
-        card.style.opacity = 0;
-        card.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            card.style.transition = 'all 0.5s ease';
-            card.style.opacity = 1;
-            card.style.transform = 'translateY(0)';
-        }, 100 * index);
-        
-        restaurantListElement.appendChild(card);
-        
-        // Add click event to navigate to the restaurant menu page
-        const viewMenuBtn = card.querySelector('.view-menu-btn');
-        viewMenuBtn.addEventListener('click', () => {
-            window.location.href = `index.html?id=${restaurant.id}`;
-        });
-        
-        // Make entire card clickable
-        card.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('view-menu-btn')) {
-                window.location.href = `index.html?id=${restaurant.id}`;
-            }
-        });
-    });
-
-    // Animate welcome title with a typing effect
-    const welcomeTitle = document.getElementById('welcome-title');
-    const titleText = welcomeTitle.textContent;
-    welcomeTitle.textContent = '';
-    welcomeTitle.style.opacity = 1;
-    
-    let i = 0;
-    const typeInterval = setInterval(() => {
-        if (i < titleText.length) {
-            welcomeTitle.textContent += titleText.charAt(i);
-            i++;
-        } else {
-            clearInterval(typeInterval);
-        }
-    }, 50);
-
-    // Add scroll reveal animation to feature cards and step cards
-    const animatedElements = document.querySelectorAll('.feature-card, .step-card, .mobile-friendly');
-    
-    const options = {
-        threshold: 0.2
-    };
-    
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
-            }
-        });
-    }, options);
-    
-    animatedElements.forEach(element => {
-        element.style.opacity = 0;
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = 'all 0.5s ease';
-        observer.observe(element);
-    });
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
             
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-});
+            <div class="step-connector"></div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <i class="fas fa-mobile-alt step-icon"></i>
+                <h3>Digital Menu</h3>
+                <p>Digital menu is instantly presented on your device</p>
+            </div>
+        </div>
+        <div class="mobile-friendly">
+            <i class="fas fa-check-circle"></i>
+            <p>No app download required - works directly in browser</p>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing-section">
+        <h2>Digital Menu Solution Pricing</h2>
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Flexible Payments</h3>
+                <p>Pay as you go, month by month</p>
+                <div class="price-tag">฿1,900 / month</div>
+                <p class="price-note">Everything included</p>
+            </div>
+            <div class="feature-card highlight">
+                <div class="best-value">Best Value</div>
+                <i class="fas fa-calendar-check"></i>
+                <h3>Annual Subscription</h3>
+                <p>Save with our yearly plan</p>
+                <div class="price-tag">฿19,000 / year</div>
+                <p class="price-note">Get 2 months free!</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <i class="fas fa-sync-alt"></i>
+            <h3>Free Updates</h3>
+            <p>Updates of your digital menu included at no extra cost</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-qrcode"></i>
+            <h3>QR Code Included</h3>
+            <p>Easy to scan QR code is included with your subscription</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-hand-holding-usd"></i>
+            <h3>No Hidden Costs</h3>
+            <p>What you see is what you get - transparent pricing</p>
+        </div>
+    </section>
+    
+    <section class="restaurant-selection">
+        <h2>Restaurant Demo Example</h2>
+        <p class="section-description">Explore our sample restaurant menu to see how our digital menu solution works in action</p>
+        <div class="restaurant-grid centered-demo" id="restaurant-list">
+            <!-- Restaurant card will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <h2>Ready to Upgrade Your Restaurant?</h2>
+        <p class="section-description">Contact us today to get started with your digital menu solution</p>
+        <a href="mailto:simplifymenu@gmail.com" class="contact-button">Contact Us</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Digital Menu Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="landing.js"></script>
+</body>
+</html>
