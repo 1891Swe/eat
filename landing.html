@@ -1,90 +1,157 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to our restaurant - explore our digital menu">
-    <meta name="theme-color" content="#000000">
-    <title>Digital Menu</title>
-    <link rel="stylesheet" href="minimal.css">
-</head>
-<body>
-    <header>
-        <div class="header-content">
-            <h1>Digital Menu</h1>
-            <p>Modernize your restaurant with our affordable digital menu system</p>
-            <!-- Price button added to header -->
-            <div class="price-container">
-                <button id="price-btn">Price</button>
-            </div>
-        </div>
-        
-        <!-- Pricing boxes that appear when clicking the Price button -->
-        <div id="pricing-boxes" class="pricing-boxes">
-            <div class="pricing-box">
-                <h3>Flexible Payments</h3>
-                <p>Pay as you go, month by month</p>
-                <div class="price">฿1,900 / month</div>
-                <p class="note">Everything included</p>
-            </div>
-            
-            <div class="pricing-box best-value">
-                <span class="value-tag">Best Value</span>
-                <h3>Annual Subscription</h3>
-                <p>Save with our yearly plan</p>
-                <div class="price">฿19,000 / year</div>
-                <p class="note">Get 2 months free!</p>
-            </div>
-        </div>
-    </header>
+/* Minimal styles matching the screenshot */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <section>
-        <h2>How It Works</h2>
-        <p>Simple access to your digital menu</p>
-        
-        <div class="step">
-            <div class="step-number">1</div>
-            <div class="step-icon">🔍</div>
-            <h3>Scan QR Code</h3>
-            <p>Scan the QR code with the mobile device camera</p>
-        </div>
-        
-        <div class="step">
-            <div class="step-number">2</div>
-            <div class="step-icon">📱</div>
-            <h3>Digital Menu</h3>
-            <p>Digital menu is instantly presented on your device</p>
-        </div>
-        
-        <div class="info-box">
-            <span class="check-icon">✓</span>
-            <p>No app download required - works directly in browser</p>
-        </div>
-    </section>
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    color: #000;
+    background-color: #fff;
+    padding: 15px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
 
-    <section>
-        <h2>Free Updates</h2>
-        <p>Updates of your digital menu included at no extra cost</p>
-    </section>
+h1, h2, h3 {
+    margin-bottom: 10px;
+}
 
-    <section>
-        <h2>QR Code Included</h2>
-        <p>Easy to scan QR code is included with your subscription</p>
-    </section>
+p {
+    margin-bottom: 15px;
+}
 
-    <section>
-        <h2>No Hidden Costs</h2>
-        <p>What you see is what you get - transparent pricing</p>
-    </section>
+section {
+    margin-bottom: 30px;
+}
 
-    <section>
-        <h2>Restaurant Demo Example</h2>
-        <p>Explore our sample restaurant menu to see how our digital menu solution works in action</p>
-        <div id="restaurant-list">
-            <!-- Restaurant demo will be inserted here -->
-        </div>
-    </section>
+/* Header and price button */
+.header-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
 
-    <script src="minimal.js"></script>
-</body>
-</html>
+.price-container {
+    margin-top: 15px;
+}
+
+#price-btn {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 6px 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#price-btn:hover {
+    background-color: #e9ecef;
+}
+
+/* Pricing boxes */
+.pricing-boxes {
+    display: none;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.pricing-boxes.show {
+    display: flex;
+}
+
+.pricing-box {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    width: 250px;
+    position: relative;
+}
+
+.pricing-box h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.pricing-box p {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.pricing-box .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.pricing-box .note {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #666;
+}
+
+.best-value {
+    border-color: #007bff;
+}
+
+.value-tag {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    background-color: #007bff;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+/* Steps section */
+.step {
+    margin-bottom: 20px;
+    padding-left: 30px;
+    position: relative;
+}
+
+.step-number {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
+}
+
+.step-icon {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.info-box {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.check-icon {
+    margin-right: 10px;
+}
+
+/* Restaurant demo */
+#restaurant-list {
+    margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pricing-boxes {
+        flex-direction: column;
+    }
+    
+    .pricing-box {
+        width: 100%;
+    }
+}
