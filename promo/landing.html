@@ -2,15 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Welcome to order your digital menu">
     <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
     <title>Restaurant Digital Menu Solutions</title>
     <link rel="stylesheet" href="landing.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 </head>
 <body>
+    <div id="loading-indicator">
+        <div>
+            <i class="fas fa-utensils fa-spin"></i>
+            <p>Loading...</p>
+        </div>
+    </div>
+
     <header class="landing-header">
         <div class="header-content">
             <h1 id="welcome-title">Digital Menu</h1>
@@ -79,8 +90,6 @@
             </div>
         </div>
     </section>
-
-
     
     <section class="restaurant-selection">
         <h2>Visit This Menu Example</h2>
@@ -103,5 +112,10 @@
     </footer>
 
     <script src="landing.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            document.getElementById('loading-indicator').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
