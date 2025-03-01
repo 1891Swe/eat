@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function() {
     // Get restaurant from URL parameter or default to "rest1"
     const urlParams = new URLSearchParams(window.location.search);
-    const restaurantId = urlParams.get('restaurant') || 'rest1';
+    const restaurantId = urlParams.get('restaurant') || 'thai';
     
     // Set restaurant name element
     const restaurantNameEl = document.getElementById('restaurant-name');
