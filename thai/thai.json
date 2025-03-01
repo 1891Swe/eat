@@ -21,11 +21,11 @@
                 "name": "Grilled Ribeye Steak",
                 "description": "Premium ribeye steak grilled to perfection with herb butter",
                 "price": 350,
-                "image": "./images/ibeyesteak.jpg"
+                "image": "./images/ribeyesteak.jpg"
             },
             {
                 "name": "Red curry Thai chicken",
-                "description": "Premium ribeye steak grilled to perfection with herb butter",
+                "description": "Spicy red curry with tender chicken",
                 "price": 450,
                 "image": "./images/redcurrychicken.jpg"
             },
@@ -45,15 +45,15 @@
         "fish": [
             {
                 "name": "Pad Thai",
-                "description": "Classic thai dish with nudles and schrimp",
+                "description": "Classic thai dish with noodles and shrimp",
                 "price": 320,
-                "image": "images/padthai.jpg"
+                "image": "./images/padthai.jpg"
             },
             {
                 "name": "Sea Bass",
                 "description": "Pan-seared sea bass with herbs and white wine sauce",
                 "price": 380,
-                "image": "images/seabass.jpg"
+                "image": "./images/seabass.jpg"
             }
         ],
         "chicken": [
@@ -61,13 +61,13 @@
                 "name": "Grilled Chicken",
                 "description": "Herb-marinated grilled chicken breast",
                 "price": 220,
-                "image": "images/chicken.jpg"
+                "image": "./images/chicken.jpg"
             },
             {
                 "name": "Chicken Satay",
                 "description": "Grilled chicken skewers with peanut sauce",
                 "price": 180,
-                "image": "images/satay.jpg"
+                "image": "./images/satay.jpg"
             }
         ],
         "beer": [
@@ -75,19 +75,19 @@
                 "name": "Singha",
                 "description": "Premium Thai lager beer, 5% ABV",
                 "price": 120,
-                "image": "images/singha.jpg"
+                "image": "./images/singha.jpg"
             },
             {
                 "name": "Chang",
                 "description": "Classic Thai beer, 5.2% ABV",
                 "price": 110,
-                "image": "images/chang.jpg"
+                "image": "./images/chang.jpg"
             },
             {
                 "name": "Draft Beer",
                 "description": "This weeks tasty beer on draft",
                 "price": 110,
-                "image": "images/draftbeer.jpg"
+                "image": "./images/draftbeer.jpg"
             }
         ],
         "wine": [
@@ -95,13 +95,13 @@
                 "name": "House Red Wine",
                 "description": "Smooth medium-bodied red wine",
                 "price": 220,
-                "image": "images/redwine.jpg"
+                "image": "./images/redwine.jpg"
             },
             {
                 "name": "House White Wine",
                 "description": "Crisp and refreshing white wine",
                 "price": 220,
-                "image": images/glass.jpg
+                "image": "./images/glass.jpg"
             }
         ],
         "drinks": [
@@ -109,13 +109,13 @@
                 "name": "Thai Iced Tea",
                 "description": "Traditional Thai tea with milk",
                 "price": 80,
-                "image": images/glass.jpg
+                "image": "./images/glass.jpg"
             },
             {
                 "name": "Coconut Water",
                 "description": "Fresh coconut water",
                 "price": 70,
-                "image": images/glass.jpg
+                "image": "./images/glass.jpg"
             }
         ],
         "desserts": [
@@ -123,13 +123,13 @@
                 "name": "Mango Sticky Rice",
                 "description": "Sweet sticky rice with fresh mango",
                 "price": 120,
-                "image": images/glass.jpg
+                "image": "./images/glass.jpg"
             },
             {
                 "name": "Coconut Ice Cream",
                 "description": "Homemade coconut ice cream",
                 "price": 90,
-                "image": images/glass.jpg
+                "image": "./images/glass.jpg"
             }
         ]
     }
