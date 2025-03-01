@@ -50,7 +50,7 @@ body {
 
 /* Background image - fixed version */
 .landing-header {
-    background-image: url('images/thairest.jpg');
+    background-image: url('eat/images/thairest.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
