@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
     restaurantCard.className = 'restaurant-card';
     
     restaurantCard.innerHTML = `
-        <img src="../restaurants/images/demorest.jpg" alt="Demo Thai Restaurant" class="restaurant-image" onerror="this.src='https://via.placeholder.com/300x200?text=Thai+Restaurant'">
+        <img src="../images/thairestdemo.jpg" alt="Demo Thai Restaurant" class="restaurant-image" onerror="this.src='https://via.placeholder.com/300x200?text=Thai+Restaurant'">
         <div class="restaurant-content">
             <h3 class="restaurant-name">Thai Delight Demo</h3>
             <p class="restaurant-address">123 Pattaya Beach Road, Thailand</p>
-            <a href="../restaurants/demorest.html" class="view-menu-btn">View Menu</a>
+            <a href="../restaurants/demorest" class="view-menu-btn">View Menu</a>
         </div>
     `;
     
