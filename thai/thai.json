@@ -7,13 +7,13 @@
                 "name": "Happy Hour Beer Special",
                 "description": "2 beers for the price of one! Available 17:00-19:00",
                 "price": 100,
-                "image": "images/happyhour.jpg"
+                "image": "./images/happyhour.jpg"
             },
             {
                 "name": "Lunch offer - Thai chicken curry",
                 "description": "Try our fantastic chicken curry! Available 11:00-15:00!",
                 "price": 199,
-                "image": "images/chickencurry.jpg"
+                "image": "./images/chickencurry.jpg"
             }
         ],
         "meat": [
@@ -21,25 +21,25 @@
                 "name": "Grilled Ribeye Steak",
                 "description": "Premium ribeye steak grilled to perfection with herb butter",
                 "price": 350,
-                "image": "images/ibeyesteak.jpg"
+                "image": "./images/ibeyesteak.jpg"
             },
             {
                 "name": "Red curry Thai chicken",
                 "description": "Premium ribeye steak grilled to perfection with herb butter",
                 "price": 450,
-                "image": "images/redcurrychicken.jpg"
+                "image": "./images/redcurrychicken.jpg"
             },
             {
                 "name": "Grisöra",
                 "description": "Riktigt gott!",
                 "price": 350,
-                "image": "images/ribeyesteak.jpg"
+                "image": "./images/ribeyesteak.jpg"
             },
             {
                 "name": "Cheese Burger with fries",
                 "description": "Juicy burger with melted cheese and fresh vegetables",
                 "price": 250,
-                "image": "images/cheeseburger.jpg"
+                "image": "./images/cheeseburger.jpg"
             }
         ],
         "fish": [
