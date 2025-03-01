@@ -29,6 +29,12 @@
                 "price": 450,
                 "image": "images/rest1/redcurrychicken.jpg"
             },
+            
+                "name": "Grisöra",
+                "description": "Riktigt gott!",
+                "price": 350,
+                "image": "images/rest1/ribeyesteak.jpg"
+            },
             {
                 "name": "Cheese Burger with fries",
                 "description": "Juicy burger with melted cheese and fresh vegetables",
