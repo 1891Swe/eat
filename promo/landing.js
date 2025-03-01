@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="restaurant-content">
             <h3 class="restaurant-name">Thai Delight Demo</h3>
             <p class="restaurant-address">123 Pattaya Beach Road, Thailand</p>
-            <a href="../restaurants/demorest" class="view-menu-btn">View Menu</a>
+            <a href="https://1891swe.github.io/eat/restaurants/demorest.html" class="view-menu-btn">View Menu</a>
         </div>
     `;
     
