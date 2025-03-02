@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     restaurantCard.className = 'restaurant-card';
     
     restaurantCard.innerHTML = `
-        <img src="../images/thairestdemo.jpg" alt="Demo Thai Restaurant" class="restaurant-image" loading="lazy" 
+        <img src="images/thairestdemo.jpg" alt="Demo Thai Restaurant" class="restaurant-image" loading="lazy" 
              onerror="this.src='https://via.placeholder.com/300x200?text=Thai+Restaurant'">
         <div class="restaurant-content">
             <h3 class="restaurant-name">Thai Delight Demo</h3>
@@ -112,4 +112,65 @@ function addActiveState(selector) {
     });
 }
 
-//
+// Resize cards for responsive layout
+function resizeCards() {
+    const cards = document.querySelectorAll('.restaurant-card, .feature-card, .step-card');
+    if (cards.length === 0) return;
+    
+    // Adjust card heights for uniform appearance on mobile
+    const isMobile = window.innerWidth <= 768;
+    
+    cards.forEach(card => {
+        // Reset heights for recalculation
+        card.style.height = '';
+    });
+    
+    if (!isMobile) {
+        // On larger screens, get the tallest card in each row
+        const getRowCards = () => {
+            const rows = {};
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const rowKey = Math.floor(rect.top);
+                if (!rows[rowKey]) rows[rowKey] = [];
+                rows[rowKey].push(card);
+            });
+            return Object.values(rows);
+        };
+        
+        const rowCards = getRowCards();
+        rowCards.forEach(row => {
+            let maxHeight = 0;
+            row.forEach(card => {
+                maxHeight = Math.max(maxHeight, card.offsetHeight);
+            });
+            row.forEach(card => {
+                card.style.height = `${maxHeight}px`;
+            });
+        });
+    }
+}
+
+// Debounce function to limit rapid-firing events
+function debounce(func, wait) {
+    let timeout;
+    return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            func.apply(context, args);
+        }, wait);
+    };
+}
+
+// Hide loading indicator
+function hideLoadingIndicator() {
+    const loadingIndicator = document.getElementById('loading-indicator');
+    if (loadingIndicator) {
+        loadingIndicator.style.opacity = '0';
+        setTimeout(() => {
+            loadingIndicator.style.display = 'none';
+        }, 300);
+    }
+}
