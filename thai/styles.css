@@ -1,24 +1,25 @@
-/* Menu Container with Sunset Theme */
+/* Menu Container with Deep Teal Blue Theme */
 .menu-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 1.5rem 1rem;
     position: relative;
-    background: linear-gradient(135deg, #ff9e7a 0%, #ffd87d 100%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: #106e7c;
+    background: linear-gradient(135deg, #106e7c 0%, #0a4b55 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Adjust Menu Item for better contrast with new background */
+/* Adjust Menu Item for better contrast with teal background */
 .menu-item {
     background: white;
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     position: relative;
-    border: none; /* Remove border since we have stronger shadows */
+    border: none;
 }
 
 .menu-item::before {
@@ -28,20 +29,20 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #ff7b54, #ffb26b);
+    background: linear-gradient(90deg, #00b8a9, #00a1ab);
     opacity: 0.9;
     z-index: 1;
 }
 
 .menu-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* Update price color to match the new theme */
+/* Update price color to match the teal theme */
 .menu-item-price {
     font-weight: 700;
-    color: #ff7b54; /* Changed from #b71c1c to match sunset theme */
+    color: #00a1ab; /* Changed from #b71c1c to match teal theme */
     font-size: 1.3rem;
     display: flex;
     align-items: center;
@@ -59,8 +60,40 @@
     transform: translateX(-50%);
     width: 60px;
     height: 2px;
-    background: linear-gradient(90deg, #ff7b54, #ffb26b);
+    background: linear-gradient(90deg, #00b8a9, #00a1ab);
     opacity: 0.9;
+}
+
+/* Add subtle pattern overlay to the teal background for more depth */
+.menu-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: 8px;
+}
+
+/* Adjust menu grid spacing */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Add section titles for better organization */
+.section-title {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Mobile-specific adjustments for the new theme */
@@ -68,21 +101,58 @@
     .menu-container {
         padding: 1.2rem 0.8rem;
     }
+    
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.2rem;
+    }
 }
 
 @media (max-width: 600px) {
     .menu-container {
-        background: linear-gradient(135deg, #ff9e7a 0%, #ffd87d 100%);
+        background: linear-gradient(135deg, #106e7c 0%, #0a4b55 100%);
         padding: 1rem 0.5rem;
     }
     
     .menu-item-title::after {
-        background: linear-gradient(90deg, #ff7b54, #ffb26b);
+        background: linear-gradient(90deg, #00b8a9, #00a1ab);
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Adjust text alignment for mobile */
+    .menu-item-content {
+        padding: 0.8rem;
+        text-align: left;
+    }
+    
+    .menu-item-title::after {
+        left: 0;
+        transform: none;
     }
 }
 
 @media (max-width: 400px) {
     .menu-container {
         padding: 0.8rem 0.4rem;
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 360px) {
+    .menu-item-content {
+        text-align: center;
+    }
+    
+    .menu-item-title::after {
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
