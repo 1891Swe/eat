@@ -11,6 +11,7 @@ body {
     background-color: #f8f9fa;
     color: #333;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 /* Loading Indicator */
@@ -48,12 +49,22 @@ body {
     justify-content: center;
 }
 
-/* Background image - fixed version */
+/* Background image - fixed to use consistent path */
 .landing-header {
-    background-image: url('eat/images/thairest.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+/* Added this as a fallback to handle the correct img path */
+.bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
 }
 
 /* Overlay for better text readability */
@@ -65,6 +76,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
 .header-content {
@@ -73,10 +85,13 @@ body {
     padding: 2rem;
     max-width: 800px;
     position: relative;
-    z-index: 1;
+    z-index: 2;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     margin: 1rem;
+    /* Added for better touch support */
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
 }
 
 #welcome-title {
@@ -122,6 +137,7 @@ body {
 .header-pricing-box {
     background-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px); /* For Safari */
     padding: 0.8rem 1.2rem;
     border-radius: 10px;
     width: 120px;
@@ -251,6 +267,8 @@ body {
     transition: all 0.3s ease;
     position: relative;
     cursor: pointer;
+    /* Added for better touch interactions */
+    -webkit-tap-highlight-color: transparent;
 }
 
 .restaurant-card::before {
@@ -301,6 +319,13 @@ body {
     border-radius: 50px;
     font-weight: 600;
     transition: all 0.3s ease;
+    /* Better touch target size for mobile */
+    min-width: 120px;
+    min-height: 44px;
+    line-height: 1.2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .view-menu-btn:hover, .view-menu-btn:active {
@@ -333,6 +358,7 @@ body {
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     position: relative;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .feature-card:hover, .feature-card:active {
@@ -380,6 +406,12 @@ body {
     transition: all 0.3s ease;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     margin-top: 1.5rem;
+    /* Better touch target size for mobile */
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .contact-button:hover, .contact-button:active {
@@ -414,6 +446,7 @@ body {
     position: relative;
     transition: all 0.3s ease;
     z-index: 1;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .step-card:hover, .step-card:active {
@@ -603,6 +636,12 @@ footer {
         padding: 1.5rem;
         max-width: 90%;
     }
+    
+    /* Improved touch targets for mobile */
+    .view-menu-btn, .contact-button {
+        min-height: 48px;
+        padding: 0.9rem 1.8rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -740,4 +779,48 @@ footer {
     .view-menu-btn:active {
         transform: translateY(2px);
     }
+}
+
+/* Additional optimizations for mobile performance */
+@media (max-width: 768px) {
+    /* Reduce animation complexity on mobile */
+    .header-pricing-box, 
+    .restaurant-card, 
+    .step-card, 
+    .feature-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    /* Larger touch targets on smaller screens */
+    .restaurant-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Improved tap targets */
+    .view-menu-btn, 
+    .contact-button {
+        padding: 12px 24px;
+    }
+}
+
+/* Fix for iOS Safari momentum scrolling */
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Fix for mobile notches and safe areas */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+        padding-bottom: max(0px, env(safe-area-inset-bottom));
+    }
+}
+
+/* Optimize image loading for mobile */
+img {
+    max-width: 100%;
+    height: auto;
 }
