@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.log('Current URL:', window.location.href);
         console.log('Current directory:', window.location.pathname);
         
+        // Make sure to hide loading indicator even if there's an error
+        setTimeout(hideLoadingIndicator, 2000); // Fallback timeout
+        
         // Detailed fetch with error handling
         const response = await fetch(`${restaurantId}.json`, {
             method: 'GET',
@@ -87,7 +90,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                                     <img src="${item.image}" alt="${item.name}" loading="lazy" 
                                          onerror="console.error('Failed to load image:', '${item.image}'); 
                                                   this.onerror=null; 
-                                                  this.src='placeholder-image.jpg'; 
+                                                  this.src='./images/placeholder-image.jpg'; 
                                                   this.alt='Image not found';">
                                 </div>`;
                         } else {
@@ -136,6 +139,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Load initial category
         displayMenuItems('special');
         
+        // Hide the loading indicator after success
+        hideLoadingIndicator();
+        
     } catch (error) {
         console.error('Detailed Error Loading Configuration:', error);
         
@@ -149,6 +155,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             </div>
         `;
         
+        // Ensure loading indicator is hidden even in case of error
         hideLoadingIndicator();
         return;
     }
