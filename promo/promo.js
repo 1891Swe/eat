@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     restaurantCard.className = 'restaurant-card';
     
     restaurantCard.innerHTML = `
-        <img src="images/thairestdemo.jpg" alt="Demo Thai Restaurant" class="restaurant-image" loading="lazy" 
+        <img src="images/restfront.jpg" alt="Demo Thai Restaurant" class="restaurant-image" loading="lazy" 
              onerror="this.src='https://via.placeholder.com/300x200?text=Thai+Restaurant'">
         <div class="restaurant-content">
             <h3 class="restaurant-name">Thai Delight Demo</h3>
