@@ -1,5 +1,5 @@
 {
-    "restaurantName": "Thai Food and Drinks ",
+    "restaurantName": "Thai Food And Drinks ",
     "currency": "฿",
     "categories": {
         "special": [
@@ -36,8 +36,8 @@
                 "image": "./images/redcurrychicken.jpg"
             },
             {
-                "name": "Grisöra",
-                "description": "Riktigt gott!",
+                "name": "T-bone steak",
+                "description": "200g (2oz) of perfectly grilled steak!",
                 "price": 350,
                 "image": "./images/ribeyesteak.jpg"
             },
