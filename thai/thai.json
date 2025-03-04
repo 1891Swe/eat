@@ -1,5 +1,5 @@
 {
-    "restaurantName": "Thai Place Pattaya",
+    "restaurantName": "Thai Food and Drinks ",
     "currency": "฿",
     "categories": {
         "special": [
@@ -11,7 +11,7 @@
             },
             {
                 "name": "Lunch offer - Thai chicken curry",
-                "description": "Try our fantastic chicken curry! Available 11:00-15:00!",
+                "description": "Try our fantastic chicken curry! Available 11:00-15:00",
                 "price": 199,
                 "image": "./images/chickencurry.jpg"
             },
