@@ -14,7 +14,7 @@
                 "description": "Try our fantastic chicken curry! Available 11:00-15:00!",
                 "price": 199,
                 "image": "./images/chickencurry.jpg"
-            }
+            },
             {
                 "name": "Late night special",
                 "description": "Order 2 drinks - pay for one! Available 23:00-01:00!",
