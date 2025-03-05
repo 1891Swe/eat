@@ -12,6 +12,34 @@
             background-color: #f5f5f5;
         }
         
+        .how-it-works {
+            background-color: #f0f8ff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #4c8bf5;
+        }
+        
+        .how-it-works h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .how-it-works ol {
+            margin-bottom: 10px;
+            padding-left: 25px;
+        }
+        
+        .how-it-works li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .how-it-works p {
+            margin-bottom: 0;
+            color: #555;
+        }
+        
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -134,11 +162,40 @@
             background-color: #f9f9f9;
             display: none;
         }
+        
+        .scheme-explanation {
+            text-align: center;
+            margin: 0 auto 20px;
+            max-width: 600px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            line-height: 1.4;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #777;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Color Matcher</h1>
+        
+        <div class="how-it-works">
+            <h2>How It Works</h2>
+            <ol>
+                <li><strong>Select a base color</strong> using the color picker or enter a hex code</li>
+                <li><strong>Choose a color scheme</strong> from the options below (Complementary, Analogous, etc.)</li>
+                <li><strong>View the matching colors</strong> in the preview section</li>
+                <li><strong>Export to CSS</strong> if you want to use these colors in your web projects</li>
+            </ol>
+            <p>This tool uses color theory principles to create harmonious color combinations for your designs.</p>
+        </div>
         
         <div class="color-picker">
             <h2>Select Your Base Color</h2>
@@ -157,6 +214,9 @@
         </div>
         
         <h3 class="preview-title">Color Scheme Preview</h3>
+        <div class="scheme-explanation" id="scheme-explanation">
+            <p>Select a color scheme to see an explanation here.</p>
+        </div>
         <div class="color-preview" id="color-preview">
             <div class="color-box" style="background-color: #4c8bf5;">
                 Base Color<br>#4c8bf5
@@ -167,6 +227,11 @@
             <button class="export-button" id="export-button">Export Colors</button>
             <pre id="export-content"></pre>
         </div>
+        
+        <footer>
+            <p>Based on color theory principles to help you create beautiful, harmonious color combinations for your designs.</p>
+            <p>Use these colors for websites, presentations, art projects, or any design work!</p>
+        </footer>
     </div>
 
     <script>
@@ -201,8 +266,32 @@
                 button.addEventListener('click', function() {
                     const scheme = this.getAttribute('data-scheme');
                     generateColorScheme(colorPicker.value, scheme);
+                    updateSchemeExplanation(scheme);
                 });
             });
+            
+            // Update the explanation for the selected scheme
+            function updateSchemeExplanation(scheme) {
+                const explanationDiv = document.getElementById('scheme-explanation');
+                
+                switch(scheme) {
+                    case 'complementary':
+                        explanationDiv.innerHTML = '<p><strong>Complementary Colors</strong> are directly opposite each other on the color wheel. They create maximum contrast and vibrance when used together.</p>';
+                        break;
+                    case 'analogous':
+                        explanationDiv.innerHTML = '<p><strong>Analogous Colors</strong> are next to each other on the color wheel. They create harmonious and comfortable designs that work well together.</p>';
+                        break;
+                    case 'triadic':
+                        explanationDiv.innerHTML = '<p><strong>Triadic Colors</strong> are evenly spaced around the color wheel. They offer strong visual contrast while maintaining color harmony.</p>';
+                        break;
+                    case 'split':
+                        explanationDiv.innerHTML = '<p><strong>Split Complementary</strong> uses a base color plus two colors adjacent to its complement. This creates high contrast but with less tension than complementary colors.</p>';
+                        break;
+                    case 'monochromatic':
+                        explanationDiv.innerHTML = '<p><strong>Monochromatic Colors</strong> are different shades and tints of your base color. They create a cohesive and elegant look that\'s easy to manage.</p>';
+                        break;
+                }
+            }
             
             // Export button
             exportButton.addEventListener('click', function() {
