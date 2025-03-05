@@ -3,24 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health & Fitness Calculators | Convert Anything</title>
-    <meta name="description" content="Free online health and fitness calculators. Calculate BMI, body fat percentage, calories, and heart rate zones.">
-    <meta name="keywords" content="BMI calculator, body fat calculator, calorie calculator, heart rate zone calculator, fitness calculator">
-    <link rel="canonical" href="https://yourwebsite.com/health-fitness.html">
-    <meta property="og:title" content="Health & Fitness Calculators | Convert Anything">
-    <meta property="og:description" content="Free online health and fitness calculators. Calculate BMI, body fat percentage, calories, and heart rate zones.">
-    <meta property="og:image" content="https://yourwebsite.com/images/health-fitness-preview.jpg">
-    <meta property="og:url" content="https://yourwebsite.com/health-fitness.html">
+    <title>Unit Converter | Convert Anything</title>
+    <meta name="description" content="Free online unit converter. Convert between different units of measurement, weight, distance, and more.">
+    <meta name="keywords" content="unit converter, measurement converter, weight converter, distance converter, temperature converter">
+    <link rel="canonical" href="https://yourwebsite.com/index.html">
+    <meta property="og:title" content="Unit Converter | Convert Anything">
+    <meta property="og:description" content="Free online unit converter. Convert between different units of measurement, weight, distance, and more.">
+    <meta property="og:url" content="https://yourwebsite.com/index.html">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="health-fitness.css">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Health & Fitness Calculators",
-      "description": "Free online health and fitness calculators. Calculate BMI, body fat percentage, calories, and heart rate zones.",
-      "applicationCategory": "HealthApplication",
+      "name": "Unit Converter",
+      "description": "Free online unit converter. Convert between different units of measurement, weight, distance, and more.",
+      "applicationCategory": "UtilityApplication",
       "operatingSystem": "Web Browser",
       "offers": {
         "@type": "Offer",
@@ -33,452 +31,408 @@
 <body>
     <div class="container">
         <header>
-            <h1>HEALTH & FITNESS CALCULATORS</h1>
-            <h2>BMI, Body Fat, Calories & Heart Rate Zones</h2>
+            <h1>UNIT CONVERTER</h1>
+            <h2>Convert Measurements, Weights, Distances & More</h2>
         </header>
 
-        <div class="tab-container">
+        <div class="converter-container">
             <div class="tabs">
-                <button class="tab-btn active" data-tab="bmi">
-                    <i class="icon health-icon" aria-hidden="true"></i> BMI
+                <button class="tab-btn active" data-tab="length">
+                    <i class="icon ruler-icon" aria-hidden="true"></i> Length
                 </button>
-                <button class="tab-btn" data-tab="bodyfat">
-                    <i class="icon bodyfat-icon" aria-hidden="true"></i> Body Fat
+                <button class="tab-btn" data-tab="weight">
+                    <i class="icon weight-icon" aria-hidden="true"></i> Weight
                 </button>
-                <button class="tab-btn" data-tab="calories">
-                    <i class="icon calories-icon" aria-hidden="true"></i> Calories
+                <button class="tab-btn" data-tab="temperature">
+                    <i class="icon temp-icon" aria-hidden="true"></i> Temperature
                 </button>
-                <button class="tab-btn" data-tab="heartrate">
-                    <i class="icon heartrate-icon" aria-hidden="true"></i> Heart Rate
+                <button class="tab-btn" data-tab="area">
+                    <i class="icon area-icon" aria-hidden="true"></i> Area
                 </button>
-                <button class="tab-btn" data-tab="index">
-                    <i class="icon ruler-icon" aria-hidden="true"></i> Back to Converters
+                <button class="tab-btn" data-tab="volume">
+                    <i class="icon volume-icon" aria-hidden="true"></i> Volume
+                </button>
+                <button class="tab-btn" data-tab="speed">
+                    <i class="icon speed-icon" aria-hidden="true"></i> Speed
+                </button>
+                <button class="tab-btn" data-tab="time">
+                    <i class="icon time-icon" aria-hidden="true"></i> Time
                 </button>
             </div>
 
-            <!-- BMI Calculator Tab -->
-            <div class="tab-content active" id="bmi">
-                <h2>BMI Calculator</h2>
-                <div class="health-form-container">
+            <!-- Length Converter Tab -->
+            <div class="tab-content active" id="length">
+                <h2>Length Converter</h2>
+                <div class="converter-form">
                     <div class="form-group">
-                        <label for="bmi-height">Height:</label>
-                        <div class="input-with-units">
-                            <input type="number" id="bmi-height" placeholder="Enter height" value="170" aria-label="Height value">
-                            <select id="bmi-height-unit" aria-label="Height unit">
-                                <option value="cm" selected>cm</option>
-                                <option value="ft">ft/in</option>
-                            </select>
-                        </div>
-                        <div id="height-inches-container" class="hidden">
-                            <label for="bmi-inches">Inches:</label>
-                            <input type="number" id="bmi-inches" placeholder="Inches" value="0" min="0" max="11" aria-label="Additional inches if using feet">
-                        </div>
+                        <label for="length-value">Value:</label>
+                        <input type="number" id="length-value" value="1" aria-label="Length value">
                     </div>
                     <div class="form-group">
-                        <label for="bmi-weight">Weight:</label>
-                        <div class="input-with-units">
-                            <input type="number" id="bmi-weight" placeholder="Enter weight" value="70" aria-label="Weight value">
-                            <select id="bmi-weight-unit" aria-label="Weight unit">
-                                <option value="kg" selected>kg</option>
-                                <option value="lb">lb</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button id="calculate-bmi" class="calculate-btn">Calculate BMI</button>
-                </div>
-                
-                <div class="result-container">
-                    <h3>Your BMI Results</h3>
-                    <div class="bmi-result">
-                        <div class="bmi-value-container">
-                            <span id="bmi-result">24.2</span>
-                            <div class="bmi-category" id="bmi-category">Normal Weight</div>
-                        </div>
-                        <div class="bmi-meter">
-                            <div class="meter-labels">
-                                <span>Underweight</span>
-                                <span>Normal</span>
-                                <span>Overweight</span>
-                                <span>Obese</span>
-                            </div>
-                            <div class="meter-bar">
-                                <div class="meter-segments">
-                                    <div class="meter-segment underweight"></div>
-                                    <div class="meter-segment normal"></div>
-                                    <div class="meter-segment overweight"></div>
-                                    <div class="meter-segment obese"></div>
-                                </div>
-                                <div class="meter-indicator" id="bmi-indicator" style="left: 60%;"></div>
-                            </div>
-                            <div class="meter-values">
-                                <span>16.5</span>
-                                <span>18.5</span>
-                                <span>25</span>
-                                <span>30</span>
-                                <span>40</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bmi-interpretation">
-                        <h4>BMI Categories:</h4>
-                        <ul>
-                            <li><strong>Underweight:</strong> BMI less than 18.5</li>
-                            <li><strong>Normal weight:</strong> BMI 18.5–24.9</li>
-                            <li><strong>Overweight:</strong> BMI 25–29.9</li>
-                            <li><strong>Obesity:</strong> BMI 30 or greater</li>
-                        </ul>
-                        <p class="disclaimer">
-                            Note: BMI is a screening tool, not a diagnostic tool. Factors such as muscle mass, bone density, 
-                            overall body composition, and ethnic differences can influence BMI interpretation.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Body Fat Calculator Tab -->
-            <div class="tab-content" id="bodyfat">
-                <h2>Body Fat Percentage Calculator</h2>
-                <div class="health-form-container">
-                    <div class="form-group">
-                        <label for="bodyfat-gender">Gender:</label>
-                        <div class="radio-group">
-                            <label>
-                                <input type="radio" name="gender" id="bodyfat-male" value="male" checked>
-                                Male
-                            </label>
-                            <label>
-                                <input type="radio" name="gender" id="bodyfat-female" value="female">
-                                Female
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="bodyfat-age">Age:</label>
-                        <input type="number" id="bodyfat-age" placeholder="Enter age" value="30" min="18" max="100" aria-label="Age in years">
-                    </div>
-                    <div class="form-group">
-                        <label for="bodyfat-height">Height:</label>
-                        <div class="input-with-units">
-                            <input type="number" id="bodyfat-height" placeholder="Enter height" value="170" aria-label="Height value">
-                            <select id="bodyfat-height-unit" aria-label="Height unit">
-                                <option value="cm" selected>cm</option>
-                                <option value="ft">ft/in</option>
-                            </select>
-                        </div>
-                        <div id="bodyfat-inches-container" class="hidden">
-                            <label for="bodyfat-inches">Inches:</label>
-                            <input type="number" id="bodyfat-inches" placeholder="Inches" value="0" min="0" max="11" aria-label="Additional inches if using feet">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="bodyfat-weight">Weight:</label>
-                        <div class="input-with-units">
-                            <input type="number" id="bodyfat-weight" placeholder="Enter weight" value="70" aria-label="Weight value">
-                            <select id="bodyfat-weight-unit" aria-label="Weight unit">
-                                <option value="kg" selected>kg</option>
-                                <option value="lb">lb</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="bodyfat-neck">Neck Circumference:</label>
-                        <div class="input-with-units">
-                            <input type="number" id="bodyfat-neck" placeholder="Neck measurement" value="35" step="0.1" aria-label="Neck circumference">
-                            <select id="bodyfat-measurement-unit" aria-label="Measurement unit">
-                                <option value="cm" selected>cm</option>
-                                <option value="in">in</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="bodyfat-waist">Waist Circumference:</label>
-                        <div class="input-with-units">
-                            <input type="number" id="bodyfat-waist" placeholder="Waist measurement" value="85" step="0.1" aria-label="Waist circumference">
-                            <span class="measurement-unit">cm</span>
-                        </div>
-                    </div>
-                    <div class="form-group" id="hip-measurement-group">
-                        <label for="bodyfat-hip">Hip Circumference (women only):</label>
-                        <div class="input-with-units">
-                            <input type="number" id="bodyfat-hip" placeholder="Hip measurement" value="90" step="0.1" aria-label="Hip circumference">
-                            <span class="measurement-unit">cm</span>
-                        </div>
-                    </div>
-                    <button id="calculate-bodyfat" class="calculate-btn">Calculate Body Fat</button>
-                </div>
-                
-                <div class="result-container">
-                    <h3>Your Body Fat Results</h3>
-                    <div class="bodyfat-result">
-                        <div class="bodyfat-value-container">
-                            <span id="bodyfat-result">18.4</span>%
-                            <div class="bodyfat-category" id="bodyfat-category">Fitness</div>
-                        </div>
-                        <div class="bodyfat-visual">
-                            <div class="silhouette male" id="silhouette"></div>
-                            <div class="bodyfat-scale">
-                                <div class="scale-segment essential">Essential</div>
-                                <div class="scale-segment athletic">Athletic</div>
-                                <div class="scale-segment fitness">Fitness</div>
-                                <div class="scale-segment acceptable">Acceptable</div>
-                                <div class="scale-segment obese">Obese</div>
-                                <div class="scale-indicator" id="bodyfat-indicator" style="top: 45%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bodyfat-interpretation">
-                        <h4>Body Fat Categories (Men/Women):</h4>
-                        <ul>
-                            <li><strong>Essential Fat:</strong> 2-5% / 10-13%</li>
-                            <li><strong>Athletic:</strong> 6-13% / 14-20%</li>
-                            <li><strong>Fitness:</strong> 14-17% / 21-24%</li>
-                            <li><strong>Acceptable:</strong> 18-24% / 25-31%</li>
-                            <li><strong>Obese:</strong> 25%+ / 32%+</li>
-                        </ul>
-                        <p class="disclaimer">
-                            Note: This calculator uses the U.S. Navy method which is an estimation. For the most accurate 
-                            body fat measurements, consider professional methods like DEXA scans or hydrostatic weighing.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Calorie Calculator Tab -->
-            <div class="tab-content" id="calories">
-                <h2>Calorie Calculator</h2>
-                <div class="health-form-container">
-                    <div class="form-group">
-                        <label for="calories-gender">Gender:</label>
-                        <div class="radio-group">
-                            <label>
-                                <input type="radio" name="calories-gender" value="male" checked>
-                                Male
-                            </label>
-                            <label>
-                                <input type="radio" name="calories-gender" value="female">
-                                Female
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="calories-age">Age:</label>
-                        <input type="number" id="calories-age" placeholder="Enter age" value="30" min="15" max="100" aria-label="Age in years">
-                    </div>
-                    <div class="form-group">
-                        <label for="calories-height">Height:</label>
-                        <div class="input-with-units">
-                            <input type="number" id="calories-height" placeholder="Enter height" value="170" aria-label="Height value">
-                            <select id="calories-height-unit" aria-label="Height unit">
-                                <option value="cm" selected>cm</option>
-                                <option value="ft">ft/in</option>
-                            </select>
-                        </div>
-                        <div id="calories-inches-container" class="hidden">
-                            <label for="calories-inches">Inches:</label>
-                            <input type="number" id="calories-inches" placeholder="Inches" value="0" min="0" max="11" aria-label="Additional inches if using feet">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="calories-weight">Weight:</label>
-                        <div class="input-with-units">
-                            <input type="number" id="calories-weight" placeholder="Enter weight" value="70" aria-label="Weight value">
-                            <select id="calories-weight-unit" aria-label="Weight unit">
-                                <option value="kg" selected>kg</option>
-                                <option value="lb">lb</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="activity-level">Activity Level:</label>
-                        <select id="activity-level" aria-label="Activity level">
-                            <option value="1.2">Sedentary (little or no exercise)</option>
-                            <option value="1.375" selected>Lightly active (light exercise 1-3 days/week)</option>
-                            <option value="1.55">Moderately active (moderate exercise 3-5 days/week)</option>
-                            <option value="1.725">Very active (hard exercise 6-7 days/week)</option>
-                            <option value="1.9">Extra active (very hard exercise or physical job)</option>
+                        <label for="length-from">From:</label>
+                        <select id="length-from" aria-label="From length unit">
+                            <option value="m" selected>Meters (m)</option>
+                            <option value="km">Kilometers (km)</option>
+                            <option value="cm">Centimeters (cm)</option>
+                            <option value="mm">Millimeters (mm)</option>
+                            <option value="mi">Miles (mi)</option>
+                            <option value="yd">Yards (yd)</option>
+                            <option value="ft">Feet (ft)</option>
+                            <option value="in">Inches (in)</option>
+                            <option value="nm">Nautical Miles (nm)</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="weight-goal">Goal:</label>
-                        <select id="weight-goal" aria-label="Weight goal">
-                            <option value="maintain">Maintain weight</option>
-                            <option value="mildlose">Mild weight loss (0.25 kg/week)</option>
-                            <option value="weightlose" selected>Weight loss (0.5 kg/week)</option>
-                            <option value="extremelose">Extreme weight loss (1 kg/week)</option>
-                            <option value="mildgain">Mild weight gain (0.25 kg/week)</option>
-                            <option value="weightgain">Weight gain (0.5 kg/week)</option>
-                            <option value="extremegain">Fast weight gain (1 kg/week)</option>
+                        <label for="length-to">To:</label>
+                        <select id="length-to" aria-label="To length unit">
+                            <option value="m">Meters (m)</option>
+                            <option value="km">Kilometers (km)</option>
+                            <option value="cm">Centimeters (cm)</option>
+                            <option value="mm">Millimeters (mm)</option>
+                            <option value="mi">Miles (mi)</option>
+                            <option value="yd">Yards (yd)</option>
+                            <option value="ft" selected>Feet (ft)</option>
+                            <option value="in">Inches (in)</option>
+                            <option value="nm">Nautical Miles (nm)</option>
                         </select>
                     </div>
-                    <button id="calculate-calories" class="calculate-btn">Calculate Calories</button>
+                    <button id="convert-length" class="convert-btn">Convert</button>
                 </div>
                 
                 <div class="result-container">
-                    <h3>Your Calorie Results</h3>
-                    <div class="calories-result">
-                        <div class="calorie-values">
-                            <div class="calorie-group">
-                                <div class="calorie-label">Basal Metabolic Rate (BMR)</div>
-                                <div class="calorie-value"><span id="bmr-result">1,645</span> calories/day</div>
-                                <div class="calorie-info">Calories your body needs at complete rest</div>
-                            </div>
-                            <div class="calorie-group">
-                                <div class="calorie-label">Total Daily Energy Expenditure (TDEE)</div>
-                                <div class="calorie-value"><span id="tdee-result">2,262</span> calories/day</div>
-                                <div class="calorie-info">Calories you burn in a typical day</div>
-                            </div>
-                            <div class="calorie-group highlight">
-                                <div class="calorie-label">Daily Calorie Target</div>
-                                <div class="calorie-value"><span id="target-result">1,762</span> calories/day</div>
-                                <div class="calorie-info">For your selected goal (weight loss of 0.5 kg/week)</div>
-                            </div>
-                        </div>
-                        <div class="macros-container">
-                            <h4>Suggested Macronutrients</h4>
-                            <div class="macros-chart">
-                                <div class="chart-segment protein" style="width: 30%;">30%</div>
-                                <div class="chart-segment carbs" style="width: 40%;">40%</div>
-                                <div class="chart-segment fat" style="width: 30%;">30%</div>
-                            </div>
-                            <div class="macros-legend">
-                                <div class="legend-item">
-                                    <span class="legend-color protein"></span>
-                                    <span>Protein: <span id="protein-grams">132</span>g (<span id="protein-cals">528</span> cals)</span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-color carbs"></span>
-                                    <span>Carbs: <span id="carbs-grams">176</span>g (<span id="carbs-cals">704</span> cals)</span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-color fat"></span>
-                                    <span>Fat: <span id="fat-grams">59</span>g (<span id="fat-cals">530</span> cals)</span>
-                                </div>
-                            </div>
-                        </div>
+                    <h3>Conversion Result</h3>
+                    <div class="result">
+                        <div class="result-value" id="length-result">3.28084</div>
+                        <div class="result-formula">1 Meter = 3.28084 Feet</div>
                     </div>
-                    <div class="calories-interpretation">
-                        <h4>Understanding Your Results:</h4>
-                        <ul>
-                            <li><strong>BMR (Basal Metabolic Rate):</strong> The number of calories your body needs to perform basic, life-sustaining functions.</li>
-                            <li><strong>TDEE (Total Daily Energy Expenditure):</strong> Your BMR plus additional calories burned through daily activities and exercise.</li>
-                            <li><strong>Daily Calorie Target:</strong> Adjusted calories based on your weight management goal.</li>
-                        </ul>
-                        <p class="disclaimer">
-                            Note: These calculations provide estimates based on population averages. Individual metabolism may vary.
-                            Always consult with a healthcare professional before making significant changes to your diet.
-                        </p>
+                    <div class="conversion-table" id="length-table">
+                        <h4>Common Length Conversions</h4>
+                        <div class="table-row">
+                            <div>1 Meter</div>
+                            <div>= 3.28084 Feet</div>
+                        </div>
+                        <div class="table-row">
+                            <div>1 Meter</div>
+                            <div>= 39.3701 Inches</div>
+                        </div>
+                        <div class="table-row">
+                            <div>1 Foot</div>
+                            <div>= 0.3048 Meters</div>
+                        </div>
+                        <div class="table-row">
+                            <div>1 Inch</div>
+                            <div>= 2.54 Centimeters</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Heart Rate Zone Calculator Tab -->
-            <div class="tab-content" id="heartrate">
-                <h2>Heart Rate Zone Calculator</h2>
-                <div class="health-form-container">
+            <!-- Weight Converter Tab -->
+            <div class="tab-content" id="weight">
+                <h2>Weight Converter</h2>
+                <div class="converter-form">
                     <div class="form-group">
-                        <label for="heartrate-age">Age:</label>
-                        <input type="number" id="heartrate-age" placeholder="Enter age" value="30" min="15" max="100" aria-label="Age in years">
+                        <label for="weight-value">Value:</label>
+                        <input type="number" id="weight-value" value="1" aria-label="Weight value">
                     </div>
                     <div class="form-group">
-                        <label for="resting-hr">Resting Heart Rate (optional):</label>
-                        <div class="input-with-units">
-                            <input type="number" id="resting-hr" placeholder="Resting HR" value="60" min="30" max="120" aria-label="Resting heart rate in BPM">
-                            <span class="measurement-unit">bpm</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hr-method">Calculation Method:</label>
-                        <select id="hr-method" aria-label="Heart rate calculation method">
-                            <option value="max" selected>Standard Maximum (220 - Age)</option>
-                            <option value="hrr">Heart Rate Reserve (Karvonen)</option>
-                            <option value="tanaka">Tanaka Formula (More accurate for older adults)</option>
+                        <label for="weight-from">From:</label>
+                        <select id="weight-from" aria-label="From weight unit">
+                            <option value="kg" selected>Kilograms (kg)</option>
+                            <option value="g">Grams (g)</option>
+                            <option value="mg">Milligrams (mg)</option>
+                            <option value="lb">Pounds (lb)</option>
+                            <option value="oz">Ounces (oz)</option>
+                            <option value="st">Stone (st)</option>
+                            <option value="ton">Tons (ton)</option>
+                            <option value="mt">Metric Tons (mt)</option>
                         </select>
                     </div>
-                    <button id="calculate-hr" class="calculate-btn">Calculate Heart Rate Zones</button>
+                    <div class="form-group">
+                        <label for="weight-to">To:</label>
+                        <select id="weight-to" aria-label="To weight unit">
+                            <option value="kg">Kilograms (kg)</option>
+                            <option value="g">Grams (g)</option>
+                            <option value="mg">Milligrams (mg)</option>
+                            <option value="lb" selected>Pounds (lb)</option>
+                            <option value="oz">Ounces (oz)</option>
+                            <option value="st">Stone (st)</option>
+                            <option value="ton">Tons (ton)</option>
+                            <option value="mt">Metric Tons (mt)</option>
+                        </select>
+                    </div>
+                    <button id="convert-weight" class="convert-btn">Convert</button>
                 </div>
                 
                 <div class="result-container">
-                    <h3>Your Heart Rate Zones</h3>
-                    <div class="heartrate-result">
-                        <div class="max-hr">Maximum Heart Rate: <span id="max-hr-result">190</span> bpm</div>
-                        <div class="hr-zones">
-                            <div class="zone-row zone-1">
-                                <div class="zone-name">Zone 1: Very Light</div>
-                                <div class="zone-range"><span id="zone1-range">95-114</span> bpm</div>
-                                <div class="zone-percent">50-60%</div>
-                                <div class="zone-info">Very easy, warm-up and recovery</div>
-                                <div class="zone-bar-container">
-                                    <div class="zone-bar" style="width: 60%;"></div>
-                                </div>
-                            </div>
-                            <div class="zone-row zone-2">
-                                <div class="zone-name">Zone 2: Light</div>
-                                <div class="zone-range"><span id="zone2-range">114-133</span> bpm</div>
-                                <div class="zone-percent">60-70%</div>
-                                <div class="zone-info">Basic endurance and fat burning</div>
-                                <div class="zone-bar-container">
-                                    <div class="zone-bar" style="width: 70%;"></div>
-                                </div>
-                            </div>
-                            <div class="zone-row zone-3">
-                                <div class="zone-name">Zone 3: Moderate</div>
-                                <div class="zone-range"><span id="zone3-range">133-152</span> bpm</div>
-                                <div class="zone-percent">70-80%</div>
-                                <div class="zone-info">Improved aerobic fitness</div>
-                                <div class="zone-bar-container">
-                                    <div class="zone-bar" style="width: 80%;"></div>
-                                </div>
-                            </div>
-                            <div class="zone-row zone-4">
-                                <div class="zone-name">Zone 4: Hard</div>
-                                <div class="zone-range"><span id="zone4-range">152-171</span> bpm</div>
-                                <div class="zone-percent">80-90%</div>
-                                <div class="zone-info">Improved anaerobic fitness</div>
-                                <div class="zone-bar-container">
-                                    <div class="zone-bar" style="width: 90%;"></div>
-                                </div>
-                            </div>
-                            <div class="zone-row zone-5">
-                                <div class="zone-name">Zone 5: Maximum</div>
-                                <div class="zone-range"><span id="zone5-range">171-190</span> bpm</div>
-                                <div class="zone-percent">90-100%</div>
-                                <div class="zone-info">Maximum effort, cannot be sustained</div>
-                                <div class="zone-bar-container">
-                                    <div class="zone-bar" style="width: 100%;"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <h3>Conversion Result</h3>
+                    <div class="result">
+                        <div class="result-value" id="weight-result">2.20462</div>
+                        <div class="result-formula">1 Kilogram = 2.20462 Pounds</div>
                     </div>
-                    <div class="heartrate-interpretation">
-                        <h4>Heart Rate Zone Training:</h4>
-                        <ul>
-                            <li><strong>Zone 1 (50-60%):</strong> Very light activity, warm up, recovery, improves general health.</li>
-                            <li><strong>Zone 2 (60-70%):</strong> Light activity, improves basic endurance and fat burning.</li>
-                            <li><strong>Zone 3 (70-80%):</strong> Moderate activity, improves aerobic fitness and efficiency.</li>
-                            <li><strong>Zone 4 (80-90%):</strong> Hard activity, improves anaerobic fitness and performance.</li>
-                            <li><strong>Zone 5 (90-100%):</strong> Maximum effort, improves maximum performance and speed.</li>
-                        </ul>
-                        <p class="disclaimer">
-                            Note: Heart rate zones are estimates. Individual factors like fitness level, medications, 
-                            and environmental conditions can affect your actual heart rate response. 
-                        </p>
+                    <div class="conversion-table" id="weight-table">
+                        <h4>Common Weight Conversions</h4>
+                        <div class="table-row">
+                            <div>1 Kilogram</div>
+                            <div>= 2.20462 Pounds</div>
+                        </div>
+                        <div class="table-row">
+                            <div>1 Kilogram</div>
+                            <div>= 1000 Grams</div>
+                        </div>
+                        <div class="table-row">
+                            <div>1 Pound</div>
+                            <div>= 0.453592 Kilograms</div>
+                        </div>
+                        <div class="table-row">
+                            <div>1 Pound</div>
+                            <div>= 16 Ounces</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="common-conversions">
-            <h3>Health & Fitness References</h3>
-            <div id="health-references-content">
-                <div class="reference-category active" id="common-health-references">
-                    <h4>Common Fitness Conversions</h4>
-                    <ul>
-                        <li>1 kg of body weight = 7,700 calories (approx)</li>
-                        <li>1 pound of body weight = 3,500 calories (approx)</li>
-                        <li>1 MET (Metabolic Equivalent) = 3.5 ml oxygen/kg/min</li>
-                        <li>1 mile running/walking ≈ 100 calories (varies by weight)</li>
-                        <li>1 hour strength training ≈ 250-500 calories (varies by intensity)</li>
-                    </ul>
+            <!-- Temperature Converter Tab -->
+            <div class="tab-content" id="temperature">
+                <h2>Temperature Converter</h2>
+                <div class="converter-form">
+                    <div class="form-group">
+                        <label for="temp-value">Value:</label>
+                        <input type="number" id="temp-value" value="0" aria-label="Temperature value">
+                    </div>
+                    <div class="form-group">
+                        <label for="temp-from">From:</label>
+                        <select id="temp-from" aria-label="From temperature unit">
+                            <option value="c" selected>Celsius (°C)</option>
+                            <option value="f">Fahrenheit (°F)</option>
+                            <option value="k">Kelvin (K)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="temp-to">To:</label>
+                        <select id="temp-to" aria-label="To temperature unit">
+                            <option value="c">Celsius (°C)</option>
+                            <option value="f" selected>Fahrenheit (°F)</option>
+                            <option value="k">Kelvin (K)</option>
+                        </select>
+                    </div>
+                    <button id="convert-temp" class="convert-btn">Convert</button>
+                </div>
+                
+                <div class="result-container">
+                    <h3>Conversion Result</h3>
+                    <div class="result">
+                        <div class="result-value" id="temp-result">32</div>
+                        <div class="result-formula">0 °C = 32 °F</div>
+                    </div>
+                    <div class="conversion-table" id="temp-table">
+                        <h4>Common Temperature Conversions</h4>
+                        <div class="table-row">
+                            <div>0 °C (Freezing)</div>
+                            <div>= 32 °F</div>
+                        </div>
+                        <div class="table-row">
+                            <div>20 °C (Room Temp)</div>
+                            <div>= 68 °F</div>
+                        </div>
+                        <div class="table-row">
+                            <div>37 °C (Body Temp)</div>
+                            <div>= 98.6 °F</div>
+                        </div>
+                        <div class="table-row">
+                            <div>100 °C (Boiling)</div>
+                            <div>= 212 °F</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional tabs for Area, Volume, Speed, Time -->
+            <div class="tab-content" id="area">
+                <!-- Area converter content -->
+                <h2>Area Converter</h2>
+                <div class="converter-form">
+                    <div class="form-group">
+                        <label for="area-value">Value:</label>
+                        <input type="number" id="area-value" value="1" aria-label="Area value">
+                    </div>
+                    <div class="form-group">
+                        <label for="area-from">From:</label>
+                        <select id="area-from" aria-label="From area unit">
+                            <option value="m2" selected>Square Meters (m²)</option>
+                            <option value="km2">Square Kilometers (km²)</option>
+                            <option value="cm2">Square Centimeters (cm²)</option>
+                            <option value="mm2">Square Millimeters (mm²)</option>
+                            <option value="ha">Hectares (ha)</option>
+                            <option value="acre">Acres</option>
+                            <option value="ft2">Square Feet (ft²)</option>
+                            <option value="in2">Square Inches (in²)</option>
+                            <option value="mi2">Square Miles (mi²)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="area-to">To:</label>
+                        <select id="area-to" aria-label="To area unit">
+                            <option value="m2">Square Meters (m²)</option>
+                            <option value="km2">Square Kilometers (km²)</option>
+                            <option value="cm2">Square Centimeters (cm²)</option>
+                            <option value="mm2">Square Millimeters (mm²)</option>
+                            <option value="ha">Hectares (ha)</option>
+                            <option value="acre">Acres</option>
+                            <option value="ft2" selected>Square Feet (ft²)</option>
+                            <option value="in2">Square Inches (in²)</option>
+                            <option value="mi2">Square Miles (mi²)</option>
+                        </select>
+                    </div>
+                    <button id="convert-area" class="convert-btn">Convert</button>
+                </div>
+                
+                <div class="result-container">
+                    <h3>Conversion Result</h3>
+                    <div class="result">
+                        <div class="result-value" id="area-result">10.7639</div>
+                        <div class="result-formula">1 m² = 10.7639 ft²</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="volume">
+                <!-- Volume converter content -->
+                <h2>Volume Converter</h2>
+                <div class="converter-form">
+                    <div class="form-group">
+                        <label for="volume-value">Value:</label>
+                        <input type="number" id="volume-value" value="1" aria-label="Volume value">
+                    </div>
+                    <div class="form-group">
+                        <label for="volume-from">From:</label>
+                        <select id="volume-from" aria-label="From volume unit">
+                            <option value="l" selected>Liters (L)</option>
+                            <option value="ml">Milliliters (mL)</option>
+                            <option value="m3">Cubic Meters (m³)</option>
+                            <option value="gal">Gallons (US)</option>
+                            <option value="qt">Quarts (US)</option>
+                            <option value="pt">Pints (US)</option>
+                            <option value="cup">Cups (US)</option>
+                            <option value="oz_fl">Fluid Ounces (US)</option>
+                            <option value="tbsp">Tablespoons (US)</option>
+                            <option value="tsp">Teaspoons (US)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="volume-to">To:</label>
+                        <select id="volume-to" aria-label="To volume unit">
+                            <option value="l">Liters (L)</option>
+                            <option value="ml">Milliliters (mL)</option>
+                            <option value="m3">Cubic Meters (m³)</option>
+                            <option value="gal" selected>Gallons (US)</option>
+                            <option value="qt">Quarts (US)</option>
+                            <option value="pt">Pints (US)</option>
+                            <option value="cup">Cups (US)</option>
+                            <option value="oz_fl">Fluid Ounces (US)</option>
+                            <option value="tbsp">Tablespoons (US)</option>
+                            <option value="tsp">Teaspoons (US)</option>
+                        </select>
+                    </div>
+                    <button id="convert-volume" class="convert-btn">Convert</button>
+                </div>
+                
+                <div class="result-container">
+                    <h3>Conversion Result</h3>
+                    <div class="result">
+                        <div class="result-value" id="volume-result">0.264172</div>
+                        <div class="result-formula">1 L = 0.264172 gal</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="speed">
+                <!-- Speed converter content -->
+                <h2>Speed Converter</h2>
+                <div class="converter-form">
+                    <div class="form-group">
+                        <label for="speed-value">Value:</label>
+                        <input type="number" id="speed-value" value="1" aria-label="Speed value">
+                    </div>
+                    <div class="form-group">
+                        <label for="speed-from">From:</label>
+                        <select id="speed-from" aria-label="From speed unit">
+                            <option value="mps" selected>Meters per Second (m/s)</option>
+                            <option value="kph">Kilometers per Hour (km/h)</option>
+                            <option value="mph">Miles per Hour (mph)</option>
+                            <option value="fps">Feet per Second (ft/s)</option>
+                            <option value="knot">Knots</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="speed-to">To:</label>
+                        <select id="speed-to" aria-label="To speed unit">
+                            <option value="mps">Meters per Second (m/s)</option>
+                            <option value="kph">Kilometers per Hour (km/h)</option>
+                            <option value="mph" selected>Miles per Hour (mph)</option>
+                            <option value="fps">Feet per Second (ft/s)</option>
+                            <option value="knot">Knots</option>
+                        </select>
+                    </div>
+                    <button id="convert-speed" class="convert-btn">Convert</button>
+                </div>
+                
+                <div class="result-container">
+                    <h3>Conversion Result</h3>
+                    <div class="result">
+                        <div class="result-value" id="speed-result">2.23694</div>
+                        <div class="result-formula">1 m/s = 2.23694 mph</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="time">
+                <!-- Time converter content -->
+                <h2>Time Converter</h2>
+                <div class="converter-form">
+                    <div class="form-group">
+                        <label for="time-value">Value:</label>
+                        <input type="number" id="time-value" value="1" aria-label="Time value">
+                    </div>
+                    <div class="form-group">
+                        <label for="time-from">From:</label>
+                        <select id="time-from" aria-label="From time unit">
+                            <option value="sec" selected>Seconds</option>
+                            <option value="min">Minutes</option>
+                            <option value="hour">Hours</option>
+                            <option value="day">Days</option>
+                            <option value="week">Weeks</option>
+                            <option value="month">Months (avg)</option>
+                            <option value="year">Years</option>
+                            <option value="ms">Milliseconds</option>
+                            <option value="μs">Microseconds</option>
+                            <option value="ns">Nanoseconds</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="time-to">To:</label>
+                        <select id="time-to" aria-label="To time unit">
+                            <option value="sec">Seconds</option>
+                            <option value="min" selected>Minutes</option>
+                            <option value="hour">Hours</option>
+                            <option value="day">Days</option>
+                            <option value="week">Weeks</option>
+                            <option value="month">Months (avg)</option>
+                            <option value="year">Years</option>
+                            <option value="ms">Milliseconds</option>
+                            <option value="μs">Microseconds</option>
+                            <option value="ns">Nanoseconds</option>
+                        </select>
+                    </div>
+                    <button id="convert-time" class="convert-btn">Convert</button>
+                </div>
+                
+                <div class="result-container">
+                    <h3>Conversion Result</h3>
+                    <div class="result">
+                        <div class="result-value" id="time-result">0.0166667</div>
+                        <div class="result-formula">1 second = 0.0166667 minutes</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -486,20 +440,16 @@
         <section class="faq">
             <h2>Frequently Asked Questions</h2>
             <div class="faq-item">
-                <h3>How accurate are these fitness calculators?</h3>
-                <p>All calculators provide estimates based on established formulas and population averages. Individual results may vary due to factors like body composition, genetics, and activity level. For the most accurate assessment, consult with healthcare professionals.</p>
+                <h3>How accurate are these conversions?</h3>
+                <p>Our conversion tool uses standard conversion rates and provides results with high precision. For most everyday purposes, the results are accurate to several decimal places.</p>
             </div>
             <div class="faq-item">
-                <h3>What is the difference between BMR and TDEE?</h3>
-                <p>BMR (Basal Metabolic Rate) is the number of calories your body needs at complete rest to maintain basic functions. TDEE (Total Daily Energy Expenditure) includes BMR plus additional calories burned through daily activities and exercise.</p>
+                <h3>Can I convert between unit systems?</h3>
+                <p>Yes, our converter supports conversions between different unit systems such as metric (meters, kilograms) and imperial (feet, pounds).</p>
             </div>
             <div class="faq-item">
-                <h3>Why might the Navy body fat formula be inaccurate for some people?</h3>
-                <p>The Navy formula relies on circumference measurements and doesn't directly measure body fat. It may be less accurate for people with atypical body shapes, very muscular builds, or those at the extremes of height and weight ranges.</p>
-            </div>
-            <div class="faq-item">
-                <h3>How often should I train in different heart rate zones?</h3>
-                <p>For balanced training, most fitness experts recommend spending the majority (about 80%) of your workout time in Zones 1-2 and the remainder (about 20%) in Zones 3-5. However, the optimal distribution depends on your fitness goals, sport, and training phase.</p>
+                <h3>Are there any limits to the values I can convert?</h3>
+                <p>The converter can handle a wide range of values, but extremely large or small numbers might show results in scientific notation.</p>
             </div>
         </section>
     </div>
@@ -508,17 +458,17 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>About Convert Anything</h3>
-                <p>A free online tool for quick and accurate unit conversions and health & fitness calculations. Perfect for students, fitness enthusiasts, and health-conscious individuals.</p>
+                <p>A free online tool for quick and accurate unit conversions. Perfect for students, engineers, and everyday calculations.</p>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <nav>
                     <ul>
-                        <li><a href="index.html">Unit Converters</a></li>
-                        <li><a href="health-fitness.html">Health & Fitness Calculators</a></li>
-                        <li><a href="#" class="tab-link" data-tab="bmi">BMI Calculator</a></li>
-                        <li><a href="#" class="tab-link" data-tab="bodyfat">Body Fat Calculator</a></li>
-                        <li><a href="#" class="tab-link" data-tab="calories">Calorie Calculator</a></li>
+                        <li><a href="#" class="tab-link" data-tab="length">Length Converter</a></li>
+                        <li><a href="#" class="tab-link" data-tab="weight">Weight Converter</a></li>
+                        <li><a href="#" class="tab-link" data-tab="temperature">Temperature Converter</a></li>
+                        <li><a href="#" class="tab-link" data-tab="area">Area Converter</a></li>
+                        <li><a href="#" class="tab-link" data-tab="volume">Volume Converter</a></li>
                     </ul>
                 </nav>
             </div>
@@ -535,12 +485,6 @@
         </div>
     </footer>
 
-    <script src="health-fitness.js"></script>
-    <script>
-        // Handle navigation back to main converters page
-        document.querySelector('.tab-btn[data-tab="index"]').addEventListener('click', function() {
-            window.location.href = 'index.html';
-        });
-    </script>
+    <script src="converter.js"></script>
 </body>
 </html>
