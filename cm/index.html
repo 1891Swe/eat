@@ -1,4 +1,18 @@
-<!DOCTYPE html>
+.app-layout {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .left-panel {
+            flex: 0 0 300px;
+            padding-right: 20px;
+        }
+        
+        .right-panel {
+            flex: 1;
+            min-width: 300px;
+        }<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,15 +47,13 @@
         
         .how-it-works {
             background-color: #f0f8ff;
-            padding: 6px 10px;
+            padding: 10px 15px;
             border-radius: 5px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             border-left: 3px solid #4c8bf5;
-            font-size: 11px;
+            font-size: 13px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            width: 50%;
-            margin-left: auto;
-            margin-right: auto;
+            width: 100%;
         }
         
         .how-it-works h2 {
@@ -71,7 +83,7 @@
         
         .container {
             width: 100%;
-            max-width: 450px;
+            max-width: 100%;
             margin: 0 auto;
             background-color: white;
             padding: 20px;
@@ -180,8 +192,8 @@
         }
         
         .color-box {
-            width: 75px;
-            height: 75px;
+            width: 100px;
+            height: 100px;
             border-radius: 6px;
             display: flex;
             flex-direction: column;
@@ -189,7 +201,7 @@
             align-items: center;
             color: white;
             text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-            font-size: 12px;
+            font-size: 14px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s, box-shadow 0.2s;
             margin: 5px;
@@ -282,35 +294,41 @@
             <p>This tool uses color theory principles to create harmonious color combinations for your designs.</p>
         </div>
         
-        <div class="color-picker">
-            <h2>Select Your Base Color</h2>
-            <div class="color-input">
-                <input type="text" id="color-value" placeholder="#RRGGBB">
-                <input type="color" id="color-picker" value="#4c8bf5">
+        <div class="app-layout">
+            <div class="left-panel">
+                <div class="color-picker">
+                    <h2>Select Your Base Color</h2>
+                    <div class="color-input">
+                        <input type="text" id="color-value" placeholder="#RRGGBB">
+                        <input type="color" id="color-picker" value="#4c8bf5">
+                    </div>
+                </div>
+                
+                <div class="scheme-options">
+                    <button class="scheme-button" data-scheme="complementary">Complementary</button>
+                    <button class="scheme-button" data-scheme="analogous">Analogous</button>
+                    <button class="scheme-button" data-scheme="triadic">Triadic</button>
+                    <button class="scheme-button" data-scheme="split">Split Complementary</button>
+                    <button class="scheme-button" data-scheme="monochromatic">Monochromatic</button>
+                </div>
+                
+                <div class="export-section">
+                    <button class="export-button" id="export-button">Export Colors</button>
+                    <pre id="export-content"></pre>
+                </div>
             </div>
-        </div>
-        
-        <div class="scheme-options">
-            <button class="scheme-button" data-scheme="complementary">Complementary</button>
-            <button class="scheme-button" data-scheme="analogous">Analogous</button>
-            <button class="scheme-button" data-scheme="triadic">Triadic</button>
-            <button class="scheme-button" data-scheme="split">Split Complementary</button>
-            <button class="scheme-button" data-scheme="monochromatic">Monochromatic</button>
-        </div>
-        
-        <h3 class="preview-title">Color Scheme Preview</h3>
-        <div class="scheme-explanation" id="scheme-explanation">
-            <p>Select a color scheme to see an explanation here.</p>
-        </div>
-        <div class="color-preview" id="color-preview">
-            <div class="color-box" style="background-color: #4c8bf5;">
-                Base Color<br>#4c8bf5
+            
+            <div class="right-panel">
+                <h3 class="preview-title">Color Scheme Preview</h3>
+                <div class="scheme-explanation" id="scheme-explanation">
+                    <p>Select a color scheme to see an explanation here.</p>
+                </div>
+                <div class="color-preview" id="color-preview">
+                    <div class="color-box" style="background-color: #4c8bf5;">
+                        Base Color<br>#4c8bf5
+                    </div>
+                </div>
             </div>
-        </div>
-        
-        <div class="export-section">
-            <button class="export-button" id="export-button">Export Colors</button>
-            <pre id="export-content"></pre>
         </div>
         
         <footer>
