@@ -13,7 +13,102 @@ document.addEventListener('DOMContentLoaded', function() {
             button.classList.add('active');
             const tabId = button.getAttribute('data-tab');
             document.getElementById(tabId).classList.add('active');
+        }
+
+    // Heart Rate Zone Calculator
+    function initHeartRateCalculator() {
+        const ageInput = document.getElementById('heartrate-age');
+        const restingHRInput = document.getElementById('resting-hr');
+        const hrMethod = document.getElementById('hr-method');
+        const calculateBtn = document.getElementById('calculate-hr');
+        const maxHRResult = document.getElementById('max-hr-result');
+        const zone1Range = document.getElementById('zone1-range');
+        const zone2Range = document.getElementById('zone2-range');
+        const zone3Range = document.getElementById('zone3-range');
+        const zone4Range = document.getElementById('zone4-range');
+        const zone5Range = document.getElementById('zone5-range');
+
+        // Calculate Heart Rate Zones
+        calculateBtn.addEventListener('click', calculateHeartRateZones);
+
+        // Also calculate on input change for responsive feel
+        [ageInput, restingHRInput, hrMethod].forEach(el => {
+            el.addEventListener('change', calculateHeartRateZones);
         });
+
+        function calculateHeartRateZones() {
+            const age = parseFloat(ageInput.value);
+            const restingHR = parseFloat(restingHRInput.value);
+            const method = hrMethod.value;
+            
+            // Calculate max HR based on selected method
+            let maxHR;
+            switch (method) {
+                case 'max':
+                    // Standard formula (220 - age)
+                    maxHR = 220 - age;
+                    break;
+                case 'hrr':
+                    // Heart Rate Reserve (Karvonen) - first calculate with 220-age
+                    maxHR = 220 - age;
+                    break;
+                case 'tanaka':
+                    // Tanaka formula (better for older adults): 208 - (0.7 × age)
+                    maxHR = 208 - (0.7 * age);
+                    break;
+            }
+            
+            // Calculate zones
+            let zone1Low, zone1High, zone2Low, zone2High, zone3Low, zone3High, zone4Low, zone4High, zone5Low, zone5High;
+            
+            if (method === 'hrr') {
+                // Karvonen Formula using Heart Rate Reserve (HRR)
+                const hrr = maxHR - restingHR;
+                
+                zone1Low = Math.round(restingHR + (hrr * 0.5));
+                zone1High = Math.round(restingHR + (hrr * 0.6));
+                zone2Low = zone1High;
+                zone2High = Math.round(restingHR + (hrr * 0.7));
+                zone3Low = zone2High;
+                zone3High = Math.round(restingHR + (hrr * 0.8));
+                zone4Low = zone3High;
+                zone4High = Math.round(restingHR + (hrr * 0.9));
+                zone5Low = zone4High;
+                zone5High = Math.round(maxHR);
+            } else {
+                // Direct percentage of max HR
+                zone1Low = Math.round(maxHR * 0.5);
+                zone1High = Math.round(maxHR * 0.6);
+                zone2Low = zone1High;
+                zone2High = Math.round(maxHR * 0.7);
+                zone3Low = zone2High;
+                zone3High = Math.round(maxHR * 0.8);
+                zone4Low = zone3High;
+                zone4High = Math.round(maxHR * 0.9);
+                zone5Low = zone4High;
+                zone5High = Math.round(maxHR);
+            }
+            
+            // Update results
+            maxHRResult.textContent = Math.round(maxHR);
+            zone1Range.textContent = `${zone1Low}-${zone1High}`;
+            zone2Range.textContent = `${zone2Low}-${zone2High}`;
+            zone3Range.textContent = `${zone3Low}-${zone3High}`;
+            zone4Range.textContent = `${zone4Low}-${zone4High}`;
+            zone5Range.textContent = `${zone5Low}-${zone5High}`;
+            
+            // Track the calculation
+            trackEvent('heartrate_calculated', { 
+                age: age,
+                maxHR: Math.round(maxHR),
+                method: method
+            });
+        }
+
+        // Initialize with default values
+        calculateHeartRateZones();
+    }
+}););
     });
 
     // Initialize all calculators
@@ -266,4 +361,261 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Get height in inches
             let heightInInches;
-            if (
+            if (heightUnit.value === 'cm') {
+                heightInInches = parseFloat(heightInput.value) / 2.54;
+            } else {
+                const feet = parseFloat(heightInput.value);
+                const inches = parseFloat(inchesInput.value) || 0;
+                heightInInches = feet * 12 + inches;
+            }
+
+            // Calculate body fat percentage using Navy method
+            let bodyFatPercentage;
+            
+            if (genderMale.checked) {
+                // Men: 86.010 × log10(abdomen - neck) - 70.041 × log10(height) + 36.76
+                bodyFatPercentage = 86.010 * Math.log10(waistCircumference - neckCircumference) - 
+                                    70.041 * Math.log10(heightInInches) + 36.76;
+            } else {
+                // Women: 163.205 × log10(waist + hip - neck) - 97.684 × log10(height) - 78.387
+                bodyFatPercentage = 163.205 * Math.log10(waistCircumference + hipCircumference - neckCircumference) - 
+                                    97.684 * Math.log10(heightInInches) - 78.387;
+            }
+            
+            // Update result
+            if (!isNaN(bodyFatPercentage) && bodyFatPercentage > 0) {
+                bodyFatPercentage = Math.max(Math.min(bodyFatPercentage, 60), 2); // Limit range for visualization
+                bodyfatResult.textContent = bodyFatPercentage.toFixed(1);
+                
+                // Update category and indicator
+                let category;
+                let indicatorPosition;
+                
+                if (genderMale.checked) {
+                    // Men categories
+                    if (bodyFatPercentage < 6) {
+                        category = "Essential Fat";
+                        indicatorPosition = bodyFatPercentage / 6 * 20;
+                    } else if (bodyFatPercentage < 14) {
+                        category = "Athletic";
+                        indicatorPosition = 20 + (bodyFatPercentage - 6) / 8 * 20;
+                    } else if (bodyFatPercentage < 18) {
+                        category = "Fitness";
+                        indicatorPosition = 40 + (bodyFatPercentage - 14) / 4 * 20;
+                    } else if (bodyFatPercentage < 25) {
+                        category = "Acceptable";
+                        indicatorPosition = 60 + (bodyFatPercentage - 18) / 7 * 20;
+                    } else {
+                        category = "Obese";
+                        indicatorPosition = 80 + Math.min((bodyFatPercentage - 25) / 15, 1) * 20;
+                    }
+                } else {
+                    // Women categories
+                    if (bodyFatPercentage < 14) {
+                        category = "Essential Fat";
+                        indicatorPosition = bodyFatPercentage / 14 * 20;
+                    } else if (bodyFatPercentage < 21) {
+                        category = "Athletic";
+                        indicatorPosition = 20 + (bodyFatPercentage - 14) / 7 * 20;
+                    } else if (bodyFatPercentage < 25) {
+                        category = "Fitness";
+                        indicatorPosition = 40 + (bodyFatPercentage - 21) / 4 * 20;
+                    } else if (bodyFatPercentage < 32) {
+                        category = "Acceptable";
+                        indicatorPosition = 60 + (bodyFatPercentage - 25) / 7 * 20;
+                    } else {
+                        category = "Obese";
+                        indicatorPosition = 80 + Math.min((bodyFatPercentage - 32) / 15, 1) * 20;
+                    }
+                }
+                
+                bodyfatCategory.textContent = category;
+                bodyfatIndicator.style.top = `${indicatorPosition}%`;
+                
+                // Track the calculation
+                trackEvent('bodyfat_calculated', { 
+                    bodyfat: bodyFatPercentage.toFixed(1), 
+                    category: category,
+                    gender: genderMale.checked ? 'male' : 'female'
+                });
+            }
+        }
+
+        // Initialize with default values
+        calculateBodyFat();
+    }
+
+    // Calorie Calculator
+    function initCalorieCalculator() {
+        const genderInputs = document.querySelectorAll('input[name="calories-gender"]');
+        const ageInput = document.getElementById('calories-age');
+        const heightInput = document.getElementById('calories-height');
+        const heightUnit = document.getElementById('calories-height-unit');
+        const inchesContainer = document.getElementById('calories-inches-container');
+        const inchesInput = document.getElementById('calories-inches');
+        const weightInput = document.getElementById('calories-weight');
+        const weightUnit = document.getElementById('calories-weight-unit');
+        const activityLevel = document.getElementById('activity-level');
+        const weightGoal = document.getElementById('weight-goal');
+        const calculateBtn = document.getElementById('calculate-calories');
+        const bmrResult = document.getElementById('bmr-result');
+        const tdeeResult = document.getElementById('tdee-result');
+        const targetResult = document.getElementById('target-result');
+        const proteinGrams = document.getElementById('protein-grams');
+        const proteinCals = document.getElementById('protein-cals');
+        const carbsGrams = document.getElementById('carbs-grams');
+        const carbsCals = document.getElementById('carbs-cals');
+        const fatGrams = document.getElementById('fat-grams');
+        const fatCals = document.getElementById('fat-cals');
+
+        // Toggle inches input visibility when height unit changes
+        heightUnit.addEventListener('change', () => {
+            if (heightUnit.value === 'ft') {
+                inchesContainer.classList.remove('hidden');
+                // Convert cm to feet and inches
+                if (heightInput.value) {
+                    const cm = parseFloat(heightInput.value);
+                    const totalInches = cm / 2.54;
+                    const feet = Math.floor(totalInches / 12);
+                    const inches = Math.round(totalInches % 12);
+                    heightInput.value = feet;
+                    inchesInput.value = inches;
+                }
+            } else {
+                inchesContainer.classList.add('hidden');
+                // Convert feet and inches to cm
+                if (heightInput.value) {
+                    const feet = parseFloat(heightInput.value);
+                    const inches = parseFloat(inchesInput.value) || 0;
+                    const cm = Math.round((feet * 12 + inches) * 2.54);
+                    heightInput.value = cm;
+                }
+            }
+        });
+
+        // Calculate Calories
+        calculateBtn.addEventListener('click', calculateCalories);
+
+        // Also calculate on input change for responsive feel
+        genderInputs.forEach(input => {
+            input.addEventListener('change', calculateCalories);
+        });
+        [ageInput, heightInput, inchesInput, weightInput, heightUnit, weightUnit, 
+         activityLevel, weightGoal].forEach(el => {
+            if (el) {
+                el.addEventListener('change', calculateCalories);
+            }
+        });
+
+        function calculateCalories() {
+            // Get gender
+            const isMale = document.querySelector('input[name="calories-gender"][value="male"]').checked;
+            
+            // Get age
+            const age = parseFloat(ageInput.value);
+            
+            // Get height in cm
+            let heightInCm;
+            if (heightUnit.value === 'cm') {
+                heightInCm = parseFloat(heightInput.value);
+            } else {
+                const feet = parseFloat(heightInput.value);
+                const inches = parseFloat(inchesInput.value) || 0;
+                heightInCm = (feet * 12 + inches) * 2.54;
+            }
+            
+            // Get weight in kg
+            let weightInKg;
+            if (weightUnit.value === 'kg') {
+                weightInKg = parseFloat(weightInput.value);
+            } else {
+                weightInKg = parseFloat(weightInput.value) * 0.453592;
+            }
+            
+            // Calculate BMR using Mifflin-St Jeor Equation
+            let bmr;
+            if (isMale) {
+                bmr = 10 * weightInKg + 6.25 * heightInCm - 5 * age + 5;
+            } else {
+                bmr = 10 * weightInKg + 6.25 * heightInCm - 5 * age - 161;
+            }
+            
+            // Calculate TDEE
+            const activity = parseFloat(activityLevel.value);
+            const tdee = bmr * activity;
+            
+            // Calculate target calories based on goal
+            let targetCalories;
+            let goalDescription;
+            
+            switch (weightGoal.value) {
+                case 'maintain':
+                    targetCalories = tdee;
+                    goalDescription = "maintenance";
+                    break;
+                case 'mildlose':
+                    targetCalories = tdee - 250;
+                    goalDescription = "mild weight loss (0.25 kg/week)";
+                    break;
+                case 'weightlose':
+                    targetCalories = tdee - 500;
+                    goalDescription = "weight loss (0.5 kg/week)";
+                    break;
+                case 'extremelose':
+                    targetCalories = tdee - 1000;
+                    goalDescription = "extreme weight loss (1 kg/week)";
+                    break;
+                case 'mildgain':
+                    targetCalories = tdee + 250;
+                    goalDescription = "mild weight gain (0.25 kg/week)";
+                    break;
+                case 'weightgain':
+                    targetCalories = tdee + 500;
+                    goalDescription = "weight gain (0.5 kg/week)";
+                    break;
+                case 'extremegain':
+                    targetCalories = tdee + 1000;
+                    goalDescription = "fast weight gain (1 kg/week)";
+                    break;
+            }
+            
+            // Ensure minimum healthy calories
+            const minHealthyCalories = isMale ? 1500 : 1200;
+            targetCalories = Math.max(targetCalories, minHealthyCalories);
+            
+            // Calculate macronutrients (30% protein, 40% carbs, 30% fat)
+            const proteinCalories = targetCalories * 0.3;
+            const carbCalories = targetCalories * 0.4;
+            const fatCalories = targetCalories * 0.3;
+            
+            const proteinG = Math.round(proteinCalories / 4); // 4 calories per gram of protein
+            const carbG = Math.round(carbCalories / 4); // 4 calories per gram of carbs
+            const fatG = Math.round(fatCalories / 9); // 9 calories per gram of fat
+            
+            // Update results
+            bmrResult.textContent = Math.round(bmr).toLocaleString();
+            tdeeResult.textContent = Math.round(tdee).toLocaleString();
+            targetResult.textContent = Math.round(targetCalories).toLocaleString();
+            
+            proteinGrams.textContent = proteinG;
+            proteinCals.textContent = Math.round(proteinCalories);
+            carbsGrams.textContent = carbG;
+            carbsCals.textContent = Math.round(carbCalories);
+            fatGrams.textContent = fatG;
+            fatCals.textContent = Math.round(fatCalories);
+            
+            // Update goal description
+            document.querySelector('.calorie-info').textContent = `For your selected goal (${goalDescription})`;
+            
+            // Track the calculation
+            trackEvent('calories_calculated', { 
+                bmr: Math.round(bmr),
+                tdee: Math.round(tdee),
+                target: Math.round(targetCalories),
+                goal: weightGoal.value
+            });
+        }
+
+        // Initialize with default values
+        calculateCalories();
+    }
