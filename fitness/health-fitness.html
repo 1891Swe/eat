@@ -51,6 +51,9 @@
                 <button class="tab-btn" data-tab="heartrate">
                     <i class="icon heartrate-icon" aria-hidden="true"></i> Heart Rate
                 </button>
+                <button class="tab-btn" data-tab="index">
+                    <i class="icon ruler-icon" aria-hidden="true"></i> Back to Converters
+                </button>
             </div>
 
             <!-- BMI Calculator Tab -->
@@ -533,5 +536,11 @@
     </footer>
 
     <script src="health-fitness.js"></script>
+    <script>
+        // Handle navigation back to main converters page
+        document.querySelector('.tab-btn[data-tab="index"]').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
 </body>
 </html>
