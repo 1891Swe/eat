@@ -12,103 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add active class to clicked button and corresponding content
             button.classList.add('active');
             const tabId = button.getAttribute('data-tab');
+            
+            // If it's the index tab, redirect to index page
+            if (tabId === 'index') {
+                window.location.href = 'index.html';
+                return;
+            }
+            
             document.getElementById(tabId).classList.add('active');
-        }
-
-    // Heart Rate Zone Calculator
-    function initHeartRateCalculator() {
-        const ageInput = document.getElementById('heartrate-age');
-        const restingHRInput = document.getElementById('resting-hr');
-        const hrMethod = document.getElementById('hr-method');
-        const calculateBtn = document.getElementById('calculate-hr');
-        const maxHRResult = document.getElementById('max-hr-result');
-        const zone1Range = document.getElementById('zone1-range');
-        const zone2Range = document.getElementById('zone2-range');
-        const zone3Range = document.getElementById('zone3-range');
-        const zone4Range = document.getElementById('zone4-range');
-        const zone5Range = document.getElementById('zone5-range');
-
-        // Calculate Heart Rate Zones
-        calculateBtn.addEventListener('click', calculateHeartRateZones);
-
-        // Also calculate on input change for responsive feel
-        [ageInput, restingHRInput, hrMethod].forEach(el => {
-            el.addEventListener('change', calculateHeartRateZones);
         });
-
-        function calculateHeartRateZones() {
-            const age = parseFloat(ageInput.value);
-            const restingHR = parseFloat(restingHRInput.value);
-            const method = hrMethod.value;
-            
-            // Calculate max HR based on selected method
-            let maxHR;
-            switch (method) {
-                case 'max':
-                    // Standard formula (220 - age)
-                    maxHR = 220 - age;
-                    break;
-                case 'hrr':
-                    // Heart Rate Reserve (Karvonen) - first calculate with 220-age
-                    maxHR = 220 - age;
-                    break;
-                case 'tanaka':
-                    // Tanaka formula (better for older adults): 208 - (0.7 × age)
-                    maxHR = 208 - (0.7 * age);
-                    break;
-            }
-            
-            // Calculate zones
-            let zone1Low, zone1High, zone2Low, zone2High, zone3Low, zone3High, zone4Low, zone4High, zone5Low, zone5High;
-            
-            if (method === 'hrr') {
-                // Karvonen Formula using Heart Rate Reserve (HRR)
-                const hrr = maxHR - restingHR;
-                
-                zone1Low = Math.round(restingHR + (hrr * 0.5));
-                zone1High = Math.round(restingHR + (hrr * 0.6));
-                zone2Low = zone1High;
-                zone2High = Math.round(restingHR + (hrr * 0.7));
-                zone3Low = zone2High;
-                zone3High = Math.round(restingHR + (hrr * 0.8));
-                zone4Low = zone3High;
-                zone4High = Math.round(restingHR + (hrr * 0.9));
-                zone5Low = zone4High;
-                zone5High = Math.round(maxHR);
-            } else {
-                // Direct percentage of max HR
-                zone1Low = Math.round(maxHR * 0.5);
-                zone1High = Math.round(maxHR * 0.6);
-                zone2Low = zone1High;
-                zone2High = Math.round(maxHR * 0.7);
-                zone3Low = zone2High;
-                zone3High = Math.round(maxHR * 0.8);
-                zone4Low = zone3High;
-                zone4High = Math.round(maxHR * 0.9);
-                zone5Low = zone4High;
-                zone5High = Math.round(maxHR);
-            }
-            
-            // Update results
-            maxHRResult.textContent = Math.round(maxHR);
-            zone1Range.textContent = `${zone1Low}-${zone1High}`;
-            zone2Range.textContent = `${zone2Low}-${zone2High}`;
-            zone3Range.textContent = `${zone3Low}-${zone3High}`;
-            zone4Range.textContent = `${zone4Low}-${zone4High}`;
-            zone5Range.textContent = `${zone5Low}-${zone5High}`;
-            
-            // Track the calculation
-            trackEvent('heartrate_calculated', { 
-                age: age,
-                maxHR: Math.round(maxHR),
-                method: method
-            });
-        }
-
-        // Initialize with default values
-        calculateHeartRateZones();
-    }
-}););
     });
 
     // Initialize all calculators
@@ -173,15 +85,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     heightInput.value = cm;
                 }
             }
+            calculateBMI(); // Recalculate after unit change
         });
 
         // Calculate BMI
         calculateBtn.addEventListener('click', calculateBMI);
         
         // Also calculate on input change for responsive feel
-        [heightInput, inchesInput, weightInput, heightUnit, weightUnit].forEach(el => {
+        [heightInput, weightInput, weightUnit].forEach(el => {
+            el.addEventListener('input', calculateBMI);
             el.addEventListener('change', calculateBMI);
         });
+        
+        if (inchesInput) {
+            inchesInput.addEventListener('input', calculateBMI);
+            inchesInput.addEventListener('change', calculateBMI);
+        }
 
         function calculateBMI() {
             // Get height in meters
@@ -189,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (heightUnit.value === 'cm') {
                 heightInMeters = parseFloat(heightInput.value) / 100;
             } else {
-                const feet = parseFloat(heightInput.value);
+                const feet = parseFloat(heightInput.value) || 0;
                 const inches = parseFloat(inchesInput.value) || 0;
                 const totalInches = feet * 12 + inches;
                 heightInMeters = totalInches * 0.0254;
@@ -213,28 +132,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Update category and indicator
                 let category;
                 let indicatorPosition;
+                let categoryColor;
                 
                 if (bmi < 16.5) {
                     category = "Severely Underweight";
                     indicatorPosition = 0;
+                    categoryColor = "#3498db"; // blue
                 } else if (bmi < 18.5) {
                     category = "Underweight";
                     indicatorPosition = (bmi - 16.5) / (18.5 - 16.5) * 10;
+                    categoryColor = "#3498db"; // blue
                 } else if (bmi < 25) {
                     category = "Normal Weight";
                     indicatorPosition = 10 + (bmi - 18.5) / (25 - 18.5) * 32.5;
+                    categoryColor = "#2ecc71"; // green
                 } else if (bmi < 30) {
                     category = "Overweight";
                     indicatorPosition = 42.5 + (bmi - 25) / (30 - 25) * 25;
+                    categoryColor = "#f39c12"; // orange
                 } else if (bmi < 40) {
                     category = "Obese";
                     indicatorPosition = 67.5 + (bmi - 30) / (40 - 30) * 32.5;
+                    categoryColor = "#e74c3c"; // red
                 } else {
                     category = "Severely Obese";
                     indicatorPosition = 100;
+                    categoryColor = "#c0392b"; // dark red
                 }
                 
                 bmiCategory.textContent = category;
+                bmiCategory.style.backgroundColor = categoryColor;
                 bmiIndicator.style.left = `${indicatorPosition}%`;
                 
                 // Track the calculation
@@ -277,6 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 hipGroup.classList.add('hidden');
                 silhouette.classList.remove('female');
                 silhouette.classList.add('male');
+                calculateBodyFat(); // Recalculate
             }
         });
 
@@ -285,6 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 hipGroup.classList.remove('hidden');
                 silhouette.classList.remove('male');
                 silhouette.classList.add('female');
+                calculateBodyFat(); // Recalculate
             }
         });
 
@@ -311,6 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     heightInput.value = cm;
                 }
             }
+            calculateBodyFat(); // Recalculate
         });
 
         // Handle measurement unit changes
@@ -332,18 +262,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (waistInput.value) waistInput.value = (parseFloat(waistInput.value) * 2.54).toFixed(1);
                 if (hipInput.value) hipInput.value = (parseFloat(hipInput.value) * 2.54).toFixed(1);
             }
+            calculateBodyFat(); // Recalculate
         });
 
         // Calculate Body Fat Percentage
         calculateBtn.addEventListener('click', calculateBodyFat);
 
         // Also calculate on input change for responsive feel
-        [genderMale, genderFemale, ageInput, heightInput, inchesInput, weightInput, 
-         neckInput, waistInput, hipInput, heightUnit, weightUnit, measurementUnit].forEach(el => {
+        [genderMale, genderFemale, ageInput, heightInput, weightInput, 
+         neckInput, waistInput, weightUnit].forEach(el => {
             if (el) {
+                el.addEventListener('input', calculateBodyFat);
                 el.addEventListener('change', calculateBodyFat);
             }
         });
+        
+        if (hipInput) {
+            hipInput.addEventListener('input', calculateBodyFat);
+            hipInput.addEventListener('change', calculateBodyFat);
+        }
+        
+        if (inchesInput) {
+            inchesInput.addEventListener('input', calculateBodyFat);
+            inchesInput.addEventListener('change', calculateBodyFat);
+        }
 
         function calculateBodyFat() {
             // Get measurements in the correct units
@@ -364,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (heightUnit.value === 'cm') {
                 heightInInches = parseFloat(heightInput.value) / 2.54;
             } else {
-                const feet = parseFloat(heightInput.value);
+                const feet = parseFloat(heightInput.value) || 0;
                 const inches = parseFloat(inchesInput.value) || 0;
                 heightInInches = feet * 12 + inches;
             }
@@ -390,46 +332,58 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Update category and indicator
                 let category;
                 let indicatorPosition;
+                let categoryColor;
                 
                 if (genderMale.checked) {
                     // Men categories
                     if (bodyFatPercentage < 6) {
                         category = "Essential Fat";
                         indicatorPosition = bodyFatPercentage / 6 * 20;
+                        categoryColor = "#3498db"; // blue
                     } else if (bodyFatPercentage < 14) {
                         category = "Athletic";
                         indicatorPosition = 20 + (bodyFatPercentage - 6) / 8 * 20;
+                        categoryColor = "#2ecc71"; // green
                     } else if (bodyFatPercentage < 18) {
                         category = "Fitness";
                         indicatorPosition = 40 + (bodyFatPercentage - 14) / 4 * 20;
+                        categoryColor = "#27ae60"; // darker green
                     } else if (bodyFatPercentage < 25) {
                         category = "Acceptable";
                         indicatorPosition = 60 + (bodyFatPercentage - 18) / 7 * 20;
+                        categoryColor = "#f39c12"; // orange
                     } else {
                         category = "Obese";
                         indicatorPosition = 80 + Math.min((bodyFatPercentage - 25) / 15, 1) * 20;
+                        categoryColor = "#e74c3c"; // red
                     }
                 } else {
                     // Women categories
                     if (bodyFatPercentage < 14) {
                         category = "Essential Fat";
                         indicatorPosition = bodyFatPercentage / 14 * 20;
+                        categoryColor = "#3498db"; // blue
                     } else if (bodyFatPercentage < 21) {
                         category = "Athletic";
                         indicatorPosition = 20 + (bodyFatPercentage - 14) / 7 * 20;
+                        categoryColor = "#2ecc71"; // green
                     } else if (bodyFatPercentage < 25) {
                         category = "Fitness";
                         indicatorPosition = 40 + (bodyFatPercentage - 21) / 4 * 20;
+                        categoryColor = "#27ae60"; // darker green
                     } else if (bodyFatPercentage < 32) {
                         category = "Acceptable";
                         indicatorPosition = 60 + (bodyFatPercentage - 25) / 7 * 20;
+                        categoryColor = "#f39c12"; // orange
                     } else {
                         category = "Obese";
                         indicatorPosition = 80 + Math.min((bodyFatPercentage - 32) / 15, 1) * 20;
+                        categoryColor = "#e74c3c"; // red
                     }
                 }
                 
                 bodyfatCategory.textContent = category;
+                bodyfatCategory.style.backgroundColor = categoryColor;
                 bodyfatIndicator.style.top = `${indicatorPosition}%`;
                 
                 // Track the calculation
@@ -467,6 +421,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const carbsCals = document.getElementById('carbs-cals');
         const fatGrams = document.getElementById('fat-grams');
         const fatCals = document.getElementById('fat-cals');
+        const goalDescription = document.querySelector('.calorie-info');
 
         // Toggle inches input visibility when height unit changes
         heightUnit.addEventListener('change', () => {
@@ -491,6 +446,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     heightInput.value = cm;
                 }
             }
+            calculateCalories(); // Recalculate
         });
 
         // Calculate Calories
@@ -500,12 +456,18 @@ document.addEventListener('DOMContentLoaded', function() {
         genderInputs.forEach(input => {
             input.addEventListener('change', calculateCalories);
         });
-        [ageInput, heightInput, inchesInput, weightInput, heightUnit, weightUnit, 
-         activityLevel, weightGoal].forEach(el => {
+        
+        [ageInput, heightInput, weightInput, activityLevel, weightGoal, weightUnit].forEach(el => {
             if (el) {
+                el.addEventListener('input', calculateCalories);
                 el.addEventListener('change', calculateCalories);
             }
         });
+        
+        if (inchesInput) {
+            inchesInput.addEventListener('input', calculateCalories);
+            inchesInput.addEventListener('change', calculateCalories);
+        }
 
         function calculateCalories() {
             // Get gender
@@ -519,7 +481,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (heightUnit.value === 'cm') {
                 heightInCm = parseFloat(heightInput.value);
             } else {
-                const feet = parseFloat(heightInput.value);
+                const feet = parseFloat(heightInput.value) || 0;
                 const inches = parseFloat(inchesInput.value) || 0;
                 heightInCm = (feet * 12 + inches) * 2.54;
             }
@@ -546,36 +508,36 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Calculate target calories based on goal
             let targetCalories;
-            let goalDescription;
+            let goalDescriptionText;
             
             switch (weightGoal.value) {
                 case 'maintain':
                     targetCalories = tdee;
-                    goalDescription = "maintenance";
+                    goalDescriptionText = "maintenance";
                     break;
                 case 'mildlose':
                     targetCalories = tdee - 250;
-                    goalDescription = "mild weight loss (0.25 kg/week)";
+                    goalDescriptionText = "mild weight loss (0.25 kg/week)";
                     break;
                 case 'weightlose':
                     targetCalories = tdee - 500;
-                    goalDescription = "weight loss (0.5 kg/week)";
+                    goalDescriptionText = "weight loss (0.5 kg/week)";
                     break;
                 case 'extremelose':
                     targetCalories = tdee - 1000;
-                    goalDescription = "extreme weight loss (1 kg/week)";
+                    goalDescriptionText = "extreme weight loss (1 kg/week)";
                     break;
                 case 'mildgain':
                     targetCalories = tdee + 250;
-                    goalDescription = "mild weight gain (0.25 kg/week)";
+                    goalDescriptionText = "mild weight gain (0.25 kg/week)";
                     break;
                 case 'weightgain':
                     targetCalories = tdee + 500;
-                    goalDescription = "weight gain (0.5 kg/week)";
+                    goalDescriptionText = "weight gain (0.5 kg/week)";
                     break;
                 case 'extremegain':
                     targetCalories = tdee + 1000;
-                    goalDescription = "fast weight gain (1 kg/week)";
+                    goalDescriptionText = "fast weight gain (1 kg/week)";
                     break;
             }
             
@@ -605,7 +567,9 @@ document.addEventListener('DOMContentLoaded', function() {
             fatCals.textContent = Math.round(fatCalories);
             
             // Update goal description
-            document.querySelector('.calorie-info').textContent = `For your selected goal (${goalDescription})`;
+            if (goalDescription) {
+                goalDescription.textContent = `For your selected goal (${goalDescriptionText})`;
+            }
             
             // Track the calculation
             trackEvent('calories_calculated', { 
@@ -619,3 +583,101 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize with default values
         calculateCalories();
     }
+
+    // Heart Rate Zone Calculator
+    function initHeartRateCalculator() {
+        const ageInput = document.getElementById('heartrate-age');
+        const restingHRInput = document.getElementById('resting-hr');
+        const hrMethod = document.getElementById('hr-method');
+        const calculateBtn = document.getElementById('calculate-hr');
+        const maxHRResult = document.getElementById('max-hr-result');
+        const zone1Range = document.getElementById('zone1-range');
+        const zone2Range = document.getElementById('zone2-range');
+        const zone3Range = document.getElementById('zone3-range');
+        const zone4Range = document.getElementById('zone4-range');
+        const zone5Range = document.getElementById('zone5-range');
+
+        // Calculate Heart Rate Zones
+        calculateBtn.addEventListener('click', calculateHeartRateZones);
+
+        // Also calculate on input change for responsive feel
+        [ageInput, restingHRInput, hrMethod].forEach(el => {
+            if (el) {
+                el.addEventListener('input', calculateHeartRateZones);
+                el.addEventListener('change', calculateHeartRateZones);
+            }
+        });
+
+        function calculateHeartRateZones() {
+            const age = parseFloat(ageInput.value);
+            const restingHR = parseFloat(restingHRInput.value);
+            const method = hrMethod.value;
+            
+            // Calculate max HR based on selected method
+            let maxHR;
+            switch (method) {
+                case 'max':
+                    // Standard formula (220 - age)
+                    maxHR = 220 - age;
+                    break;
+                case 'hrr':
+                    // Heart Rate Reserve (Karvonen) - first calculate with 220-age
+                    maxHR = 220 - age;
+                    break;
+                case 'tanaka':
+                    // Tanaka formula (better for older adults): 208 - (0.7 × age)
+                    maxHR = 208 - (0.7 * age);
+                    break;
+            }
+            
+            // Calculate zones
+            let zone1Low, zone1High, zone2Low, zone2High, zone3Low, zone3High, zone4Low, zone4High, zone5Low, zone5High;
+            
+            if (method === 'hrr') {
+                // Karvonen Formula using Heart Rate Reserve (HRR)
+                const hrr = maxHR - restingHR;
+                
+                zone1Low = Math.round(restingHR + (hrr * 0.5));
+                zone1High = Math.round(restingHR + (hrr * 0.6));
+                zone2Low = zone1High + 1;
+                zone2High = Math.round(restingHR + (hrr * 0.7));
+                zone3Low = zone2High + 1;
+                zone3High = Math.round(restingHR + (hrr * 0.8));
+                zone4Low = zone3High + 1;
+                zone4High = Math.round(restingHR + (hrr * 0.9));
+                zone5Low = zone4High + 1;
+                zone5High = Math.round(maxHR);
+            } else {
+                // Direct percentage of max HR
+                zone1Low = Math.round(maxHR * 0.5);
+                zone1High = Math.round(maxHR * 0.6);
+                zone2Low = zone1High + 1;
+                zone2High = Math.round(maxHR * 0.7);
+                zone3Low = zone2High + 1;
+                zone3High = Math.round(maxHR * 0.8);
+                zone4Low = zone3High + 1;
+                zone4High = Math.round(maxHR * 0.9);
+                zone5Low = zone4High + 1;
+                zone5High = Math.round(maxHR);
+            }
+            
+            // Update results
+            maxHRResult.textContent = Math.round(maxHR);
+            zone1Range.textContent = `${zone1Low}-${zone1High}`;
+            zone2Range.textContent = `${zone2Low}-${zone2High}`;
+            zone3Range.textContent = `${zone3Low}-${zone3High}`;
+            zone4Range.textContent = `${zone4Low}-${zone4High}`;
+            zone5Range.textContent = `${zone5Low}-${zone5High}`;
+            
+            // Track the calculation
+            trackEvent('heartrate_calculated', { 
+                age: age,
+                maxHR: Math.round(maxHR),
+                method: method
+            });
+        }
+
+        // Initialize with default values
+        calculateHeartRateZones();
+    }
+});
