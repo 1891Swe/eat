@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Matcher</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .color-picker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .color-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        #color-value {
+            width: 120px;
+            height: 40px;
+            padding: 0 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        
+        #color-picker {
+            width: 50px;
+            height: 40px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .scheme-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .scheme-button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4c8bf5;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .scheme-button:hover {
+            background-color: #2d6bdb;
+        }
+        
+        .preview-title {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+        }
+        
+        .color-preview {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .color-box {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            font-size: 12px;
+        }
+        
+        .export-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .export-button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .export-button:hover {
+            background-color: #3e8e41;
+        }
+        
+        #export-content {
+            width: 80%;
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Color Matcher</h1>
+        
+        <div class="color-picker">
+            <h2>Select Your Base Color</h2>
+            <div class="color-input">
+                <input type="text" id="color-value" placeholder="#RRGGBB">
+                <input type="color" id="color-picker" value="#4c8bf5">
+            </div>
+        </div>
+        
+        <div class="scheme-options">
+            <button class="scheme-button" data-scheme="complementary">Complementary</button>
+            <button class="scheme-button" data-scheme="analogous">Analogous</button>
+            <button class="scheme-button" data-scheme="triadic">Triadic</button>
+            <button class="scheme-button" data-scheme="split">Split Complementary</button>
+            <button class="scheme-button" data-scheme="monochromatic">Monochromatic</button>
+        </div>
+        
+        <h3 class="preview-title">Color Scheme Preview</h3>
+        <div class="color-preview" id="color-preview">
+            <div class="color-box" style="background-color: #4c8bf5;">
+                Base Color<br>#4c8bf5
+            </div>
+        </div>
+        
+        <div class="export-section">
+            <button class="export-button" id="export-button">Export Colors</button>
+            <pre id="export-content"></pre>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const colorPicker = document.getElementById('color-picker');
+            const colorValue = document.getElementById('color-value');
+            const colorPreview = document.getElementById('color-preview');
+            const schemeButtons = document.querySelectorAll('.scheme-button');
+            const exportButton = document.getElementById('export-button');
+            const exportContent = document.getElementById('export-content');
+            
+            let currentColors = [];
+            
+            // Sync color picker and text input
+            colorPicker.addEventListener('input', function() {
+                colorValue.value = this.value;
+                updateBaseColor(this.value);
+            });
+            
+            colorValue.addEventListener('input', function() {
+                if (this.value.match(/^#[0-9A-Fa-f]{6}$/)) {
+                    colorPicker.value = this.value;
+                    updateBaseColor(this.value);
+                }
+            });
+            
+            // Set initial value
+            colorValue.value = colorPicker.value;
+            
+            // Handle scheme button clicks
+            schemeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const scheme = this.getAttribute('data-scheme');
+                    generateColorScheme(colorPicker.value, scheme);
+                });
+            });
+            
+            // Export button
+            exportButton.addEventListener('click', function() {
+                exportColors();
+            });
+            
+            // Update base color
+            function updateBaseColor(color) {
+                const baseColorBox = colorPreview.querySelector('.color-box');
+                if (baseColorBox) {
+                    baseColorBox.style.backgroundColor = color;
+                    baseColorBox.innerHTML = `Base Color<br>${color}`;
+                }
+            }
+            
+            // Generate color scheme
+            function generateColorScheme(baseColor, scheme) {
+                // Clear previous colors
+                colorPreview.innerHTML = '';
+                currentColors = [];
+                
+                // Add base color
+                addColorToPreview(baseColor, 'Base Color');
+                currentColors.push({ name: 'Base Color', hex: baseColor });
+                
+                // Generate scheme colors
+                switch(scheme) {
+                    case 'complementary':
+                        const complementary = getComplementaryColor(baseColor);
+                        addColorToPreview(complementary, 'Complementary');
+                        currentColors.push({ name: 'Complementary', hex: complementary });
+                        break;
+                    
+                    case 'analogous':
+                        const analogous = getAnalogousColors(baseColor);
+                        analogous.forEach((color, index) => {
+                            addColorToPreview(color, `Analogous ${index+1}`);
+                            currentColors.push({ name: `Analogous ${index+1}`, hex: color });
+                        });
+                        break;
+                    
+                    case 'triadic':
+                        const triadic = getTriadicColors(baseColor);
+                        triadic.forEach((color, index) => {
+                            addColorToPreview(color, `Triadic ${index+1}`);
+                            currentColors.push({ name: `Triadic ${index+1}`, hex: color });
+                        });
+                        break;
+                    
+                    case 'split':
+                        const split = getSplitComplementaryColors(baseColor);
+                        split.forEach((color, index) => {
+                            addColorToPreview(color, `Split Comp ${index+1}`);
+                            currentColors.push({ name: `Split Comp ${index+1}`, hex: color });
+                        });
+                        break;
+                    
+                    case 'monochromatic':
+                        const mono = getMonochromaticColors(baseColor);
+                        mono.forEach((color, index) => {
+                            addColorToPreview(color, `Shade ${index+1}`);
+                            currentColors.push({ name: `Shade ${index+1}`, hex: color });
+                        });
+                        break;
+                }
+            }
+            
+            // Add color to preview
+            function addColorToPreview(color, label) {
+                const colorBox = document.createElement('div');
+                colorBox.className = 'color-box';
+                colorBox.style.backgroundColor = color;
+                colorBox.innerHTML = `${label}<br>${color}`;
+                
+                // Set text color based on background brightness
+                const brightness = getBrightness(color);
+                if (brightness > 160) {
+                    colorBox.style.color = 'black';
+                    colorBox.style.textShadow = 'none';
+                }
+                
+                colorPreview.appendChild(colorBox);
+            }
+            
+            // Export colors
+            function exportColors() {
+                if (currentColors.length === 0) {
+                    alert('Please generate a color scheme first');
+                    return;
+                }
+                
+                let output = '/* Color Scheme */\n';
+                output += ':root {\n';
+                
+                currentColors.forEach(color => {
+                    const cssVar = '--color-' + color.name.toLowerCase().replace(' ', '-');
+                    output += `  ${cssVar}: ${color.hex};\n`;
+                });
+                
+                output += '}\n\n';
+                
+                output += '/* CSS Example */\n';
+                output += '.primary-bg { background-color: var(--color-base-color); }\n';
+                
+                exportContent.textContent = output;
+                exportContent.style.display = 'block';
+            }
+            
+            // Color calculation functions
+            function hexToRgb(hex) {
+                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return result ? {
+                    r: parseInt(result[1], 16),
+                    g: parseInt(result[2], 16),
+                    b: parseInt(result[3], 16)
+                } : null;
+            }
+            
+            function rgbToHex(r, g, b) {
+                return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+            }
+            
+            function rgbToHsl(r, g, b) {
+                r /= 255;
+                g /= 255;
+                b /= 255;
+                
+                const max = Math.max(r, g, b);
+                const min = Math.min(r, g, b);
+                let h, s, l = (max + min) / 2;
+                
+                if (max === min) {
+                    h = s = 0; // achromatic
+                } else {
+                    const d = max - min;
+                    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                    
+                    switch (max) {
+                        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                        case g: h = (b - r) / d + 2; break;
+                        case b: h = (r - g) / d + 4; break;
+                    }
+                    
+                    h /= 6;
+                }
+                
+                return { h, s, l };
+            }
+            
+            function hslToRgb(h, s, l) {
+                let r, g, b;
+                
+                if (s === 0) {
+                    r = g = b = l; // achromatic
+                } else {
+                    const hue2rgb = (p, q, t) => {
+                        if (t < 0) t += 1;
+                        if (t > 1) t -= 1;
+                        if (t < 1/6) return p + (q - p) * 6 * t;
+                        if (t < 1/2) return q;
+                        if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                        return p;
+                    };
+                    
+                    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                    const p = 2 * l - q;
+                    
+                    r = hue2rgb(p, q, h + 1/3);
+                    g = hue2rgb(p, q, h);
+                    b = hue2rgb(p, q, h - 1/3);
+                }
+                
+                return {
+                    r: Math.round(r * 255),
+                    g: Math.round(g * 255),
+                    b: Math.round(b * 255)
+                };
+            }
+            
+            function getComplementaryColor(hex) {
+                const rgb = hexToRgb(hex);
+                const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+                
+                // Rotate hue by 180 degrees
+                hsl.h = (hsl.h + 0.5) % 1;
+                
+                const complementaryRgb = hslToRgb(hsl.h, hsl.s, hsl.l);
+                return rgbToHex(complementaryRgb.r, complementaryRgb.g, complementaryRgb.b);
+            }
+            
+            function getAnalogousColors(hex) {
+                const rgb = hexToRgb(hex);
+                const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+                
+                // Rotate hue by 30 degrees in each direction
+                const hsl1 = { h: (hsl.h + 1/12) % 1, s: hsl.s, l: hsl.l };
+                const hsl2 = { h: (hsl.h - 1/12 + 1) % 1, s: hsl.s, l: hsl.l };
+                
+                const rgb1 = hslToRgb(hsl1.h, hsl1.s, hsl1.l);
+                const rgb2 = hslToRgb(hsl2.h, hsl2.s, hsl2.l);
+                
+                return [
+                    rgbToHex(rgb1.r, rgb1.g, rgb1.b),
+                    rgbToHex(rgb2.r, rgb2.g, rgb2.b)
+                ];
+            }
+            
+            function getTriadicColors(hex) {
+                const rgb = hexToRgb(hex);
+                const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+                
+                // Rotate hue by 120 degrees in each direction
+                const hsl1 = { h: (hsl.h + 1/3) % 1, s: hsl.s, l: hsl.l };
+                const hsl2 = { h: (hsl.h + 2/3) % 1, s: hsl.s, l: hsl.l };
+                
+                const rgb1 = hslToRgb(hsl1.h, hsl1.s, hsl1.l);
+                const rgb2 = hslToRgb(hsl2.h, hsl2.s, hsl2.l);
+                
+                return [
+                    rgbToHex(rgb1.r, rgb1.g, rgb1.b),
+                    rgbToHex(rgb2.r, rgb2.g, rgb2.b)
+                ];
+            }
+            
+            function getSplitComplementaryColors(hex) {
+                const rgb = hexToRgb(hex);
+                const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+                
+                // Get the complement
+                const complementaryHsl = { h: (hsl.h + 0.5) % 1, s: hsl.s, l: hsl.l };
+                
+                // Rotate complement by 30 degrees in each direction
+                const hsl1 = { h: (complementaryHsl.h + 1/12) % 1, s: hsl.s, l: hsl.l };
+                const hsl2 = { h: (complementaryHsl.h - 1/12 + 1) % 1, s: hsl.s, l: hsl.l };
+                
+                const rgb1 = hslToRgb(hsl1.h, hsl1.s, hsl1.l);
+                const rgb2 = hslToRgb(hsl2.h, hsl2.s, hsl2.l);
+                
+                return [
+                    rgbToHex(rgb1.r, rgb1.g, rgb1.b),
+                    rgbToHex(rgb2.r, rgb2.g, rgb2.b)
+                ];
+            }
+            
+            function getMonochromaticColors(hex) {
+                const rgb = hexToRgb(hex);
+                const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+                
+                const colors = [];
+                
+                // Generate 4 variations with different lightness
+                for (let i = 1; i <= 4; i++) {
+                    // Adjust lightness, but keep it between 0.1 and 0.9
+                    let newL = hsl.l + (i * 0.1 - 0.3); // -0.2, -0.1, 0, +0.1
+                    newL = Math.max(0.1, Math.min(0.9, newL));
+                    
+                    const newRgb = hslToRgb(hsl.h, hsl.s, newL);
+                    colors.push(rgbToHex(newRgb.r, newRgb.g, newRgb.b));
+                }
+                
+                return colors;
+            }
+            
+            function getBrightness(hex) {
+                const rgb = hexToRgb(hex);
+                return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+            }
+            
+            // Initialize with complementary scheme
+            generateColorScheme(colorPicker.value, 'complementary');
+        });
+    </script>
+</body>
+</html>
