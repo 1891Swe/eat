@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health & Fitness Calculators | Convert Anything</title>
+    <meta name="description" content="Free online health and fitness calculators. Calculate BMI, body fat percentage, calories, and heart rate zones.">
+    <meta name="keywords" content="BMI calculator, body fat calculator, calorie calculator, heart rate zone calculator, fitness calculator">
+    <link rel="canonical" href="https://yourwebsite.com/health-fitness.html">
+    <meta property="og:title" content="Health & Fitness Calculators | Convert Anything">
+    <meta property="og:description" content="Free online health and fitness calculators. Calculate BMI, body fat percentage, calories, and heart rate zones.">
+    <meta property="og:image" content="https://yourwebsite.com/images/health-fitness-preview.jpg">
+    <meta property="og:url" content="https://yourwebsite.com/health-fitness.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="health-fitness.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Health & Fitness Calculators",
+      "description": "Free online health and fitness calculators. Calculate BMI, body fat percentage, calories, and heart rate zones.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HEALTH & FITNESS CALCULATORS</h1>
+            <h2>BMI, Body Fat, Calories & Heart Rate Zones</h2>
+        </header>
+
+        <div class="tab-container">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="bmi">
+                    <i class="icon health-icon" aria-hidden="true"></i> BMI
+                </button>
+                <button class="tab-btn" data-tab="bodyfat">
+                    <i class="icon bodyfat-icon" aria-hidden="true"></i> Body Fat
+                </button>
+                <button class="tab-btn" data-tab="calories">
+                    <i class="icon calories-icon" aria-hidden="true"></i> Calories
+                </button>
+                <button class="tab-btn" data-tab="heartrate">
+                    <i class="icon heartrate-icon" aria-hidden="true"></i> Heart Rate
+                </button>
+            </div>
+
+            <!-- BMI Calculator Tab -->
+            <div class="tab-content active" id="bmi">
+                <h2>BMI Calculator</h2>
+                <div class="health-form-container">
+                    <div class="form-group">
+                        <label for="bmi-height">Height:</label>
+                        <div class="input-with-units">
+                            <input type="number" id="bmi-height" placeholder="Enter height" value="170" aria-label="Height value">
+                            <select id="bmi-height-unit" aria-label="Height unit">
+                                <option value="cm" selected>cm</option>
+                                <option value="ft">ft/in</option>
+                            </select>
+                        </div>
+                        <div id="height-inches-container" class="hidden">
+                            <label for="bmi-inches">Inches:</label>
+                            <input type="number" id="bmi-inches" placeholder="Inches" value="0" min="0" max="11" aria-label="Additional inches if using feet">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bmi-weight">Weight:</label>
+                        <div class="input-with-units">
+                            <input type="number" id="bmi-weight" placeholder="Enter weight" value="70" aria-label="Weight value">
+                            <select id="bmi-weight-unit" aria-label="Weight unit">
+                                <option value="kg" selected>kg</option>
+                                <option value="lb">lb</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="calculate-bmi" class="calculate-btn">Calculate BMI</button>
+                </div>
+                
+                <div class="result-container">
+                    <h3>Your BMI Results</h3>
+                    <div class="bmi-result">
+                        <div class="bmi-value-container">
+                            <span id="bmi-result">24.2</span>
+                            <div class="bmi-category" id="bmi-category">Normal Weight</div>
+                        </div>
+                        <div class="bmi-meter">
+                            <div class="meter-labels">
+                                <span>Underweight</span>
+                                <span>Normal</span>
+                                <span>Overweight</span>
+                                <span>Obese</span>
+                            </div>
+                            <div class="meter-bar">
+                                <div class="meter-segments">
+                                    <div class="meter-segment underweight"></div>
+                                    <div class="meter-segment normal"></div>
+                                    <div class="meter-segment overweight"></div>
+                                    <div class="meter-segment obese"></div>
+                                </div>
+                                <div class="meter-indicator" id="bmi-indicator" style="left: 60%;"></div>
+                            </div>
+                            <div class="meter-values">
+                                <span>16.5</span>
+                                <span>18.5</span>
+                                <span>25</span>
+                                <span>30</span>
+                                <span>40</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bmi-interpretation">
+                        <h4>BMI Categories:</h4>
+                        <ul>
+                            <li><strong>Underweight:</strong> BMI less than 18.5</li>
+                            <li><strong>Normal weight:</strong> BMI 18.5–24.9</li>
+                            <li><strong>Overweight:</strong> BMI 25–29.9</li>
+                            <li><strong>Obesity:</strong> BMI 30 or greater</li>
+                        </ul>
+                        <p class="disclaimer">
+                            Note: BMI is a screening tool, not a diagnostic tool. Factors such as muscle mass, bone density, 
+                            overall body composition, and ethnic differences can influence BMI interpretation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Body Fat Calculator Tab -->
+            <div class="tab-content" id="bodyfat">
+                <h2>Body Fat Percentage Calculator</h2>
+                <div class="health-form-container">
+                    <div class="form-group">
+                        <label for="bodyfat-gender">Gender:</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="gender" id="bodyfat-male" value="male" checked>
+                                Male
+                            </label>
+                            <label>
+                                <input type="radio" name="gender" id="bodyfat-female" value="female">
+                                Female
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bodyfat-age">Age:</label>
+                        <input type="number" id="bodyfat-age" placeholder="Enter age" value="30" min="18" max="100" aria-label="Age in years">
+                    </div>
+                    <div class="form-group">
+                        <label for="bodyfat-height">Height:</label>
+                        <div class="input-with-units">
+                            <input type="number" id="bodyfat-height" placeholder="Enter height" value="170" aria-label="Height value">
+                            <select id="bodyfat-height-unit" aria-label="Height unit">
+                                <option value="cm" selected>cm</option>
+                                <option value="ft">ft/in</option>
+                            </select>
+                        </div>
+                        <div id="bodyfat-inches-container" class="hidden">
+                            <label for="bodyfat-inches">Inches:</label>
+                            <input type="number" id="bodyfat-inches" placeholder="Inches" value="0" min="0" max="11" aria-label="Additional inches if using feet">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bodyfat-weight">Weight:</label>
+                        <div class="input-with-units">
+                            <input type="number" id="bodyfat-weight" placeholder="Enter weight" value="70" aria-label="Weight value">
+                            <select id="bodyfat-weight-unit" aria-label="Weight unit">
+                                <option value="kg" selected>kg</option>
+                                <option value="lb">lb</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bodyfat-neck">Neck Circumference:</label>
+                        <div class="input-with-units">
+                            <input type="number" id="bodyfat-neck" placeholder="Neck measurement" value="35" step="0.1" aria-label="Neck circumference">
+                            <select id="bodyfat-measurement-unit" aria-label="Measurement unit">
+                                <option value="cm" selected>cm</option>
+                                <option value="in">in</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bodyfat-waist">Waist Circumference:</label>
+                        <div class="input-with-units">
+                            <input type="number" id="bodyfat-waist" placeholder="Waist measurement" value="85" step="0.1" aria-label="Waist circumference">
+                            <span class="measurement-unit">cm</span>
+                        </div>
+                    </div>
+                    <div class="form-group" id="hip-measurement-group">
+                        <label for="bodyfat-hip">Hip Circumference (women only):</label>
+                        <div class="input-with-units">
+                            <input type="number" id="bodyfat-hip" placeholder="Hip measurement" value="90" step="0.1" aria-label="Hip circumference">
+                            <span class="measurement-unit">cm</span>
+                        </div>
+                    </div>
+                    <button id="calculate-bodyfat" class="calculate-btn">Calculate Body Fat</button>
+                </div>
+                
+                <div class="result-container">
+                    <h3>Your Body Fat Results</h3>
+                    <div class="bodyfat-result">
+                        <div class="bodyfat-value-container">
+                            <span id="bodyfat-result">18.4</span>%
+                            <div class="bodyfat-category" id="bodyfat-category">Fitness</div>
+                        </div>
+                        <div class="bodyfat-visual">
+                            <div class="silhouette male" id="silhouette"></div>
+                            <div class="bodyfat-scale">
+                                <div class="scale-segment essential">Essential</div>
+                                <div class="scale-segment athletic">Athletic</div>
+                                <div class="scale-segment fitness">Fitness</div>
+                                <div class="scale-segment acceptable">Acceptable</div>
+                                <div class="scale-segment obese">Obese</div>
+                                <div class="scale-indicator" id="bodyfat-indicator" style="top: 45%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bodyfat-interpretation">
+                        <h4>Body Fat Categories (Men/Women):</h4>
+                        <ul>
+                            <li><strong>Essential Fat:</strong> 2-5% / 10-13%</li>
+                            <li><strong>Athletic:</strong> 6-13% / 14-20%</li>
+                            <li><strong>Fitness:</strong> 14-17% / 21-24%</li>
+                            <li><strong>Acceptable:</strong> 18-24% / 25-31%</li>
+                            <li><strong>Obese:</strong> 25%+ / 32%+</li>
+                        </ul>
+                        <p class="disclaimer">
+                            Note: This calculator uses the U.S. Navy method which is an estimation. For the most accurate 
+                            body fat measurements, consider professional methods like DEXA scans or hydrostatic weighing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calorie Calculator Tab -->
+            <div class="tab-content" id="calories">
+                <h2>Calorie Calculator</h2>
+                <div class="health-form-container">
+                    <div class="form-group">
+                        <label for="calories-gender">Gender:</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="calories-gender" value="male" checked>
+                                Male
+                            </label>
+                            <label>
+                                <input type="radio" name="calories-gender" value="female">
+                                Female
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="calories-age">Age:</label>
+                        <input type="number" id="calories-age" placeholder="Enter age" value="30" min="15" max="100" aria-label="Age in years">
+                    </div>
+                    <div class="form-group">
+                        <label for="calories-height">Height:</label>
+                        <div class="input-with-units">
+                            <input type="number" id="calories-height" placeholder="Enter height" value="170" aria-label="Height value">
+                            <select id="calories-height-unit" aria-label="Height unit">
+                                <option value="cm" selected>cm</option>
+                                <option value="ft">ft/in</option>
+                            </select>
+                        </div>
+                        <div id="calories-inches-container" class="hidden">
+                            <label for="calories-inches">Inches:</label>
+                            <input type="number" id="calories-inches" placeholder="Inches" value="0" min="0" max="11" aria-label="Additional inches if using feet">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="calories-weight">Weight:</label>
+                        <div class="input-with-units">
+                            <input type="number" id="calories-weight" placeholder="Enter weight" value="70" aria-label="Weight value">
+                            <select id="calories-weight-unit" aria-label="Weight unit">
+                                <option value="kg" selected>kg</option>
+                                <option value="lb">lb</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="activity-level">Activity Level:</label>
+                        <select id="activity-level" aria-label="Activity level">
+                            <option value="1.2">Sedentary (little or no exercise)</option>
+                            <option value="1.375" selected>Lightly active (light exercise 1-3 days/week)</option>
+                            <option value="1.55">Moderately active (moderate exercise 3-5 days/week)</option>
+                            <option value="1.725">Very active (hard exercise 6-7 days/week)</option>
+                            <option value="1.9">Extra active (very hard exercise or physical job)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight-goal">Goal:</label>
+                        <select id="weight-goal" aria-label="Weight goal">
+                            <option value="maintain">Maintain weight</option>
+                            <option value="mildlose">Mild weight loss (0.25 kg/week)</option>
+                            <option value="weightlose" selected>Weight loss (0.5 kg/week)</option>
+                            <option value="extremelose">Extreme weight loss (1 kg/week)</option>
+                            <option value="mildgain">Mild weight gain (0.25 kg/week)</option>
+                            <option value="weightgain">Weight gain (0.5 kg/week)</option>
+                            <option value="extremegain">Fast weight gain (1 kg/week)</option>
+                        </select>
+                    </div>
+                    <button id="calculate-calories" class="calculate-btn">Calculate Calories</button>
+                </div>
+                
+                <div class="result-container">
+                    <h3>Your Calorie Results</h3>
+                    <div class="calories-result">
+                        <div class="calorie-values">
+                            <div class="calorie-group">
+                                <div class="calorie-label">Basal Metabolic Rate (BMR)</div>
+                                <div class="calorie-value"><span id="bmr-result">1,645</span> calories/day</div>
+                                <div class="calorie-info">Calories your body needs at complete rest</div>
+                            </div>
+                            <div class="calorie-group">
+                                <div class="calorie-label">Total Daily Energy Expenditure (TDEE)</div>
+                                <div class="calorie-value"><span id="tdee-result">2,262</span> calories/day</div>
+                                <div class="calorie-info">Calories you burn in a typical day</div>
+                            </div>
+                            <div class="calorie-group highlight">
+                                <div class="calorie-label">Daily Calorie Target</div>
+                                <div class="calorie-value"><span id="target-result">1,762</span> calories/day</div>
+                                <div class="calorie-info">For your selected goal (weight loss of 0.5 kg/week)</div>
+                            </div>
+                        </div>
+                        <div class="macros-container">
+                            <h4>Suggested Macronutrients</h4>
+                            <div class="macros-chart">
+                                <div class="chart-segment protein" style="width: 30%;">30%</div>
+                                <div class="chart-segment carbs" style="width: 40%;">40%</div>
+                                <div class="chart-segment fat" style="width: 30%;">30%</div>
+                            </div>
+                            <div class="macros-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color protein"></span>
+                                    <span>Protein: <span id="protein-grams">132</span>g (<span id="protein-cals">528</span> cals)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color carbs"></span>
+                                    <span>Carbs: <span id="carbs-grams">176</span>g (<span id="carbs-cals">704</span> cals)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color fat"></span>
+                                    <span>Fat: <span id="fat-grams">59</span>g (<span id="fat-cals">530</span> cals)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calories-interpretation">
+                        <h4>Understanding Your Results:</h4>
+                        <ul>
+                            <li><strong>BMR (Basal Metabolic Rate):</strong> The number of calories your body needs to perform basic, life-sustaining functions.</li>
+                            <li><strong>TDEE (Total Daily Energy Expenditure):</strong> Your BMR plus additional calories burned through daily activities and exercise.</li>
+                            <li><strong>Daily Calorie Target:</strong> Adjusted calories based on your weight management goal.</li>
+                        </ul>
+                        <p class="disclaimer">
+                            Note: These calculations provide estimates based on population averages. Individual metabolism may vary.
+                            Always consult with a healthcare professional before making significant changes to your diet.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Heart Rate Zone Calculator Tab -->
+            <div class="tab-content" id="heartrate">
+                <h2>Heart Rate Zone Calculator</h2>
+                <div class="health-form-container">
+                    <div class="form-group">
+                        <label for="heartrate-age">Age:</label>
+                        <input type="number" id="heartrate-age" placeholder="Enter age" value="30" min="15" max="100" aria-label="Age in years">
+                    </div>
+                    <div class="form-group">
+                        <label for="resting-hr">Resting Heart Rate (optional):</label>
+                        <div class="input-with-units">
+                            <input type="number" id="resting-hr" placeholder="Resting HR" value="60" min="30" max="120" aria-label="Resting heart rate in BPM">
+                            <span class="measurement-unit">bpm</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="hr-method">Calculation Method:</label>
+                        <select id="hr-method" aria-label="Heart rate calculation method">
+                            <option value="max" selected>Standard Maximum (220 - Age)</option>
+                            <option value="hrr">Heart Rate Reserve (Karvonen)</option>
+                            <option value="tanaka">Tanaka Formula (More accurate for older adults)</option>
+                        </select>
+                    </div>
+                    <button id="calculate-hr" class="calculate-btn">Calculate Heart Rate Zones</button>
+                </div>
+                
+                <div class="result-container">
+                    <h3>Your Heart Rate Zones</h3>
+                    <div class="heartrate-result">
+                        <div class="max-hr">Maximum Heart Rate: <span id="max-hr-result">190</span> bpm</div>
+                        <div class="hr-zones">
+                            <div class="zone-row zone-1">
+                                <div class="zone-name">Zone 1: Very Light</div>
+                                <div class="zone-range"><span id="zone1-range">95-114</span> bpm</div>
+                                <div class="zone-percent">50-60%</div>
+                                <div class="zone-info">Very easy, warm-up and recovery</div>
+                                <div class="zone-bar-container">
+                                    <div class="zone-bar" style="width: 60%;"></div>
+                                </div>
+                            </div>
+                            <div class="zone-row zone-2">
+                                <div class="zone-name">Zone 2: Light</div>
+                                <div class="zone-range"><span id="zone2-range">114-133</span> bpm</div>
+                                <div class="zone-percent">60-70%</div>
+                                <div class="zone-info">Basic endurance and fat burning</div>
+                                <div class="zone-bar-container">
+                                    <div class="zone-bar" style="width: 70%;"></div>
+                                </div>
+                            </div>
+                            <div class="zone-row zone-3">
+                                <div class="zone-name">Zone 3: Moderate</div>
+                                <div class="zone-range"><span id="zone3-range">133-152</span> bpm</div>
+                                <div class="zone-percent">70-80%</div>
+                                <div class="zone-info">Improved aerobic fitness</div>
+                                <div class="zone-bar-container">
+                                    <div class="zone-bar" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                            <div class="zone-row zone-4">
+                                <div class="zone-name">Zone 4: Hard</div>
+                                <div class="zone-range"><span id="zone4-range">152-171</span> bpm</div>
+                                <div class="zone-percent">80-90%</div>
+                                <div class="zone-info">Improved anaerobic fitness</div>
+                                <div class="zone-bar-container">
+                                    <div class="zone-bar" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                            <div class="zone-row zone-5">
+                                <div class="zone-name">Zone 5: Maximum</div>
+                                <div class="zone-range"><span id="zone5-range">171-190</span> bpm</div>
+                                <div class="zone-percent">90-100%</div>
+                                <div class="zone-info">Maximum effort, cannot be sustained</div>
+                                <div class="zone-bar-container">
+                                    <div class="zone-bar" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="heartrate-interpretation">
+                        <h4>Heart Rate Zone Training:</h4>
+                        <ul>
+                            <li><strong>Zone 1 (50-60%):</strong> Very light activity, warm up, recovery, improves general health.</li>
+                            <li><strong>Zone 2 (60-70%):</strong> Light activity, improves basic endurance and fat burning.</li>
+                            <li><strong>Zone 3 (70-80%):</strong> Moderate activity, improves aerobic fitness and efficiency.</li>
+                            <li><strong>Zone 4 (80-90%):</strong> Hard activity, improves anaerobic fitness and performance.</li>
+                            <li><strong>Zone 5 (90-100%):</strong> Maximum effort, improves maximum performance and speed.</li>
+                        </ul>
+                        <p class="disclaimer">
+                            Note: Heart rate zones are estimates. Individual factors like fitness level, medications, 
+                            and environmental conditions can affect your actual heart rate response. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="common-conversions">
+            <h3>Health & Fitness References</h3>
+            <div id="health-references-content">
+                <div class="reference-category active" id="common-health-references">
+                    <h4>Common Fitness Conversions</h4>
+                    <ul>
+                        <li>1 kg of body weight = 7,700 calories (approx)</li>
+                        <li>1 pound of body weight = 3,500 calories (approx)</li>
+                        <li>1 MET (Metabolic Equivalent) = 3.5 ml oxygen/kg/min</li>
+                        <li>1 mile running/walking ≈ 100 calories (varies by weight)</li>
+                        <li>1 hour strength training ≈ 250-500 calories (varies by intensity)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How accurate are these fitness calculators?</h3>
+                <p>All calculators provide estimates based on established formulas and population averages. Individual results may vary due to factors like body composition, genetics, and activity level. For the most accurate assessment, consult with healthcare professionals.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the difference between BMR and TDEE?</h3>
+                <p>BMR (Basal Metabolic Rate) is the number of calories your body needs at complete rest to maintain basic functions. TDEE (Total Daily Energy Expenditure) includes BMR plus additional calories burned through daily activities and exercise.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Why might the Navy body fat formula be inaccurate for some people?</h3>
+                <p>The Navy formula relies on circumference measurements and doesn't directly measure body fat. It may be less accurate for people with atypical body shapes, very muscular builds, or those at the extremes of height and weight ranges.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How often should I train in different heart rate zones?</h3>
+                <p>For balanced training, most fitness experts recommend spending the majority (about 80%) of your workout time in Zones 1-2 and the remainder (about 20%) in Zones 3-5. However, the optimal distribution depends on your fitness goals, sport, and training phase.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Convert Anything</h3>
+                <p>A free online tool for quick and accurate unit conversions and health & fitness calculations. Perfect for students, fitness enthusiasts, and health-conscious individuals.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Unit Converters</a></li>
+                        <li><a href="health-fitness.html">Health & Fitness Calculators</a></li>
+                        <li><a href="#" class="tab-link" data-tab="bmi">BMI Calculator</a></li>
+                        <li><a href="#" class="tab-link" data-tab="bodyfat">Body Fat Calculator</a></li>
+                        <li><a href="#" class="tab-link" data-tab="calories">Calorie Calculator</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <div class="contact-info">
+                    <p>Have suggestions or found an issue?</p>
+                    <p><a href="mailto:contact@convertanything.com">Email us</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Convert Anything | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script src="health-fitness.js"></script>
+</body>
+</html>
