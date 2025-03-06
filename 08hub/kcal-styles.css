@@ -1,0 +1,565 @@
+/* Base Styles */
+:root {
+    --primary-color: #b33;
+    --primary-dark: #a22;
+    --primary-light: #ffeaea;
+    --secondary-color: #4a6fa5;
+    --background-color: #f7f7f7;
+    --card-color: #ffffff;
+    --text-color: #333333;
+    --text-light: #666666;
+    --text-lighter: #888888;
+    --border-color: #eeeeee;
+    --shadow-color: rgba(0, 0, 0, 0.05);
+    --shadow-hover: rgba(0, 0, 0, 0.1);
+    
+    /* BMI Colors */
+    --underweight-color: #4e9eda;
+    --normal-color: #4caf50;
+    --overweight-color: #ff9800;
+    --obese-color: #f44336;
+    
+    /* Macro Colors */
+    --protein-color: #3498db;
+    --carbs-color: #2ecc71;
+    --fat-color: #f39c12;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0;
+    background-color: var(--card-color);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px var(--shadow-color);
+    overflow: hidden;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--card-color);
+    color: var(--text-color);
+    padding: 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-container {
+    width: 100%;
+    background-color: var(--background-color);
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.header-content {
+    padding: 1.5rem;
+    width: 100%;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.tagline {
+    color: var(--text-light);
+    margin-top: 0.5rem;
+}
+
+/* Tab Styles */
+.calculator-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--card-color);
+    padding: 0 2rem;
+}
+
+.tab-btn {
+    padding: 1rem 1.5rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--text-light);
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+    color: var(--primary-color);
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.calculator-content {
+    padding: 2rem;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* Card Styles */
+.calculator-card, .results-card {
+    background-color: var(--card-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.calculator-description {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input[type="number"], select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+input[type="number"]:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.input-with-unit {
+    position: relative;
+}
+
+.unit {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-lighter);
+}
+
+.radio-group {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+.calculate-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.calculate-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Results Styles */
+.results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.result-item {
+    background-color: var(--background-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.result-item.primary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.result-item.highlighted {
+    background-color: var(--primary-color);
+    color: white;
+    position: relative;
+}
+
+.result-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.result-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.result-info {
+    font-size: 0.9rem;
+    color: inherit;
+    opacity: 0.8;
+}
+
+/* Macros Styles */
+.macros-container {
+    margin-bottom: 2rem;
+}
+
+.macros-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.macro-item {
+    text-align: center;
+    padding: 1rem;
+}
+
+.macro-chart {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    position: relative;
+}
+
+.macro-chart.protein {
+    background-color: var(--protein-color);
+}
+
+.macro-chart.carbs {
+    background-color: var(--carbs-color);
+}
+
+.macro-chart.fat {
+    background-color: var(--fat-color);
+}
+
+.macro-label {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.macro-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.macro-percentage {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* BMI Styles */
+.bmi-result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.bmi-value-container {
+    text-align: center;
+}
+
+.bmi-value {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.bmi-category {
+    font-size: 1.25rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.bmi-scale-container {
+    width: 100%;
+    position: relative;
+    margin-top: 1rem;
+}
+
+.bmi-scale {
+    display: flex;
+    width: 100%;
+    height: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.bmi-range {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.bmi-range span {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.bmi-range.underweight {
+    background-color: var(--underweight-color);
+}
+
+.bmi-range.normal {
+    background-color: var(--normal-color);
+}
+
+.bmi-range.overweight {
+    background-color: var(--overweight-color);
+}
+
+.bmi-range.obese {
+    background-color: var(--obese-color);
+}
+
+.bmi-marker {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid black;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: left 0.5s ease;
+}
+
+.bmi-info {
+    margin-bottom: 2rem;
+}
+
+.bmi-categories {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bmi-categories li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.category-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    display: inline-block;
+}
+
+.category-dot.underweight {
+    background-color: var(--underweight-color);
+}
+
+.category-dot.normal {
+    background-color: var(--normal-color);
+}
+
+.category-dot.overweight {
+    background-color: var(--overweight-color);
+}
+
+.category-dot.obese {
+    background-color: var(--obese-color);
+}
+
+/* Info Section Styles */
+.info-section {
+    padding: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.info-card {
+    background-color: var(--card-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.info-card h4 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+/* Disclaimer Styles */
+.disclaimer {
+    background-color: #fff8e1;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #ffc107;
+}
+
+.disclaimer p {
+    margin: 0;
+    color: #856404;
+}
+
+/* Back to Home Styles */
+.back-to-home {
+    text-align: center;
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.home-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.home-link:hover {
+    color: var(--primary-color);
+}
+
+.home-icon {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-lighter);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-nav {
+    margin-top: 0.5rem;
+}
+
+.footer-nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.2s;
+    margin: 0 0.5rem;
+}
+
+.footer-nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .results-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .macros-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .calculator-tabs {
+        padding: 0 1rem;
+    }
+    
+    .tab-btn {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .calculator-content {
+        padding: 1rem;
+    }
+    
+    .info-section {
+        padding: 1rem;
+    }
+}
